@@ -4,4 +4,9 @@
     <string name="title_beranda">Beranda</string>
     <string name="title_perpustakaan">Perpustakaan</string>
     <string name="title_pengaturan">Pengaturan</string>
+    <string name="title_koleksi_bacaan">Koleksi Bacaan</string>
+    <string name="title_edukasi">Edukasi</string>
+    <string name="profil_pengguna">Profil pengguna</string>
+    <string name="clicked">Clicked</string>
+
 </resources>
