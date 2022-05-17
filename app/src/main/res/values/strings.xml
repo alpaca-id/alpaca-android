@@ -1,7 +1,39 @@
 <resources>
     <string name="app_name">Alpaca</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_beranda">Beranda</string>
+    <string name="title_perpustakaan">Perpustakaan</string>
+    <string name="title_pengaturan">Pengaturan</string>
+    <string name="title_koleksi_bacaan">Koleksi Bacaan</string>
+    <string name="title_edukasi">Edukasi</string>
+
+    <string name="content_description_fab_action">Memindai gambar</string>
+    <string name="content_description_fab_gallery">Pilih dari galeri</string>
+    <string name="content_description_fab_camera">Pilih dari kamera</string>
+    <string name="content_description_illustration_no_collection">Ilustrasi bahwa tidak ada koleksi tersedia</string>
+    <string name="content_description_word_game">Ilustrasi seseorang menunjuk sebuah kata</string>
+    <string name="content_description_item_book_cover">Cover buku</string>
+    <string name="info_no_collection_message_headline">Belum Ada Koleksi</string>
+    <string name="info_no_collection_message_body">Silakan tambah koleksi buku melalui menu berikut</string>
+
+    <string name="dummy_collection_title">Angin Utara dan Matahari</string>
+    <string name="dummy_collection_date">Dipindai: 5 Mei 2022</string>
+    <string name="dummy_flashcard_body">Penderita disleksia akan kesulitan dalam mengidentifikasi kata-kata yang diucapkan dan mengubahnya menjadi huruf atau kalimat.</string>
+
+    <string name="profil_pengguna">Profil pengguna</string>
+    <string name="clicked">Clicked</string>
+    <string name="pindai_gambar">Pindai Gambar</string>
+    <string name="select_story">Pilih Cerita</string>
+    <string name="pilih_dari_galeri">Pilih Dari Galeri</string>
+    <string name="disleksia">Disleksia</string>
+    <string name="susun_kata">Susun Kata</string>
+    <string name="card_word_games_description">Permainan susun kata sebagai bahan latihan membaca</string>
+    <string name="camera_error_message">Gagal memunculkan kamera</string>
+    <string name="error_message_no_permission_camera">Tidak Ada Akses Kamera</string>
+    <string name="error_message_no_permission_camera_body">Aktifkan izin akses kamera untuk menjalankan fitur ini</string>
+    <string name="izinkan">Izinkan</string>
+    <string name="izin_ditolak">Izin ditolak</string>
+    <string name="dialog_no_permission_message">Izin untuk aplikasi menggunakan kamera telah ditolak, hal ini menyebabkan kamu tidak dapat mengakses fitur ini.</string>
+    <string name="dialog_positive_button">Mengerti</string>
+
 </resources>

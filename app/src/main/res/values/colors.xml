@@ -15,6 +15,9 @@
 
     <color name="blue_900">#2F2E41</color>
 
+    <color name="grey_200">#C4C4C4</color>
+    <color name="grey_500">#646464</color>
+
     <color name="black">#FF000000</color>
     <color name="white_warm">#FFFFFB</color>
     <color name="white">#FFFFFFFF</color>

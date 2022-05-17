@@ -4,19 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="16dp"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/white_warm"
+        app:layout_constraintEnd_toStartOf="@+id/iv_profile_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabGravity="center"
+        app:tabIndicatorColor="@color/blue_900"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/blue_900"
+        app:tabTextColor="@color/grey_200" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profile_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/profil_pengguna"
+        android:src="@drawable/ic_profile_picture"
+        app:layout_constraintBottom_toBottomOf="@+id/tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tab_layout" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/content_description_fab_action"
+        android:src="@drawable/ic_baseline_photo_camera_24"
+        app:backgroundTint="@color/yellow_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/content_description_fab_gallery"
+        android:text="@string/pilih_dari_galeri"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:backgroundTint="@color/green_700"
+        app:icon="@drawable/ic_baseline_photo_library_24"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/fab_action"
+        app:layout_constraintEnd_toEndOf="@+id/fab_action" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/content_description_fab_camera"
+        android:text="@string/pindai_gambar"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:icon="@drawable/ic_baseline_photo_camera_24"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/fab_gallery"
+        app:layout_constraintEnd_toEndOf="@+id/fab_gallery" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

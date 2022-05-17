@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.collection.CollectionFragment">
+
+    <LinearLayout
+        android:id="@+id/container_info_no_collection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="172dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/content_description_illustration_no_collection"
+            android:src="@drawable/ic_illustration_not_found" />
+
+        <TextView
+            style="@style/Theme.Alpaca.Text.Headline.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/info_no_collection_message_headline" />
+
+        <TextView
+            style="@style/Theme.Alpaca.Text.Body.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="72dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/info_no_collection_message_body"
+            android:textAlignment="center" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_scan_with_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/pindai_gambar"
+            app:icon="@drawable/ic_baseline_photo_camera_24" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_select_story"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_story"
+            android:textColor="@color/blue_900"
+            app:icon="@drawable/ic_baseline_menu_book_24"
+            app:iconTint="@color/blue_900" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_collection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="32dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/card_collection_item" />
+
+</FrameLayout>

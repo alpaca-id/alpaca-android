@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bangkit.alpaca">
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,9 +17,11 @@
         android:theme="@style/Theme.Alpaca"
         tools:targetApi="31">
         <activity
+            android:name=".ui.camera.CameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_main">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
