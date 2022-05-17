@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentSettingsBinding
 
@@ -45,17 +46,16 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_user_profile -> navigateToUserProfile()
+            R.id.btn_user_profile -> {
+                v.findNavController().navigate(R.id.action_navigation_settings_to_profileActivity)
+            }
+
             R.id.btn_customisation_profile -> navigateToCustomisation()
             R.id.btn_logout -> logoutHandler()
             R.id.btn_about_apps -> navigateToAboutApps()
             R.id.btn_privacy_terms -> navigateToPrivacyTerms()
             R.id.btn_user_terms -> navigateToUserTerms()
         }
-    }
-
-    private fun navigateToUserProfile() {
-        Toast.makeText(requireContext(), "Profil Pengguna", Toast.LENGTH_SHORT).show()
     }
 
     private fun navigateToCustomisation() {
