@@ -13,6 +13,8 @@
     <string name="content_description_illustration_no_collection">Ilustrasi bahwa tidak ada koleksi tersedia</string>
     <string name="content_description_word_game">Ilustrasi seseorang menunjuk sebuah kata</string>
     <string name="content_description_item_book_cover">Cover buku</string>
+    <string name="content_description_camera_shutter">Tombol shutter kamera</string>
+    <string name="content_description_camera_frame">Frame kamera</string>
     <string name="info_no_collection_message_headline">Belum Ada Koleksi</string>
     <string name="info_no_collection_message_body">Silakan tambah koleksi buku melalui menu berikut</string>
 
@@ -50,4 +52,6 @@
     <string name="find_account">Temukan akun anda</string>
     <string name="input_your_email_to_find">Masukkan alamat email yang terhubung dengan akun Alpaca</string>
     <string name="label_next">Selanjutnya</string>
+    <string name="camera_message">Arahkan kamera pada tulisan, pastikan seluruh tulisan terbaca dengan jelas</string>
+
 </resources>

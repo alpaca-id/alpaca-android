@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
@@ -84,6 +85,7 @@ class CameraActivity : AppCompatActivity() {
      * @param isDark Status bar's theme
      */
     private fun changeStatusBarTheme(isDark: Boolean) {
+        // Status bar color
         window.statusBarColor =
             ContextCompat.getColor(
                 this,
@@ -91,6 +93,7 @@ class CameraActivity : AppCompatActivity() {
                 else R.color.white_warm
             )
 
+        // Status bar text color
         WindowInsetsControllerCompat(
             window,
             window.decorView
@@ -120,12 +123,19 @@ class CameraActivity : AppCompatActivity() {
 
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
+
+                val camera = cameraProvider.bindToLifecycle(
                     this,
                     cameraSelector,
                     preview,
                     imageCapture
                 )
+
+                // Setting camera's flash
+                binding.btnToggleFlash.setOnCheckedChangeListener { _, checked ->
+                    setCameraFlash(camera, checked)
+                }
+
             } catch (e: Exception) {
                 Toast.makeText(
                     this@CameraActivity,
@@ -134,6 +144,18 @@ class CameraActivity : AppCompatActivity() {
                 ).show()
             }
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    /**
+     * Turn On/Off camera flash
+     *
+     * @param camera Camera
+     * @param isActive Flash state
+     */
+    private fun setCameraFlash(camera: Camera, isActive: Boolean) {
+        if (camera.cameraInfo.hasFlashUnit()) {
+            camera.cameraControl.enableTorch(isActive)
+        }
     }
 
     /**
