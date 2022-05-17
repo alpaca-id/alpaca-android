@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
 
-
 class RegistrationFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentRegistrationBinding? = null
@@ -45,4 +44,8 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         mFragmentManager.popBackStack()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
