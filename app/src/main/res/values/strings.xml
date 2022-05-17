@@ -38,5 +38,9 @@
     <string name="content_description_camera_shutter">Tombol shutter kamera</string>
     <string name="content_description_camera_frame">Frame kamera</string>
     <string name="camera_message">Arahkan kamera pada tulisan, pastikan seluruh tulisan terbaca dengan jelas</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="memproses_gambar">Memproses Gambar</string>
+    <string name="loading_processing_info">Gambar kamu sedang diproses menjadi teks, proses ini berlangsung dalam 1 menit</string>
+    <string name="batalkan">Batalkan</string>
 
 </resources>

@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityCameraBinding
+import com.bangkit.alpaca.ui.processing.ProcessingActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CameraActivity : AppCompatActivity() {
@@ -68,6 +69,12 @@ class CameraActivity : AppCompatActivity() {
 
                     intent.data = uri
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
+            }
+
+            btnCameraShutter.setOnClickListener {
+                Intent(this@CameraActivity, ProcessingActivity::class.java).also { intent ->
                     startActivity(intent)
                 }
             }
