@@ -35,5 +35,14 @@
     <string name="izin_ditolak">Izin ditolak</string>
     <string name="dialog_no_permission_message">Izin untuk aplikasi menggunakan kamera telah ditolak, hal ini menyebabkan kamu tidak dapat mengakses fitur ini.</string>
     <string name="dialog_positive_button">Mengerti</string>
+    <string name="desc_alpaca_logo">Alpaca logo</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="login_to_continue">Masuk untuk melanjutkan</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Kata sandi</string>
+    <string name="label_login">Masuk</string>
+    <string name="forgot_password">Lupa kata sandi?</string>
+    <string name="no_account_ready">Belum memiliki akun?</string>
+    <string name="label_registration">Daftar</string>
 
 </resources>
