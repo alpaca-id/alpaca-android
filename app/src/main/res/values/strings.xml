@@ -13,5 +13,9 @@
     <string name="info_no_collection_message_body">Silakan tambah koleksi buku melalui menu berikut</string>
     <string name="pindai_gambar">Pindai Gambar</string>
     <string name="select_story">Pilih Cerita</string>
+    <string name="content_description_fab_action">Memindai gambar</string>
+    <string name="content_description_fab_gallery">Pilih dari galeri</string>
+    <string name="content_description_fab_camera">Pilih dari kamera</string>
+    <string name="pilih_dari_galeri">Pilih Dari Galeri</string>
 
 </resources>

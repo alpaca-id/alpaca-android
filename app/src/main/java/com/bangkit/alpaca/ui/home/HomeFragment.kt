@@ -28,16 +28,50 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var isExpanded = false
+
         setViewPager()
 
-        binding.ivProfileIcon.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.clicked), Toast.LENGTH_SHORT).show()
+        binding.apply {
+            fabAction.setOnClickListener {
+                floatingActionButtonHandler(isExpanded)
+                isExpanded = !isExpanded
+            }
+
+            fabCamera.setOnClickListener {
+                Toast.makeText(requireContext(), "Hi from camera", Toast.LENGTH_SHORT).show()
+            }
+
+            fabGallery.setOnClickListener {
+                Toast.makeText(requireContext(), "Hi from gallery", Toast.LENGTH_SHORT).show()
+            }
+
+            ivProfileIcon.setOnClickListener {
+                Toast.makeText(requireContext(), getString(R.string.clicked), Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun floatingActionButtonHandler(isExpanded: Boolean) {
+        if (!isExpanded) {
+            binding.apply {
+                fabCamera.show()
+                fabGallery.show()
+                fabAction.setImageResource(R.drawable.ic_baseline_close_24)
+            }
+        } else {
+            binding.apply {
+                fabCamera.hide()
+                fabGallery.hide()
+                fabAction.setImageResource(R.drawable.ic_baseline_photo_camera_24)
+            }
+        }
     }
 
     /**
