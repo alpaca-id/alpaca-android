@@ -8,5 +8,10 @@
     <string name="title_edukasi">Edukasi</string>
     <string name="profil_pengguna">Profil pengguna</string>
     <string name="clicked">Clicked</string>
+    <string name="content_description_illustration_no_collection">Ilustrasi bahwa tidak ada koleksi tersedia</string>
+    <string name="info_no_collection_message_headline">Belum Ada Koleksi</string>
+    <string name="info_no_collection_message_body">Silakan tambah koleksi buku melalui menu berikut</string>
+    <string name="pindai_gambar">Pindai Gambar</string>
+    <string name="select_story">Pilih Cerita</string>
 
 </resources>
