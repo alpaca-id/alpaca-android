@@ -55,6 +55,7 @@
             style="@style/Theme.Alpaca.Text.Body.Large.Setting"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
+            android:forceHasOverlappingRendering="true"
             android:text="@string/user_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
