@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.commit
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
+import com.bangkit.alpaca.ui.registration.RegistrationFragment
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
@@ -49,7 +51,16 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun moveToRegistration() {
-        Toast.makeText(requireContext(), "Registration", Toast.LENGTH_SHORT).show()
+        val mRegistrationFragment = RegistrationFragment()
+        val mFragmentManager = parentFragmentManager
+        mFragmentManager.commit {
+            addToBackStack(null)
+            replace(
+                R.id.auth_container,
+                mRegistrationFragment,
+                RegistrationFragment::class.java.simpleName
+            )
+        }
     }
 
     private fun moveToForgotPassword() {

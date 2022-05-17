@@ -44,5 +44,7 @@
     <string name="forgot_password">Lupa kata sandi?</string>
     <string name="no_account_ready">Belum memiliki akun?</string>
     <string name="label_registration">Daftar</string>
-
+    <string name="create_to_access">Buat akun baru untuk mengakses Alpaca</string>
+    <string name="label_name">Nama lengkap</string>
+    <string name="account_ready">Sudah memiliki akun?</string>
 </resources>
