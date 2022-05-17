@@ -1,5 +1,6 @@
 package com.bangkit.alpaca.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentHomeBinding
 import com.bangkit.alpaca.ui.adapter.SectionPagerAdapter
+import com.bangkit.alpaca.ui.camera.CameraActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : Fragment() {
@@ -39,7 +41,9 @@ class HomeFragment : Fragment() {
             }
 
             fabCamera.setOnClickListener {
-                Toast.makeText(requireContext(), "Hi from camera", Toast.LENGTH_SHORT).show()
+                Intent(requireContext(), CameraActivity::class.java).also { intent ->
+                    startActivity(intent)
+                }
             }
 
             fabGallery.setOnClickListener {
@@ -58,6 +62,12 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    /**
+     * Manage the FloatingActionButton expand state
+     *
+     * @param isExpanded Expand state
+     * @return Unit
+     */
     private fun floatingActionButtonHandler(isExpanded: Boolean) {
         if (!isExpanded) {
             binding.apply {

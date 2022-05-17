@@ -28,5 +28,12 @@
     <string name="disleksia">Disleksia</string>
     <string name="susun_kata">Susun Kata</string>
     <string name="card_word_games_description">Permainan susun kata sebagai bahan latihan membaca</string>
+    <string name="camera_error_message">Gagal memunculkan kamera</string>
+    <string name="error_message_no_permission_camera">Tidak Ada Akses Kamera</string>
+    <string name="error_message_no_permission_camera_body">Aktifkan izin akses kamera untuk menjalankan fitur ini</string>
+    <string name="izinkan">Izinkan</string>
+    <string name="izin_ditolak">Izin ditolak</string>
+    <string name="dialog_no_permission_message">Izin untuk aplikasi menggunakan kamera telah ditolak, hal ini menyebabkan kamu tidak dapat mengakses fitur ini.</string>
+    <string name="dialog_positive_button">Mengerti</string>
 
 </resources>
