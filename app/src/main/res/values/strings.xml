@@ -35,5 +35,8 @@
     <string name="izin_ditolak">Izin ditolak</string>
     <string name="dialog_no_permission_message">Izin untuk aplikasi menggunakan kamera telah ditolak, hal ini menyebabkan kamu tidak dapat mengakses fitur ini.</string>
     <string name="dialog_positive_button">Mengerti</string>
+    <string name="content_description_camera_shutter">Tombol shutter kamera</string>
+    <string name="content_description_camera_frame">Frame kamera</string>
+    <string name="camera_message">Arahkan kamera pada tulisan, pastikan seluruh tulisan terbaca dengan jelas</string>
 
 </resources>
