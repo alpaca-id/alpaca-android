@@ -21,5 +21,15 @@
         android:id="@+id/navigation_settings"
         android:name="com.bangkit.alpaca.ui.settings.SettingsFragment"
         android:label="@string/title_pengaturan"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_profileActivity"
+            app:destination="@id/profileActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/profileActivity"
+        android:name="com.bangkit.alpaca.ui.profile.ProfileActivity"
+        android:label="activity_profile"
+        tools:layout="@layout/activity_profile" />
 </navigation>
