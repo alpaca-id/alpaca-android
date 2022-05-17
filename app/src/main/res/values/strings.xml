@@ -53,5 +53,14 @@
     <string name="input_your_email_to_find">Masukkan alamat email yang terhubung dengan akun Alpaca</string>
     <string name="label_next">Selanjutnya</string>
     <string name="camera_message">Arahkan kamera pada tulisan, pastikan seluruh tulisan terbaca dengan jelas</string>
+    <string name="label_settings">Pengaturan</string>
+    <string name="label_profile">Profil</string>
+    <string name="user_profile">Profil Pengguna</string>
+    <string name="text_customisation">Kustomisasi Teks</string>
+    <string name="label_logout">Keluar</string>
+    <string name="label_application">Aplikasi</string>
+    <string name="about_apps">Tentang Aplikasi</string>
+    <string name="privacy_terms">Ketentuan Privasi</string>
+    <string name="user_terms">Ketentuan Pengguna</string>
 
 </resources>
