@@ -47,4 +47,7 @@
     <string name="create_to_access">Buat akun baru untuk mengakses Alpaca</string>
     <string name="label_name">Nama lengkap</string>
     <string name="account_ready">Sudah memiliki akun?</string>
+    <string name="find_account">Temukan akun anda</string>
+    <string name="input_your_email_to_find">Masukkan alamat email yang terhubung dengan akun Alpaca</string>
+    <string name="label_next">Selanjutnya</string>
 </resources>
