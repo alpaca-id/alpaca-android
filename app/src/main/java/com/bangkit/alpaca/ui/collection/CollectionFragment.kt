@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bangkit.alpaca.data.model.Story
 import com.bangkit.alpaca.databinding.FragmentCollectionBinding
+import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.CollectionListAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
 import dagger.hilt.android.AndroidEntryPoint

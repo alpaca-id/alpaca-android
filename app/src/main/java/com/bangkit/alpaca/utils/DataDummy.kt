@@ -1,6 +1,6 @@
 package com.bangkit.alpaca.utils
 
-import com.bangkit.alpaca.data.model.Story
+import com.bangkit.alpaca.model.Story
 
 object DataDummy {
 

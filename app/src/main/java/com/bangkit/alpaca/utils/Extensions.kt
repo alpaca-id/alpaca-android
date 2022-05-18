@@ -1,5 +1,7 @@
 package com.bangkit.alpaca.utils
 
+import com.bangkit.alpaca.data.local.entity.StoryEntity
+import com.bangkit.alpaca.model.Story
 import java.text.DateFormat
 import java.util.*
 
@@ -11,4 +13,32 @@ import java.util.*
 fun Long.toFormattedString(): String {
     val date = Date(this)
     return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale("id", "ID")).format(date)
+}
+
+/**
+ * Convert StoryEntity object to Story object
+ */
+fun StoryEntity.toStory(): Story {
+    return Story(
+        id = this.id,
+        title = this.title,
+        body = this.body,
+        coverPath = this.coverPath,
+        authorName = this.authorName,
+        createdAt = this.createdAt
+    )
+}
+
+/**
+ * Convert Story object to StoryEntity object
+ */
+fun Story.toStoryEntity(): StoryEntity {
+    return StoryEntity(
+        id = this.id,
+        title = this.title,
+        body = this.body,
+        coverPath = this.coverPath,
+        authorName = this.authorName,
+        createdAt = this.createdAt
+    )
 }

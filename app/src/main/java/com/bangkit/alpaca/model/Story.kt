@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.data.model
+package com.bangkit.alpaca.model
 
 data class Story(
     val id: Int,
