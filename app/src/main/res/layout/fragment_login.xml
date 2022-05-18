@@ -44,12 +44,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_email_login"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            style="@style/Theme.Alpaca.InputLayout.Auth"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="40dp"
             android:hint="@string/label_email"
             app:layout_constraintEnd_toEndOf="@+id/img_logo1"
             app:layout_constraintStart_toStartOf="@+id/img_logo1"
@@ -64,12 +60,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_password_login"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            style="@style/Theme.Alpaca.InputLayout.Auth"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
             android:hint="@string/label_password"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="@+id/img_logo1"
@@ -98,14 +90,9 @@
 
         <TextView
             android:id="@+id/btn_to_forgot_password"
-            style="@style/Theme.Alpaca.Text.Body.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Theme.Alpaca.Text.Body.Small.Button"
             android:layout_marginTop="40dp"
-            android:clickable="true"
-            android:focusable="true"
             android:text="@string/forgot_password"
-            android:textColor="?colorPrimary"
             app:layout_constraintEnd_toEndOf="@+id/img_logo1"
             app:layout_constraintStart_toStartOf="@+id/img_logo1"
             app:layout_constraintTop_toBottomOf="@+id/btn_process_login" />
@@ -132,13 +119,8 @@
 
             <TextView
                 android:id="@+id/btn_to_registration_from_login"
-                style="@style/Theme.Alpaca.Text.Body.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="@string/label_registration"
-                android:textColor="?colorPrimary" />
+                style="@style/Theme.Alpaca.Text.Body.Small.Button"
+                android:text="@string/label_registration" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
