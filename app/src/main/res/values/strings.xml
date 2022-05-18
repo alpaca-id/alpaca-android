@@ -42,5 +42,10 @@
     <string name="memproses_gambar">Memproses Gambar</string>
     <string name="loading_processing_info">Gambar kamu sedang diproses menjadi teks, proses ini berlangsung dalam 1 menit</string>
     <string name="batalkan">Batalkan</string>
+    <string name="simpan_catatan">Simpan Catatan</string>
+    <string name="judul">Judul</string>
+    <string name="hasil_pemindaian">Hasil Pemindaian</string>
+    <string name="dummy_text">Cerita Pendek atau biasa disingkat cerpen adalah salah satu jenis prosa yang isi ceritanya bukan kejadian nyata dan hanya dibuat-buat. Jumlah kata di dalam cerita pendek tidak lebih dari 10.000 kata. Penulisan cerita pendek menggunakan gaya bahasa yang naratif</string>
+    <string name="helper_scan_result">*Anda dapat melakukan penyesuaian sebelum menyimpan cerita</string>
 
 </resources>

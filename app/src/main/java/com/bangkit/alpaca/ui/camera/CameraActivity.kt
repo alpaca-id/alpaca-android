@@ -59,8 +59,6 @@ class CameraActivity : AppCompatActivity() {
             title = getString(R.string.pindai_gambar)
         }
 
-        checkCameraPermission()
-
         // OnClickListener
         binding.apply {
             btnGivePermission.setOnClickListener {
@@ -79,6 +77,11 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkCameraPermission()
     }
 
     override fun onSupportNavigateUp(): Boolean {
