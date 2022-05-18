@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -22,7 +25,7 @@
             <ImageView
                 android:id="@+id/iv_collection_item_cover"
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
+                android:layout_height="200dp"
                 android:contentDescription="@string/content_description_item_book_cover"
                 android:src="@color/yellow_500"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +39,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:maxLines="4"
                 android:text="@string/dummy_collection_title"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_collection_item_cover"
                 app:layout_constraintEnd_toEndOf="parent"

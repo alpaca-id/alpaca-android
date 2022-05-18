@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.bangkit.alpaca.MainActivity
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentConfirmationBinding
+import com.bangkit.alpaca.ui.main.MainActivity
 
 class ConfirmationFragment : Fragment() {
 

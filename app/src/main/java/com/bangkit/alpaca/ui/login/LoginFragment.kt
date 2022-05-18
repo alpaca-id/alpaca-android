@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
-import com.bangkit.alpaca.MainActivity
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
 import com.bangkit.alpaca.ui.AuthenticationActivity
 import com.bangkit.alpaca.ui.forgotpassword.ForgotPasswordFragment
+import com.bangkit.alpaca.ui.main.MainActivity
 import com.bangkit.alpaca.ui.registration.RegistrationFragment
 
 class LoginFragment : Fragment(), View.OnClickListener {

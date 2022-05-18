@@ -1,7 +1,7 @@
 package com.bangkit.alpaca.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.ui.login.LoginFragment
