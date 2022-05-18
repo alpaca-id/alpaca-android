@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
 
@@ -35,13 +36,9 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_to_login_from_registration -> moveToLogin()
+            R.id.btn_to_login_from_registration -> v.findNavController()
+                .navigate(R.id.action_registrationFragment_to_loginFragment2)
         }
-    }
-
-    private fun moveToLogin() {
-        val mFragmentManager = parentFragmentManager
-        mFragmentManager.popBackStack()
     }
 
     override fun onDestroy() {

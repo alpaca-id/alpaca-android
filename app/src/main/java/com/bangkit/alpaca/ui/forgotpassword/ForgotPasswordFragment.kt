@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
-import com.bangkit.alpaca.ui.registration.RegistrationFragment
 
 class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
@@ -39,27 +38,10 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_to_login_from_forgot_password -> moveToLogin()
-            R.id.btn_to_registration_from_forgot_password -> moveToRegistration()
-        }
-    }
-
-    private fun moveToLogin() {
-        val mFragmentManager = parentFragmentManager
-        mFragmentManager.popBackStack()
-    }
-
-    private fun moveToRegistration() {
-        val mRegistrationFragment = RegistrationFragment()
-        val mFragmentManager = parentFragmentManager
-        mFragmentManager.popBackStack()
-        mFragmentManager.commit {
-            addToBackStack(null)
-            replace(
-                R.id.auth_container,
-                mRegistrationFragment,
-                RegistrationFragment::class.java.simpleName
-            )
+            R.id.btn_to_login_from_forgot_password -> v.findNavController()
+                .navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+            R.id.btn_to_registration_from_forgot_password -> v.findNavController()
+                .navigate(R.id.action_forgotPasswordFragment_to_registrationFragment)
         }
     }
 
