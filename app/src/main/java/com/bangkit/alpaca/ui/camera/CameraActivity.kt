@@ -187,12 +187,16 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         if (isVisible) {
             binding.apply {
                 cameraViewfinder.visibility = View.GONE
+                btnCameraShutter.visibility = View.GONE
+                btnToggleFlash.visibility = View.GONE
                 cameraNoPermissionMsg.visibility = View.VISIBLE
                 toolbar.visibility = View.VISIBLE
             }
         } else {
             binding.apply {
                 cameraViewfinder.visibility = View.VISIBLE
+                btnCameraShutter.visibility = View.VISIBLE
+                btnToggleFlash.visibility = View.VISIBLE
                 cameraNoPermissionMsg.visibility = View.GONE
                 toolbar.visibility = View.GONE
             }
