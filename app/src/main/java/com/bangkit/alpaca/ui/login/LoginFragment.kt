@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bangkit.alpaca.MainActivity
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
 import com.bangkit.alpaca.ui.AuthenticationActivity
-import com.bangkit.alpaca.ui.forgotpassword.ForgotPasswordFragment
-import com.bangkit.alpaca.ui.registration.RegistrationFragment
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
@@ -44,8 +42,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_to_registration_from_login -> moveToRegistration()
-            R.id.btn_to_forgot_password -> moveToForgotPassword()
+            R.id.btn_to_registration_from_login -> v.findNavController()
+                .navigate(R.id.action_loginFragment_to_registrationFragment)
+            R.id.btn_to_forgot_password -> v.findNavController()
+                .navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
             R.id.btn_process_login -> loginHandler()
         }
     }
@@ -54,32 +54,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         val mainIntent = Intent(requireContext(), MainActivity::class.java)
         startActivity(mainIntent)
         (activity as AuthenticationActivity).finish()
-    }
-
-    private fun moveToRegistration() {
-        val mRegistrationFragment = RegistrationFragment()
-        val mFragmentManager = parentFragmentManager
-        mFragmentManager.commit {
-            addToBackStack(null)
-            replace(
-                R.id.auth_container,
-                mRegistrationFragment,
-                RegistrationFragment::class.java.simpleName
-            )
-        }
-    }
-
-    private fun moveToForgotPassword() {
-        val mForgotPasswordFragment = ForgotPasswordFragment()
-        val mFragmentManager = parentFragmentManager
-        mFragmentManager.commit {
-            addToBackStack(null)
-            replace(
-                R.id.auth_container,
-                mForgotPasswordFragment,
-                ForgotPasswordFragment::class.java.simpleName
-            )
-        }
     }
 
     override fun onDestroy() {
