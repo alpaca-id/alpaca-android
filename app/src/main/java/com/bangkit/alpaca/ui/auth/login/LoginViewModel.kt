@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.login
+package com.bangkit.alpaca.ui.auth.login
 
 import androidx.lifecycle.ViewModel
 

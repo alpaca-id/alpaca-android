@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui
+package com.bangkit.alpaca.ui.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

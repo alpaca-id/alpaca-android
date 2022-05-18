@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.login
+package com.bangkit.alpaca.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.MainActivity
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
-import com.bangkit.alpaca.ui.AuthenticationActivity
+import com.bangkit.alpaca.ui.auth.AuthenticationActivity
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
