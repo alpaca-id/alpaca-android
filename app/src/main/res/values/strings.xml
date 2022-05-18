@@ -78,5 +78,13 @@
     <string name="label_confirm_password">Konfirmasi kata sandi baru*</string>
     <string name="note_edit_profile">*Abaikan jika tidak ingin mengubah password</string>
     <string name="save">Simpan</string>
+    <string name="label_library">Perpustakaan</string>
+    <string name="search">Search</string>
+    <string name="new_collection">Koleksi terbaru</string>
+    <string name="desc_story_cover">Cover cerita</string>
+    <string name="search_result">Hasil pencarian: %s</string>
+    <string name="desc_not_found">Pencarian tidak ditemukan</string>
+    <string name="result_not_found1">Tidak ditemukan hasil</string>
+    <string name="result_not_found2">Pencarian cerita dengan judul “%s” tidak ditemukan</string>
 
 </resources>
