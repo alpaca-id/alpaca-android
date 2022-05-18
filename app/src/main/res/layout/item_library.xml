@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Asal Usul Danau Toba"
+            android:text="@string/dummy_story_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_item_cover_story"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="Toba merupakan seorang petani yang banyak menghabiskan waktu di sawah. Sesekali dia juga senang untuk pergi memancing ikan untuk dimakan"
+            android:text="@string/dummy_story_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_item_cover_story"
             app:layout_constraintTop_toBottomOf="@id/tv_item_title_story" />
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Anonim"
+            android:text="@string/dummy_writer_story"
             android:textColor="@color/grey_500"
             app:layout_constraintStart_toStartOf="@id/tv_item_title_story"
             app:layout_constraintTop_toBottomOf="@id/tv_item_desc_story" />

@@ -86,5 +86,8 @@
     <string name="desc_not_found">Pencarian tidak ditemukan</string>
     <string name="result_not_found1">Tidak ditemukan hasil</string>
     <string name="result_not_found2">Pencarian cerita dengan judul “%s” tidak ditemukan</string>
+    <string name="dummy_story_title">Asal Usul Danau Toba</string>
+    <string name="dummy_story_desc">Toba merupakan seorang petani yang banyak menghabiskan waktu di sawah. Sesekali dia juga senang untuk pergi memancing ikan untuk dimakan</string>
+    <string name="dummy_writer_story">Anonim</string>
 
 </resources>
