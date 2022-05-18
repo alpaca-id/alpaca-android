@@ -77,5 +77,6 @@
     <string name="label_new_password">Kata sandi baru*</string>
     <string name="label_confirm_password">Konfirmasi kata sandi baru*</string>
     <string name="note_edit_profile">*Abaikan jika tidak ingin mengubah password</string>
+    <string name="save">Simpan</string>
 
 </resources>
