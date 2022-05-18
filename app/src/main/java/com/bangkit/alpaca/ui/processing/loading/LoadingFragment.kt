@@ -1,24 +1,24 @@
-package com.bangkit.alpaca.ui.collection
+package com.bangkit.alpaca.ui.processing.loading
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bangkit.alpaca.databinding.FragmentCollectionBinding
-import com.bangkit.alpaca.ui.camera.CameraActivity
+import androidx.navigation.fragment.findNavController
+import com.bangkit.alpaca.R
+import com.bangkit.alpaca.databinding.FragmentLoadingBinding
 
-class CollectionFragment : Fragment() {
+class LoadingFragment : Fragment() {
 
-    private var _binding: FragmentCollectionBinding? = null
+    private var _binding: FragmentLoadingBinding? = null
     private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCollectionBinding.inflate(inflater, container, false)
+        _binding = FragmentLoadingBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -32,10 +32,9 @@ class CollectionFragment : Fragment() {
      */
     private fun handleViewAction() {
         binding?.apply {
-            btnScanWithCamera.setOnClickListener {
-                Intent(requireContext(), CameraActivity::class.java).also { intent ->
-                    startActivity(intent)
-                }
+            btnCancel.setOnClickListener {
+                // FIXME: Cancel scanning job, and navigate back to the camera
+                findNavController().navigate(R.id.action_loadingFragment_to_confirmationFragment)
             }
         }
     }

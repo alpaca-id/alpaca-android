@@ -17,6 +17,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding
     private lateinit var settingsViewModel: SettingsViewModel
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
