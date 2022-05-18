@@ -18,15 +18,24 @@
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_library.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/hover_text_button.xml" value="0.1355" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/ic_camera_frame.xml" value="0.145" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/ic_camera_shutter.xml" value="0.145" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/ic_illustration_not_found.xml" value="0.145" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/ic_search.xml" value="0.145" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout-v24/fragment_settings.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/activity_authentication.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/card_collection_item.xml" value="0.25" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_collection.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_forgot_password.xml" value="0.264" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_home.xml" value="0.136" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_library.xml" value="0.2" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_login.xml" value="0.46833013435700577" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_registration.xml" value="0.2" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/item_library.xml" value="0.2" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/menu/library_menu.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/xml/setting_preferences.xml" value="0.25" />
       </map>
     </option>
