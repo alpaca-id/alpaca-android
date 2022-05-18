@@ -47,7 +47,13 @@ class HomeFragment : Fragment() {
             }
 
             fabGallery.setOnClickListener {
-                Toast.makeText(requireContext(), "Hi from gallery", Toast.LENGTH_SHORT).show()
+                Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    type = "image/*"
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }.also { intent ->
+                    startActivity(intent)
+                }
             }
 
             ivProfileIcon.setOnClickListener {
