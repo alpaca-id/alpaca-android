@@ -22,7 +22,7 @@ import com.bangkit.alpaca.databinding.ActivityCameraBinding
 import com.bangkit.alpaca.ui.processing.ProcessingActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class CameraActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityCameraBinding
 
@@ -30,6 +30,7 @@ class CameraActivity : AppCompatActivity() {
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
     private val requestPermissionLauncher =
+        // Handling request permission launcher
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 startCamera()
@@ -52,6 +53,7 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Toolbar setup
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
@@ -61,7 +63,14 @@ class CameraActivity : AppCompatActivity() {
 
         // OnClickListener
         binding.apply {
-            btnGivePermission.setOnClickListener {
+            btnGivePermission.setOnClickListener(this@CameraActivity)
+            btnCameraShutter.setOnClickListener(this@CameraActivity)
+        }
+    }
+
+    override fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.btn_give_permission -> {
                 Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).also { intent ->
                     val uri = Uri.fromParts("package", packageName, null)
 
@@ -71,7 +80,8 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
 
-            btnCameraShutter.setOnClickListener {
+            R.id.btn_camera_shutter -> {
+                // FIXME: Implement the right camera shutter method
                 Intent(this@CameraActivity, ProcessingActivity::class.java).also { intent ->
                     startActivity(intent)
                 }

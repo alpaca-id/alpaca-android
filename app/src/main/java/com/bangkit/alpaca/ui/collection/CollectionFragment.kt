@@ -12,20 +12,26 @@ import com.bangkit.alpaca.ui.camera.CameraActivity
 class CollectionFragment : Fragment() {
 
     private var _binding: FragmentCollectionBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentCollectionBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleViewAction()
+    }
 
-        binding.apply {
+    /**
+     * Handling views' action
+     */
+    private fun handleViewAction() {
+        binding?.apply {
             btnScanWithCamera.setOnClickListener {
                 Intent(requireContext(), CameraActivity::class.java).also { intent ->
                     startActivity(intent)

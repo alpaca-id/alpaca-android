@@ -37,7 +37,13 @@ class ConfirmationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleViewAction()
+    }
 
+    /**
+     * Handling views' action
+     */
+    private fun handleViewAction() {
         // Automatically focus on title field and open keyboard
         binding.etTitle.apply {
             requestFocus()
@@ -53,7 +59,6 @@ class ConfirmationFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
     }
 
     override fun onDestroyView() {

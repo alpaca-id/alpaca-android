@@ -24,8 +24,13 @@ class LoadingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleViewAction()
+    }
 
-        // SetOnClickListener Handler
+    /**
+     * Handling views' action
+     */
+    private fun handleViewAction() {
         binding?.apply {
             btnCancel.setOnClickListener {
                 // FIXME: Cancel scanning job, and navigate back to the camera

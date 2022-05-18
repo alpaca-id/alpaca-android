@@ -30,10 +30,20 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var isExpanded = false
-
         setViewPager()
+        handleViewAction()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    /**
+     * Handling views' action
+     */
+    private fun handleViewAction() {
+        var isExpanded = false
         binding.apply {
             fabAction.setOnClickListener {
                 floatingActionButtonHandler(isExpanded)
@@ -61,11 +71,6 @@ class HomeFragment : Fragment() {
                     .show()
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     /**
