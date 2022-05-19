@@ -71,6 +71,7 @@
     <string name="about_apps">Tentang Aplikasi</string>
     <string name="privacy_terms">Ketentuan Privasi</string>
     <string name="user_terms">Ketentuan Pengguna</string>
+    <string name="switch_information">Ganti informasi</string>
     <string name="privacy_information">Informasi Pribadi</string>
     <string name="security">Keamanan</string>
     <string name="label_current_password">Kata sandi saat ini*</string>
