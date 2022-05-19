@@ -1,18 +1,33 @@
 package com.bangkit.alpaca.utils
 
+import android.animation.ObjectAnimator
+import android.view.View
 import com.bangkit.alpaca.data.local.entity.StoryEntity
 import com.bangkit.alpaca.model.Story
 import java.text.DateFormat
 import java.util.*
 
 /**
- * Convert the Unix Timestamp to formatted String
+ * Convert the Unix Timestamp to formatted date in String
  *
  * @return String
  */
 fun Long.toFormattedString(): String {
     val date = Date(this)
     return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale("id", "ID")).format(date)
+}
+
+/**
+ * Animate View's visibility by change the alpha value
+ *
+ * @param isVisible: Boolean
+ * @param duration: Long
+ */
+fun View.animateVisibility(isVisible: Boolean, duration: Long = 400) {
+    ObjectAnimator.ofFloat(this, View.ALPHA, if (isVisible) 1f else 0f).apply {
+        this.duration = duration
+        start()
+    }
 }
 
 /**
