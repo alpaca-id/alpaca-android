@@ -89,5 +89,10 @@
     <string name="dummy_story_title">Asal Usul Danau Toba</string>
     <string name="dummy_story_desc">Toba merupakan seorang petani yang banyak menghabiskan waktu di sawah. Sesekali dia juga senang untuk pergi memancing ikan untuk dimakan</string>
     <string name="dummy_writer_story">Anonim</string>
+    <string name="error_empty_email">Email tidak boleh kosong</string>
+    <string name="error_email_format">Format email harus benar</string>
+    <string name="error_empty_password">Kata sandi tidak boleh kosong</string>
+    <string name="dummy_email">admin@alpaca.com</string>
+    <string name="error_empty_name">Nama tidak boleh kosong</string>
 
 </resources>

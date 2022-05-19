@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.login
+package com.bangkit.alpaca.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.MainActivity
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
-import com.bangkit.alpaca.ui.AuthenticationActivity
+import com.bangkit.alpaca.ui.auth.AuthenticationActivity
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
@@ -51,9 +51,43 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loginHandler() {
+        if (!isFormValid()) return
         val mainIntent = Intent(requireContext(), MainActivity::class.java)
         startActivity(mainIntent)
         (activity as AuthenticationActivity).finish()
+    }
+
+    private fun isFormValid(): Boolean {
+        val email = binding?.edtEmailLogin?.text.toString()
+        val isEmailFormatValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        val password = binding?.edtPasswordLogin?.text.toString()
+
+        binding?.tilEmailLogin?.apply {
+            if (email.isEmpty()) {
+                isErrorEnabled = true
+                error = getString(R.string.error_empty_email)
+            } else {
+                if (!isEmailFormatValid) {
+                    error = getString(R.string.error_email_format)
+                } else {
+                    isErrorEnabled = false
+                    error = null
+                }
+            }
+        }
+
+        binding?.tilPasswordLogin?.apply {
+            if (password.isEmpty()) {
+                isErrorEnabled = true
+                error = getString(R.string.error_empty_password)
+            } else {
+                isErrorEnabled = false
+                error = null
+            }
+        }
+
+        return binding?.tilEmailLogin?.isErrorEnabled == false &&
+                binding?.tilPasswordLogin?.isErrorEnabled == false
     }
 
     override fun onDestroy() {
