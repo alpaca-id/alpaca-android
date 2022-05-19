@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.registration
+package com.bangkit.alpaca.ui.auth.registration
 
 import androidx.lifecycle.ViewModel
 

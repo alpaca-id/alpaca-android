@@ -16,5 +16,13 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbarProfile.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 }

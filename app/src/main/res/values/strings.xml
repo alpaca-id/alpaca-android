@@ -72,5 +72,28 @@
     <string name="privacy_terms">Ketentuan Privasi</string>
     <string name="user_terms">Ketentuan Pengguna</string>
     <string name="switch_information">Ganti informasi</string>
+    <string name="privacy_information">Informasi Pribadi</string>
+    <string name="security">Keamanan</string>
+    <string name="label_current_password">Kata sandi saat ini*</string>
+    <string name="label_new_password">Kata sandi baru*</string>
+    <string name="label_confirm_password">Konfirmasi kata sandi baru*</string>
+    <string name="note_edit_profile">*Abaikan jika tidak ingin mengubah password</string>
+    <string name="save">Simpan</string>
+    <string name="label_library">Perpustakaan</string>
+    <string name="search">Search</string>
+    <string name="new_collection">Koleksi terbaru</string>
+    <string name="desc_story_cover">Cover cerita</string>
+    <string name="search_result">Hasil pencarian: %d</string>
+    <string name="desc_not_found">Pencarian tidak ditemukan</string>
+    <string name="result_not_found1">Tidak ditemukan hasil</string>
+    <string name="result_not_found2">Pencarian cerita dengan judul “%s” tidak ditemukan</string>
+    <string name="dummy_story_title">Asal Usul Danau Toba</string>
+    <string name="dummy_story_desc">Toba merupakan seorang petani yang banyak menghabiskan waktu di sawah. Sesekali dia juga senang untuk pergi memancing ikan untuk dimakan</string>
+    <string name="dummy_author_story">Anonim</string>
+    <string name="error_empty_email">Email tidak boleh kosong</string>
+    <string name="error_email_format">Format email harus benar</string>
+    <string name="error_empty_password">Kata sandi tidak boleh kosong</string>
+    <string name="dummy_email">admin@alpaca.com</string>
+    <string name="error_empty_name">Nama tidak boleh kosong</string>
 
 </resources>
