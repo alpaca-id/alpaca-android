@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "479581347880",
+    "project_id": "alpaca-350506",
+    "storage_bucket": "alpaca-350506.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479581347880:android:ad5dd0113764f000f0551d",
+        "android_client_info": {
+          "package_name": "com.bangkit.alpaca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479581347880-aajcjov4a7ak7728hkqufhmbuokqp99v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrgv6kRz18qatGypNEvlOqp8ng2KPLieg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479581347880-aajcjov4a7ak7728hkqufhmbuokqp99v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
