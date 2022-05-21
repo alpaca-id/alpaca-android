@@ -6,22 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
+import com.bangkit.alpaca.utils.showError
 
 class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentForgotPasswordBinding? = null
     private val binding get() = _binding
-    private lateinit var viewModel: ForgotPasswordViewModel
+    private val forgotPasswordViewModel: ForgotPasswordViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this)[ForgotPasswordViewModel::class.java]
         _binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -30,6 +30,7 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
+        isSendPasswordSuccess()
     }
 
     private fun setupAction() {
@@ -50,7 +51,27 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
     private fun forgotPasswordHandler() {
         if (!isFormValid()) return
-        Toast.makeText(requireContext(), "Diproses", Toast.LENGTH_SHORT).show()
+
+        val email = binding?.edtEmailForgotPassword?.text.toString()
+        forgotPasswordViewModel.sendPassword(requireActivity(), email)
+    }
+
+    private fun isSendPasswordSuccess() {
+        forgotPasswordViewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                Toast.makeText(
+                    requireContext(),
+                    "Berhasil mengirim password ke email",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Gagal mengirim password ke email",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun isFormValid(): Boolean {
@@ -61,12 +82,15 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
             if (email.isEmpty()) {
                 isErrorEnabled = true
                 error = getString(R.string.error_empty_email)
+                showError(true, getString(R.string.error_empty_email))
             } else {
                 if (!isEmailFormatValid) {
                     error = getString(R.string.error_email_format)
+                    showError(true, getString(R.string.error_email_format))
                 } else {
                     isErrorEnabled = false
                     error = null
+                    showError(false)
                 }
             }
         }

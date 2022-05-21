@@ -1,34 +1,42 @@
 package com.bangkit.alpaca.ui.auth.registration
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
+import com.bangkit.alpaca.ui.main.MainActivity
+import com.bangkit.alpaca.utils.showError
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class RegistrationFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding
-    private lateinit var registrationViewModel: RegistrationViewModel
+    private val registrationViewModel: RegistrationViewModel by viewModels()
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        registrationViewModel = ViewModelProvider(this)[RegistrationViewModel::class.java]
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
+        mAuth = Firebase.auth
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupAction()
+        isRegistrationSuccess()
     }
 
     private fun setupAction() {
@@ -46,7 +54,25 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
 
     private fun registrationHandler() {
         if (!isFormValid()) return
-        Toast.makeText(requireContext(), "Registrasi berhasil", Toast.LENGTH_SHORT).show()
+
+        val name = binding?.edtNameRegistration?.text.toString()
+        val email = binding?.edtEmailRegistration?.text.toString()
+        val password = binding?.edtPasswordRegistration?.text.toString()
+
+        registrationViewModel.registrationUser(requireActivity(), name, email, password, mAuth)
+    }
+
+    private fun isRegistrationSuccess() {
+        registrationViewModel.isSuccess.observe(requireActivity()) { isSuccess ->
+            if (isSuccess) {
+                Toast.makeText(requireContext(), "Registrasi berhasil", Toast.LENGTH_SHORT).show()
+                val mainIntent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(mainIntent)
+                activity?.finish()
+            } else {
+                Toast.makeText(requireContext(), "Registrasi gagal", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun isFormValid(): Boolean {
@@ -57,36 +83,37 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
 
         binding?.tilNameRegistration?.apply {
             if (name.isEmpty()) {
-                isErrorEnabled = true
-                error = getString(R.string.error_empty_name)
+                showError(true, getString(R.string.error_empty_name))
             } else {
-                isErrorEnabled = false
-                error = null
+                showError(false)
             }
-
         }
 
         binding?.tilEmailRegistration?.apply {
             if (email.isEmpty()) {
-                isErrorEnabled = true
-                error = getString(R.string.error_empty_email)
+                showError(true, getString(R.string.error_empty_email))
             } else {
                 if (!isEmailFormatValid) {
-                    error = getString(R.string.error_email_format)
+                    showError(true, getString(R.string.error_email_format))
                 } else {
-                    isErrorEnabled = false
-                    error = null
+                    showError(false)
                 }
             }
         }
 
         binding?.tilPasswordRegistration?.apply {
             if (password.isEmpty()) {
-                isErrorEnabled = true
-                error = getString(R.string.error_empty_password)
+                showError(true, getString(R.string.error_empty_password))
             } else {
-                isErrorEnabled = false
-                error = null
+                showError(false)
+            }
+        }
+
+        binding?.tilPasswordRegistration?.apply {
+            if (password.length < 6) {
+                showError(true, getString(R.string.error_lenght_password))
+            } else {
+                showError(false)
             }
         }
 
