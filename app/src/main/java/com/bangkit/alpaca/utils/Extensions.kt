@@ -2,6 +2,8 @@ package com.bangkit.alpaca.utils
 
 import android.animation.ObjectAnimator
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import com.bangkit.alpaca.data.local.entity.StoryEntity
 import com.bangkit.alpaca.model.Story
 import com.google.android.material.textfield.TextInputLayout
@@ -69,5 +71,16 @@ fun TextInputLayout.showError(isError: Boolean, message: String? = null) {
     } else {
         isErrorEnabled = false
         error = null
+    }
+}
+
+fun Window.isTouchableScreen(isTouchable: Boolean) {
+    if (isTouchable) {
+        setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+    } else {
+        clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 }

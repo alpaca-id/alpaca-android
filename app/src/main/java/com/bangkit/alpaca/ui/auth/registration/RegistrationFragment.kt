@@ -1,6 +1,5 @@
 package com.bangkit.alpaca.ui.auth.registration
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
-import com.bangkit.alpaca.ui.main.MainActivity
+import com.bangkit.alpaca.utils.Result
+import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -35,8 +35,9 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupAction()
-        isRegistrationSuccess()
+        registrationResult()
     }
 
     private fun setupAction() {
@@ -62,15 +63,21 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         registrationViewModel.registrationUser(requireActivity(), name, email, password, mAuth)
     }
 
-    private fun isRegistrationSuccess() {
-        registrationViewModel.isSuccess.observe(requireActivity()) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(requireContext(), "Registrasi berhasil", Toast.LENGTH_SHORT).show()
-                val mainIntent = Intent(requireContext(), MainActivity::class.java)
-                startActivity(mainIntent)
-                activity?.finish()
-            } else {
-                Toast.makeText(requireContext(), "Registrasi gagal", Toast.LENGTH_SHORT).show()
+    private fun registrationResult() {
+        registrationViewModel.result.observe(requireActivity()) { result ->
+            when (result) {
+                is Result.Loading -> loadingHandler(true)
+                is Result.Success -> {
+                    loadingHandler(false)
+                    if (result.data) {
+                        binding?.root?.findNavController()
+                            ?.navigate(R.id.action_registrationFragment_to_loginFragment2)
+                    }
+                }
+                is Result.Error -> {
+                    loadingHandler(false)
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -120,6 +127,15 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         return binding?.tilNameRegistration?.isErrorEnabled == false &&
                 binding?.tilEmailRegistration?.isErrorEnabled == false &&
                 binding?.tilPasswordRegistration?.isErrorEnabled == false
+    }
+
+    private fun loadingHandler(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.loadingRegistration?.visibility = View.VISIBLE
+        } else {
+            binding?.loadingRegistration?.visibility = View.GONE
+        }
+        activity?.window?.isTouchableScreen(isLoading)
     }
 
     override fun onDestroy() {

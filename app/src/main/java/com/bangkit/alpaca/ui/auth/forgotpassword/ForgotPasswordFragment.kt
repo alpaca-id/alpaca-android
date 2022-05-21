@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
+import com.bangkit.alpaca.utils.Result
+import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 
 class ForgotPasswordFragment : Fragment(), View.OnClickListener {
@@ -30,7 +32,7 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
-        isSendPasswordSuccess()
+        sendPasswordResult()
     }
 
     private fun setupAction() {
@@ -56,20 +58,30 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         forgotPasswordViewModel.sendPassword(requireActivity(), email)
     }
 
-    private fun isSendPasswordSuccess() {
-        forgotPasswordViewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(
-                    requireContext(),
-                    "Berhasil mengirim password ke email",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Gagal mengirim password ke email",
-                    Toast.LENGTH_SHORT
-                ).show()
+    private fun sendPasswordResult() {
+        forgotPasswordViewModel.result.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> loadingHandler(true)
+                is Result.Success -> {
+                    loadingHandler(false)
+                    if (result.data) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Tautan reset kata sandi berhasil dikirim ke email Anda",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding?.root?.findNavController()
+                            ?.navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+                    }
+                }
+                is Result.Error -> {
+                    loadingHandler(false)
+                    Toast.makeText(
+                        requireContext(),
+                        result.error,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -95,6 +107,15 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
             }
         }
         return binding?.tilEmailForgotPassword?.isErrorEnabled == false
+    }
+
+    private fun loadingHandler(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.loadingForgotPassword?.visibility = View.VISIBLE
+        } else {
+            binding?.loadingForgotPassword?.visibility = View.GONE
+        }
+        activity?.window?.isTouchableScreen(isLoading)
     }
 
     override fun onDestroy() {

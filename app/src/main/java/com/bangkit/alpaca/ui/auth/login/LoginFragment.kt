@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
 import com.bangkit.alpaca.ui.main.MainActivity
+import com.bangkit.alpaca.utils.Result
+import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -38,7 +40,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
-        isLoginSuccess()
+        loginResult()
     }
 
     private fun setupAction() {
@@ -66,14 +68,25 @@ class LoginFragment : Fragment(), View.OnClickListener {
         loginViewModel.loginUser(requireActivity(), email, password, mAuth)
     }
 
-    private fun isLoginSuccess() {
-        loginViewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                val user = mAuth.currentUser
-                updateUI(user)
-            } else {
-                Toast.makeText(requireContext(), "Gagal masuk", Toast.LENGTH_SHORT).show()
-                updateUI(null)
+    private fun loginResult() {
+        loginViewModel.result.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> loadingHandler(true)
+                is Result.Success -> {
+                    loadingHandler(false)
+                    if (result.data) {
+                        val user = mAuth.currentUser
+                        updateUI(user)
+                    }
+                }
+                is Result.Error -> {
+                    loadingHandler(false)
+                    Toast.makeText(
+                        requireContext(),
+                        result.error,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -121,6 +134,15 @@ class LoginFragment : Fragment(), View.OnClickListener {
             startActivity(mainIntent)
             activity?.finish()
         }
+    }
+
+    private fun loadingHandler(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.loadingLogin?.visibility = View.VISIBLE
+        } else {
+            binding?.loadingLogin?.visibility = View.GONE
+        }
+        activity?.window?.isTouchableScreen(isLoading)
     }
 
     override fun onStart() {
