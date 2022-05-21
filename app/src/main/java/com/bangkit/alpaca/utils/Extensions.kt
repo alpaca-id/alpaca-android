@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.view.View
 import com.bangkit.alpaca.data.local.entity.StoryEntity
 import com.bangkit.alpaca.model.Story
+import com.google.android.material.textfield.TextInputLayout
 import java.text.DateFormat
 import java.util.*
 
@@ -56,4 +57,17 @@ fun Story.toStoryEntity(): StoryEntity {
         authorName = this.authorName,
         createdAt = this.createdAt
     )
+}
+
+
+fun TextInputLayout.showError(isError: Boolean, message: String? = null) {
+    if (isError) {
+        isErrorEnabled = false
+        error = null
+        isErrorEnabled = true
+        error = message
+    } else {
+        isErrorEnabled = false
+        error = null
+    }
 }

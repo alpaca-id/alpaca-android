@@ -93,7 +93,13 @@
     <string name="error_empty_email">Email tidak boleh kosong</string>
     <string name="error_email_format">Format email harus benar</string>
     <string name="error_empty_password">Kata sandi tidak boleh kosong</string>
-    <string name="dummy_email">admin@alpaca.com</string>
+    <string name="dummy_email">gunawan.jeri25@gmail.com</string>
     <string name="error_empty_name">Nama tidak boleh kosong</string>
+    <string name="really_logout">Yakin untuk keluar?</string>
+    <string name="remove_session_message">Sesi akun anda akan dihapus, dan anda perlu login kembali untuk menggunakan aplikasi ini</string>
+    <string name="label_cancel">Batal</string>
+    <string name="dummy_password">adminadmin</string>
+    <string name="loading">Loading…</string>
+    <string name="error_lenght_password">Kata sandi minimal 6 karakter</string>
 
 </resources>

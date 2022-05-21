@@ -47,6 +47,7 @@
             style="@style/Theme.Alpaca.InputLayout.Auth"
             android:layout_marginTop="32dp"
             android:hint="@string/label_email"
+            app:errorIconDrawable="@null"
             app:layout_constraintEnd_toEndOf="@+id/img_logo1"
             app:layout_constraintStart_toStartOf="@+id/img_logo1"
             app:layout_constraintTop_toBottomOf="@id/tv_login2">
@@ -65,6 +66,7 @@
             android:layout_marginTop="16dp"
             android:hint="@string/label_password"
             app:endIconMode="password_toggle"
+            app:errorIconDrawable="@null"
             app:layout_constraintEnd_toEndOf="@+id/img_logo1"
             app:layout_constraintStart_toStartOf="@+id/img_logo1"
             app:layout_constraintTop_toBottomOf="@id/til_email_login">
@@ -74,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
-                android:text="@string/dummy_email" />
+                android:text="@string/dummy_password" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

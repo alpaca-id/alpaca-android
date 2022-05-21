@@ -5,31 +5,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.bangkit.alpaca.databinding.FragmentLoginBinding
-import com.bangkit.alpaca.ui.AuthenticationActivity
-import com.bangkit.alpaca.ui.forgotpassword.ForgotPasswordFragment
-import com.bangkit.alpaca.ui.main.MainActivity
-import com.bangkit.alpaca.ui.registration.RegistrationFragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.bangkit.alpaca.MainActivity
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
-import com.bangkit.alpaca.ui.auth.AuthenticationActivity
+import com.bangkit.alpaca.ui.main.MainActivity
+import com.bangkit.alpaca.utils.showError
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
-    private lateinit var viewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -37,6 +38,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
+        isLoginSuccess()
     }
 
     private fun setupAction() {
@@ -57,9 +59,23 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun loginHandler() {
         if (!isFormValid()) return
-        val mainIntent = Intent(requireContext(), MainActivity::class.java)
-        startActivity(mainIntent)
-        (activity as AuthenticationActivity).finish()
+
+        val email = binding?.edtEmailLogin?.text.toString()
+        val password = binding?.edtPasswordLogin?.text.toString()
+
+        loginViewModel.loginUser(requireActivity(), email, password, mAuth)
+    }
+
+    private fun isLoginSuccess() {
+        loginViewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
+            if (isSuccess) {
+                val user = mAuth.currentUser
+                updateUI(user)
+            } else {
+                Toast.makeText(requireContext(), "Gagal masuk", Toast.LENGTH_SHORT).show()
+                updateUI(null)
+            }
+        }
     }
 
     private fun isFormValid(): Boolean {
@@ -69,30 +85,48 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         binding?.tilEmailLogin?.apply {
             if (email.isEmpty()) {
-                isErrorEnabled = true
-                error = getString(R.string.error_empty_email)
+                showError(true, getString(R.string.error_empty_email))
             } else {
                 if (!isEmailFormatValid) {
-                    error = getString(R.string.error_email_format)
+                    showError(true, getString(R.string.error_email_format))
                 } else {
-                    isErrorEnabled = false
-                    error = null
+                    showError(false)
                 }
             }
         }
 
         binding?.tilPasswordLogin?.apply {
             if (password.isEmpty()) {
-                isErrorEnabled = true
-                error = getString(R.string.error_empty_password)
+                showError(true, getString(R.string.error_empty_password))
             } else {
-                isErrorEnabled = false
-                error = null
+                showError(false)
+            }
+        }
+
+        binding?.tilPasswordLogin?.apply {
+            if (password.length < 6) {
+                showError(true, getString(R.string.error_lenght_password))
+            } else {
+                showError(false)
             }
         }
 
         return binding?.tilEmailLogin?.isErrorEnabled == false &&
                 binding?.tilPasswordLogin?.isErrorEnabled == false
+    }
+
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
+            val mainIntent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(mainIntent)
+            activity?.finish()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = mAuth.currentUser
+        updateUI(currentUser)
     }
 
     override fun onDestroy() {
