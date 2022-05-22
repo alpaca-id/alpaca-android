@@ -99,7 +99,7 @@
     <string name="remove_session_message">Sesi akun anda akan dihapus, dan anda perlu login kembali untuk menggunakan aplikasi ini</string>
     <string name="label_cancel">Batal</string>
     <string name="dummy_password">adminadmin</string>
-    <string name="loading">Loading…</string>
+    <string name="loading">Memuat…</string>
     <string name="error_lenght_password">Kata sandi minimal 6 karakter</string>
     <string name="password_reset_link">Password reset link successfully sent to your email</string>
     <string name="feature_not_ready">Feature not ready</string>

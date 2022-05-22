@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
-import com.bangkit.alpaca.utils.isTouchableScreen
+import com.bangkit.alpaca.utils.LoadingDialog
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,9 +64,9 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         forgotPasswordViewModel.result.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { result ->
                 when (result) {
-                    is Result.Loading -> loadingHandler(true)
+                    is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
                     is Result.Success -> {
-                        loadingHandler(false)
+                        LoadingDialog.hideLoading()
                         if (result.data) {
                             getString(R.string.password_reset_link).showToastMessage(requireContext())
                             binding?.root?.findNavController()
@@ -74,7 +74,7 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
                         }
                     }
                     is Result.Error -> {
-                        loadingHandler(false)
+                        LoadingDialog.hideLoading()
                         result.error.showToastMessage(requireContext())
                     }
                 }
@@ -103,15 +103,6 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
             }
         }
         return binding?.tilEmailForgotPassword?.isErrorEnabled == false
-    }
-
-    private fun loadingHandler(isLoading: Boolean) {
-        if (isLoading) {
-            binding?.loadingForgotPassword?.visibility = View.VISIBLE
-        } else {
-            binding?.loadingForgotPassword?.visibility = View.GONE
-        }
-        activity?.window?.isTouchableScreen(isLoading)
     }
 
     override fun onDestroy() {
