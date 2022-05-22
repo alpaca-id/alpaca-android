@@ -13,7 +13,9 @@ import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
 import com.bangkit.alpaca.utils.Result
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentForgotPasswordBinding? = null
@@ -55,7 +57,7 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         if (!isFormValid()) return
 
         val email = binding?.edtEmailForgotPassword?.text.toString()
-        forgotPasswordViewModel.sendPassword(requireActivity(), email)
+        forgotPasswordViewModel.sendPassword(email)
     }
 
     private fun sendPasswordResult() {

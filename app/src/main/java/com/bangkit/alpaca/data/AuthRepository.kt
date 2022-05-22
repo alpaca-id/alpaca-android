@@ -5,7 +5,6 @@ import com.bangkit.alpaca.model.User
 import com.bangkit.alpaca.utils.Result
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -47,7 +46,14 @@ class AuthRepository @Inject constructor(private val auth: FirebaseAuth) : IFire
         }
     }
 
-    override suspend fun sendPasswordReset(email: String): Flow<Result<Boolean>> {
-        TODO("Not yet implemented")
+    override suspend fun sendPasswordReset(email: String) = flow {
+        try {
+            emit(Result.Loading)
+            auth.sendPasswordResetEmail(email).await()
+            emit(Result.Success(true))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+
     }
 }
