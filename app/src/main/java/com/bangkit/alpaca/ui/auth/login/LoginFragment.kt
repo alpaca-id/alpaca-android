@@ -5,32 +5,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
 import com.bangkit.alpaca.ui.main.MainActivity
+import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
+import com.bangkit.alpaca.utils.showToastMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var mAuth: FirebaseAuth
+
+    @Inject
+    lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -38,7 +42,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
-        isLoginSuccess()
+        loginResult()
     }
 
     private fun setupAction() {
@@ -63,17 +67,26 @@ class LoginFragment : Fragment(), View.OnClickListener {
         val email = binding?.edtEmailLogin?.text.toString()
         val password = binding?.edtPasswordLogin?.text.toString()
 
-        loginViewModel.loginUser(requireActivity(), email, password, mAuth)
+        loginViewModel.loginUser(email, password)
     }
 
-    private fun isLoginSuccess() {
-        loginViewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                val user = mAuth.currentUser
-                updateUI(user)
-            } else {
-                Toast.makeText(requireContext(), "Gagal masuk", Toast.LENGTH_SHORT).show()
-                updateUI(null)
+    private fun loginResult() {
+        loginViewModel.result.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { result ->
+                when (result) {
+                    is Result.Loading -> loadingHandler(true)
+                    is Result.Success -> {
+                        loadingHandler(false)
+                        if (result.data) {
+                            val user = mAuth.currentUser
+                            updateUI(user)
+                        }
+                    }
+                    is Result.Error -> {
+                        loadingHandler(false)
+                        result.error.showToastMessage(requireContext())
+                    }
+                }
             }
         }
     }
@@ -121,6 +134,15 @@ class LoginFragment : Fragment(), View.OnClickListener {
             startActivity(mainIntent)
             activity?.finish()
         }
+    }
+
+    private fun loadingHandler(isLoading: Boolean) {
+        if (isLoading) {
+            binding?.loadingLogin?.visibility = View.VISIBLE
+        } else {
+            binding?.loadingLogin?.visibility = View.GONE
+        }
+        activity?.window?.isTouchableScreen(isLoading)
     }
 
     override fun onStart() {

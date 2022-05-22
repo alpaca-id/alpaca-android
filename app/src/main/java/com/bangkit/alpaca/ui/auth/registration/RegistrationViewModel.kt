@@ -1,39 +1,32 @@
 package com.bangkit.alpaca.ui.auth.registration
 
-import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bangkit.alpaca.model.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import androidx.lifecycle.viewModelScope
+import com.bangkit.alpaca.data.AuthRepository
+import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.utils.Event
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegistrationViewModel : ViewModel() {
-    private val _isSuccess = MutableLiveData<Boolean>()
-    val isSuccess: LiveData<Boolean>
-        get() = _isSuccess
+@HiltViewModel
+class RegistrationViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
+    private val _result = MutableLiveData<Event<Result<Boolean>>>()
+    val result: LiveData<Event<Result<Boolean>>> get() = _result
 
     fun registrationUser(
-        activity: Activity,
         name: String,
         email: String,
         password: String,
-        auth: FirebaseAuth
     ) {
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity) { task1 ->
-                if (task1.isSuccessful) {
-                    val user = User(name, email)
-                    FirebaseAuth.getInstance().currentUser?.uid?.let {
-                        FirebaseDatabase.getInstance().getReference("Users")
-                            .child(it)
-                            .setValue(user)
-                            .addOnCompleteListener(activity) { task2 ->
-                                _isSuccess.value = task2.isSuccessful
-                            }
-                    }
-                }
+        viewModelScope.launch {
+            authRepository.registrationUser(name, email, password).collect { result ->
+                _result.value = Event(result)
             }
+        }
     }
 }
