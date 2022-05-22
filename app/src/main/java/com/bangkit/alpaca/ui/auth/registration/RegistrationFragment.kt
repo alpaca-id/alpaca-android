@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -13,9 +12,7 @@ import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
 import com.bangkit.alpaca.utils.Result
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,14 +21,12 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding
     private val registrationViewModel: RegistrationViewModel by viewModels()
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -78,7 +73,7 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
                 }
                 is Result.Error -> {
                     loadingHandler(false)
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                    result.error.showToastMessage(requireContext())
                 }
             }
         }

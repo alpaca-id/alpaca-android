@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -15,10 +14,9 @@ import com.bangkit.alpaca.ui.main.MainActivity
 import com.bangkit.alpaca.utils.Result
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
+import com.bangkit.alpaca.utils.showToastMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +32,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -83,11 +80,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 }
                 is Result.Error -> {
                     loadingHandler(false)
-                    Toast.makeText(
-                        requireContext(),
-                        result.error,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    result.error.showToastMessage(requireContext())
                 }
             }
         }
