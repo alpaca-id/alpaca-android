@@ -14,16 +14,14 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentSettingsBinding
 import com.bangkit.alpaca.ui.auth.AuthenticationActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding
     private lateinit var settingsViewModel: SettingsViewModel
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +30,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     ): View? {
         settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -88,7 +85,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             .setTitle(getString(R.string.really_logout))
             .setMessage(getString(R.string.remove_session_message))
             .setPositiveButton(getString(R.string.label_logout)) { _, _ ->
-                mAuth.signOut()
+                settingsViewModel.logoutUser()
                 val authIntent = Intent(requireContext(), AuthenticationActivity::class.java)
                 startActivity(authIntent)
                 activity?.finish()

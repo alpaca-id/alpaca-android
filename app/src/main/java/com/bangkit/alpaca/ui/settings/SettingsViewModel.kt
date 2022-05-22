@@ -1,13 +1,15 @@
 package com.bangkit.alpaca.ui.settings
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bangkit.alpaca.data.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SettingsViewModel : ViewModel() {
+@HiltViewModel
+class SettingsViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is settings Fragment"
+    fun logoutUser() {
+        authRepository.logoutUser()
     }
-    val text: LiveData<String> = _text
 }

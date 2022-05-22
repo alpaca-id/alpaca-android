@@ -11,4 +11,5 @@ interface IFirebaseAuth {
         password: String
     ): Flow<Result<Boolean>>
     suspend fun sendPasswordReset(email: String): Flow<Result<Boolean>>
+    fun logoutUser()
 }

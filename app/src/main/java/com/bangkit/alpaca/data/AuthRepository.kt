@@ -1,8 +1,8 @@
 package com.bangkit.alpaca.data
 
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.data.remote.firebase.IFirebaseAuth
 import com.bangkit.alpaca.model.User
-import com.bangkit.alpaca.data.remote.Result
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.flow
@@ -55,5 +55,9 @@ class AuthRepository @Inject constructor(private val auth: FirebaseAuth) : IFire
             emit(Result.Error(e.message.toString()))
         }
 
+    }
+
+    override fun logoutUser() {
+        auth.signOut()
     }
 }
