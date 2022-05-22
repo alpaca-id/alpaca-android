@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.utils
+package com.bangkit.alpaca.data.remote
 
 sealed class Result<out R> private constructor() {
     data class Success<out T>(val data: T) : Result<T>()

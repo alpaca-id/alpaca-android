@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
-import com.bangkit.alpaca.utils.Result
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
