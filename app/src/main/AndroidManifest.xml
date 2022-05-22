@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Alpaca"
         tools:targetApi="31">
         <activity
+            android:name=".ui.changepassword.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.processing.ProcessingActivity"
             android:exported="false" />
         <activity

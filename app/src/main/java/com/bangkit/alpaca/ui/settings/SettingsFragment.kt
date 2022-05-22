@@ -47,17 +47,22 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             btnAboutApps.setOnClickListener(this@SettingsFragment)
             btnPrivacyTerms.setOnClickListener(this@SettingsFragment)
             btnUserTerms.setOnClickListener(this@SettingsFragment)
+            btnChangePassword.setOnClickListener(this@SettingsFragment)
         }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_user_profile -> {
-                v.findNavController().navigate(R.id.action_navigation_settings_to_profileActivity)
-            }
+            R.id.btn_user_profile -> v.findNavController()
+                .navigate(R.id.action_navigation_settings_to_profileActivity)
 
             R.id.btn_customisation_profile -> navigateToCustomisation()
+
             R.id.btn_logout -> showLogoutAlert()
+
+            R.id.btn_change_password -> v.findNavController()
+                .navigate(R.id.action_navigation_settings_to_changePasswordActivity)
+
             R.id.btn_about_apps -> navigateToAboutApps()
             R.id.btn_privacy_terms -> navigateToPrivacyTerms()
             R.id.btn_user_terms -> navigateToUserTerms()

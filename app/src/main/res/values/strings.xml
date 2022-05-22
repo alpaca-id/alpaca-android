@@ -103,4 +103,7 @@
     <string name="error_lenght_password">Kata sandi minimal 6 karakter</string>
     <string name="password_reset_link">Password reset link successfully sent to your email</string>
     <string name="feature_not_ready">Feature not ready</string>
+    <string name="label_account">Akun</string>
+    <string name="change_password">Ubah kata sandi</string>
+    <string name="change">Ubah</string>
 </resources>
