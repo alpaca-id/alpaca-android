@@ -16,7 +16,9 @@ import com.bangkit.alpaca.utils.showError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegistrationFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentRegistrationBinding? = null
@@ -60,7 +62,7 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         val email = binding?.edtEmailRegistration?.text.toString()
         val password = binding?.edtPasswordRegistration?.text.toString()
 
-        registrationViewModel.registrationUser(requireActivity(), name, email, password, mAuth)
+        registrationViewModel.registrationUser(name, email, password)
     }
 
     private fun registrationResult() {
