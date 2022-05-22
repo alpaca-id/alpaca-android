@@ -19,7 +19,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentLoginBinding? = null
@@ -65,7 +67,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         val email = binding?.edtEmailLogin?.text.toString()
         val password = binding?.edtPasswordLogin?.text.toString()
 
-        loginViewModel.loginUser(requireActivity(), email, password, mAuth)
+        loginViewModel.loginUser(email, password)
     }
 
     private fun loginResult() {
