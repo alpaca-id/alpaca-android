@@ -9,15 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
 import com.bangkit.alpaca.ui.main.MainActivity
-import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -25,7 +26,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var mAuth: FirebaseAuth
+
+    @Inject
+    lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,19 +71,21 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loginResult() {
-        loginViewModel.result.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> loadingHandler(true)
-                is Result.Success -> {
-                    loadingHandler(false)
-                    if (result.data) {
-                        val user = mAuth.currentUser
-                        updateUI(user)
+        loginViewModel.result.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { result ->
+                when (result) {
+                    is Result.Loading -> loadingHandler(true)
+                    is Result.Success -> {
+                        loadingHandler(false)
+                        if (result.data) {
+                            val user = mAuth.currentUser
+                            updateUI(user)
+                        }
                     }
-                }
-                is Result.Error -> {
-                    loadingHandler(false)
-                    result.error.showToastMessage(requireContext())
+                    is Result.Error -> {
+                        loadingHandler(false)
+                        result.error.showToastMessage(requireContext())
+                    }
                 }
             }
         }

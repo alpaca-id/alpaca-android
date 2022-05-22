@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
-import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
 import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.databinding.FragmentRegistrationBinding
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
@@ -61,19 +61,21 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
     }
 
     private fun registrationResult() {
-        registrationViewModel.result.observe(requireActivity()) { result ->
-            when (result) {
-                is Result.Loading -> loadingHandler(true)
-                is Result.Success -> {
-                    loadingHandler(false)
-                    if (result.data) {
-                        binding?.root?.findNavController()
-                            ?.navigate(R.id.action_registrationFragment_to_loginFragment2)
+        registrationViewModel.result.observe(requireActivity()) { event ->
+            event.getContentIfNotHandled()?.let { result ->
+                when (result) {
+                    is Result.Loading -> loadingHandler(true)
+                    is Result.Success -> {
+                        loadingHandler(false)
+                        if (result.data) {
+                            binding?.root?.findNavController()
+                                ?.navigate(R.id.action_registrationFragment_to_loginFragment2)
+                        }
                     }
-                }
-                is Result.Error -> {
-                    loadingHandler(false)
-                    result.error.showToastMessage(requireContext())
+                    is Result.Error -> {
+                        loadingHandler(false)
+                        result.error.showToastMessage(requireContext())
+                    }
                 }
             }
         }

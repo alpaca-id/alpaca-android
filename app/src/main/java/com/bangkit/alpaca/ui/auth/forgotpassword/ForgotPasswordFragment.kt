@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
-import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
 import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
 import com.bangkit.alpaca.utils.isTouchableScreen
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
@@ -61,20 +61,22 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
     }
 
     private fun sendPasswordResult() {
-        forgotPasswordViewModel.result.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> loadingHandler(true)
-                is Result.Success -> {
-                    loadingHandler(false)
-                    if (result.data) {
-                        getString(R.string.password_reset_link).showToastMessage(requireContext())
-                        binding?.root?.findNavController()
-                            ?.navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+        forgotPasswordViewModel.result.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { result ->
+                when (result) {
+                    is Result.Loading -> loadingHandler(true)
+                    is Result.Success -> {
+                        loadingHandler(false)
+                        if (result.data) {
+                            getString(R.string.password_reset_link).showToastMessage(requireContext())
+                            binding?.root?.findNavController()
+                                ?.navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+                        }
                     }
-                }
-                is Result.Error -> {
-                    loadingHandler(false)
-                    result.error.showToastMessage(requireContext())
+                    is Result.Error -> {
+                        loadingHandler(false)
+                        result.error.showToastMessage(requireContext())
+                    }
                 }
             }
         }
