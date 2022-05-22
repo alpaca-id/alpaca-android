@@ -6,7 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.alpaca.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegistrationViewModel : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
@@ -26,11 +27,15 @@ class RegistrationViewModel : ViewModel() {
                 if (task1.isSuccessful) {
                     val user = User(name, email)
                     FirebaseAuth.getInstance().currentUser?.uid?.let {
-                        FirebaseDatabase.getInstance().getReference("Users")
-                            .child(it)
-                            .setValue(user)
-                            .addOnCompleteListener(activity) { task2 ->
-                                _isSuccess.value = task2.isSuccessful
+                        val db = Firebase.firestore
+                        db.collection("users")
+                            .document(user.email)
+                            .set(user)
+                            .addOnSuccessListener {
+                                _isSuccess.value = true
+                            }
+                            .addOnFailureListener {
+                                _isSuccess.value = false
                             }
                     }
                 }
