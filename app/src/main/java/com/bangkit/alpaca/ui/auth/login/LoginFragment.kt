@@ -12,7 +12,7 @@ import com.bangkit.alpaca.R
 import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentLoginBinding
 import com.bangkit.alpaca.ui.main.MainActivity
-import com.bangkit.alpaca.utils.isTouchableScreen
+import com.bangkit.alpaca.utils.LoadingDialog
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.firebase.auth.FirebaseAuth
@@ -74,16 +74,19 @@ class LoginFragment : Fragment(), View.OnClickListener {
         loginViewModel.result.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { result ->
                 when (result) {
-                    is Result.Loading -> loadingHandler(true)
+                    is Result.Loading -> LoadingDialog.displayLoading(
+                        requireContext(),
+                        false
+                    )
                     is Result.Success -> {
-                        loadingHandler(false)
+                        LoadingDialog.hideLoading()
                         if (result.data) {
                             val user = mAuth.currentUser
                             updateUI(user)
                         }
                     }
                     is Result.Error -> {
-                        loadingHandler(false)
+                        LoadingDialog.hideLoading()
                         result.error.showToastMessage(requireContext())
                     }
                 }
@@ -134,15 +137,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
             startActivity(mainIntent)
             activity?.finish()
         }
-    }
-
-    private fun loadingHandler(isLoading: Boolean) {
-        if (isLoading) {
-            binding?.loadingLogin?.visibility = View.VISIBLE
-        } else {
-            binding?.loadingLogin?.visibility = View.GONE
-        }
-        activity?.window?.isTouchableScreen(isLoading)
     }
 
     override fun onStart() {
