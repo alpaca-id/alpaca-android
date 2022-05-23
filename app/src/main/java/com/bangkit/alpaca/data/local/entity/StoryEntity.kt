@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "stories")
 data class StoryEntity(
-    @PrimaryKey
-    val id: Int,
 
+    @PrimaryKey
     @ColumnInfo(name = "title")
     val title: String,
 

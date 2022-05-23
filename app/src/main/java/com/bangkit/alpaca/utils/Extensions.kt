@@ -36,7 +36,6 @@ fun View.animateVisibility(isVisible: Boolean, duration: Long = 400) {
  */
 fun StoryEntity.toStory(): Story {
     return Story(
-        id = this.id,
         title = this.title,
         body = this.body,
         coverPath = this.coverPath,
@@ -50,7 +49,6 @@ fun StoryEntity.toStory(): Story {
  */
 fun Story.toStoryEntity(): StoryEntity {
     return StoryEntity(
-        id = this.id,
         title = this.title,
         body = this.body,
         coverPath = this.coverPath,
