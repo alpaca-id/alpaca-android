@@ -61,11 +61,13 @@ class EducationFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding?.root?.requestLayout()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun generateRandomIndex(maxValue: Int): Int =
-        Random(Calendar.getInstance().timeInMillis).nextInt(maxValue)
 }
