@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.collection
+package com.bangkit.alpaca.ui.home.collection
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

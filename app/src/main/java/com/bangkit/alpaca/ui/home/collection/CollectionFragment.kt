@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.collection
+package com.bangkit.alpaca.ui.home.collection
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import com.bangkit.alpaca.databinding.FragmentCollectionBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.CollectionListAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
+import com.bangkit.alpaca.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -89,6 +90,12 @@ class CollectionFragment : Fragment() {
      * @param isVisible State of the message visibility
      */
     private fun showEmptyCollectionMessage(isVisible: Boolean) {
+
+        binding?.apply {
+            rvCollection.animateVisibility(!isVisible)
+            containerInfoNoCollection.animateVisibility(isVisible)
+        }
+
         if (isVisible) {
             binding?.containerInfoNoCollection?.visibility = View.VISIBLE
             binding?.rvCollection?.visibility = View.GONE
