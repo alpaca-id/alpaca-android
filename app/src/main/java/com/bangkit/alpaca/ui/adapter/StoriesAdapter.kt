@@ -19,7 +19,8 @@ class StoriesAdapter : ListAdapter<Story, StoriesAdapter.ListViewHolder>(DIFF_CA
         holder.bind(story)
     }
 
-    inner class ListViewHolder(val binding: ItemLibraryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(val binding: ItemLibraryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             with(binding) {
                 tvItemTitleStory.text = story.title

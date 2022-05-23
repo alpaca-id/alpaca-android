@@ -14,7 +14,9 @@ import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.CollectionListAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class CollectionFragment : Fragment() {
 
@@ -36,7 +38,7 @@ class CollectionFragment : Fragment() {
         handleViewAction()
 
         collectionViewModel.storiesCollection.observe(viewLifecycleOwner) { stories ->
-            if (stories.isNotEmpty()) {
+            if (stories?.isNotEmpty() == true) {
                 val recyclerView = binding?.rvCollection
                 val layoutManager = GridLayoutManager(requireContext(), 2)
                 val adapter = CollectionListAdapter(stories)
@@ -54,8 +56,13 @@ class CollectionFragment : Fragment() {
                 }
             }
 
-            showEmptyCollectionMessage(stories.isEmpty())
+            showEmptyCollectionMessage(stories?.isEmpty() == true)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.root?.requestLayout()
     }
 
     override fun onDestroyView() {

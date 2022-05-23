@@ -9,7 +9,7 @@
         android:id="@+id/loginFragment"
         android:name="com.bangkit.alpaca.ui.auth.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
@@ -21,7 +21,7 @@
         android:id="@+id/registrationFragment"
         android:name="com.bangkit.alpaca.ui.auth.registration.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment2"
             app:destination="@id/loginFragment"
@@ -32,7 +32,7 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.bangkit.alpaca.ui.auth.forgotpassword.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" >
+        tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment"

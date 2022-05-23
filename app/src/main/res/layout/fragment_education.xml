@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,107 +8,101 @@
     android:paddingVertical="32dp"
     tools:context=".ui.education.EducationFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_flashcard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        app:cardBackgroundColor="@color/green_700"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_flashcard"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            app:cardBackgroundColor="@color/green_700"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_flashcard_title"
+                style="@style/Theme.Alpaca.Text.Headline.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disleksia"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_flashcard_message"
+                style="@style/Theme.Alpaca.Text.Body.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:animateLayoutChanges="true"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:layout_marginTop="16dp"
+                android:text="@string/dummy_flashcard_body"
+                android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/tv_flashcard_title"
-                    style="@style/Theme.Alpaca.Text.Headline.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/disleksia"
-                    android:textColor="@color/white" />
+            <ImageView
+                android:id="@+id/btn_change"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/switch_information"
+                android:src="@drawable/ic_baseline_change_circle_24"
+                app:tint="@color/white" />
 
-                <TextView
-                    android:id="@+id/tv_flashcard_message"
-                    style="@style/Theme.Alpaca.Text.Body.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/dummy_flashcard_body"
-                    android:textColor="@color/white" />
+        </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/btn_change"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="16dp"
-                    android:contentDescription="@string/switch_information"
-                    android:src="@drawable/ic_baseline_change_circle_24"
-                    app:tint="@color/white" />
+    </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_word_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/green_700"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_flashcard">
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_word_game"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/green_700"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_flashcard">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <LinearLayout
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="24dp">
+                android:contentDescription="@string/content_description_word_game"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_illustration_word_games" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/content_description_word_game"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_illustration_word_games" />
+            <TextView
+                style="@style/Theme.Alpaca.Text.Headline.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/susun_kata"
+                android:textColor="@color/white" />
 
-                <TextView
-                    style="@style/Theme.Alpaca.Text.Headline.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/susun_kata"
-                    android:textColor="@color/white" />
+            <TextView
+                style="@style/Theme.Alpaca.Text.Body.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/card_word_games_description"
+                android:textColor="@color/white" />
 
-                <TextView
-                    style="@style/Theme.Alpaca.Text.Body.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/card_word_games_description"
-                    android:textColor="@color/white" />
+        </LinearLayout>
 
-            </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
