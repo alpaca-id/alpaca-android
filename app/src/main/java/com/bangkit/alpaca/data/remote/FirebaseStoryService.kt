@@ -18,6 +18,25 @@ object FirebaseStoryService {
     private const val TAG = "FirebaseStoryService"
 
     /**
+     * Save new story to the database
+     *
+     * @param story Story
+     */
+    fun saveNewStory(story: Story) {
+        val email = Firebase.auth.currentUser?.email
+        try {
+            Firebase.firestore.collection("users/$email/stories-scan").add(story)
+        } catch (e: Exception) {
+            Firebase.crashlytics.apply {
+                log("Error save new story")
+                recordException(e)
+            }
+
+            Log.e(TAG, "saveNewStory: ${e.message}")
+        }
+    }
+
+    /**
      * Fetch all user's saved stories (from scan)
      *
      * @return Flow
