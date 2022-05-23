@@ -25,7 +25,8 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:title="@string/label_settings" />
+                app:title="@string/label_settings"
+                app:titleMarginStart="24dp" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView

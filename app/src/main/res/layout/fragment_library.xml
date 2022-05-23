@@ -26,6 +26,8 @@
                 android:id="@+id/toolbar_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 app:menu="@menu/library_menu"
                 app:title="@string/label_library" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -57,9 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:visibility="gone"
             android:layout_marginTop="16dp"
             android:text="@string/search_result"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appbar_library" />
 
