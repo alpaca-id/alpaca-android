@@ -14,8 +14,10 @@ import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentConfirmationBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.main.MainActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.util.*
 
+@ExperimentalCoroutinesApi
 class ConfirmationFragment : Fragment() {
 
     private var _binding: FragmentConfirmationBinding? = null
@@ -63,7 +65,6 @@ class ConfirmationFragment : Fragment() {
             val content = binding.etContent.text.toString()
 
             val story = Story(
-                id = null,
                 title = title,
                 body = content,
                 coverPath = null,
