@@ -4,12 +4,15 @@ import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.data.remote.firebase.IFirebaseAuth
 import com.bangkit.alpaca.model.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val auth: FirebaseAuth) : IFirebaseAuth {
+class AuthRepository @Inject constructor(
+    private val auth: FirebaseAuth,
+    private val db: FirebaseFirestore
+) : IFirebaseAuth {
 
     override suspend fun loginUser(email: String, password: String) = flow {
         try {
@@ -31,13 +34,12 @@ class AuthRepository @Inject constructor(private val auth: FirebaseAuth) : IFire
             auth.createUserWithEmailAndPassword(email, password).await()
 
             val user = User(name, email)
-            val fb = FirebaseDatabase.getInstance()
             val pathString = FirebaseAuth.getInstance().currentUser?.uid
 
             pathString?.let {
-                fb.getReference("Users")
-                    .child(it)
-                    .setValue(user)
+                db.collection("users")
+                    .document(user.email)
+                    .set(user)
             }?.await()
 
             emit(Result.Success(true))
