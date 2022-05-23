@@ -14,6 +14,10 @@ class ConfirmationViewModel : ViewModel() {
         try {
             db.collection("users/${user?.email}/stories-scan")
                 .add(story)
+
+            db.collection("users").document("").get().addOnSuccessListener {
+                it.id
+            }
         } catch (e: Exception) {
             // Exception handler
         }

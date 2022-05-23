@@ -63,6 +63,7 @@ class ConfirmationFragment : Fragment() {
             val content = binding.etContent.text.toString()
 
             val story = Story(
+                id = null,
                 title = title,
                 body = content,
                 coverPath = null,
