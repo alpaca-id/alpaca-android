@@ -36,8 +36,9 @@ object FirebaseStoryService {
                     return@addSnapshotListener
                 }
 
-                val stories =
-                    value?.documents?.mapNotNull { it.toStory() }?.sortedBy { it.createdAt }
+                val stories = value?.documents
+                    ?.mapNotNull { it.toStory() }
+                    ?.sortedByDescending { it.createdAt }
 
                 trySend(stories)
             }

@@ -2,8 +2,6 @@ package com.bangkit.alpaca.utils
 
 import android.animation.ObjectAnimator
 import android.view.View
-import com.bangkit.alpaca.data.local.entity.StoryEntity
-import com.bangkit.alpaca.model.Story
 import com.google.android.material.textfield.TextInputLayout
 import java.text.DateFormat
 import java.util.*
@@ -29,33 +27,6 @@ fun View.animateVisibility(isVisible: Boolean, duration: Long = 400) {
         this.duration = duration
         start()
     }
-}
-
-/**
- * Convert StoryEntity object to Story object
- */
-fun StoryEntity.toStory(): Story {
-    return Story(
-        id = null,
-        title = this.title,
-        body = this.body,
-        coverPath = this.coverPath,
-        authorName = this.authorName,
-        createdAt = this.createdAt
-    )
-}
-
-/**
- * Convert Story object to StoryEntity object
- */
-fun Story.toStoryEntity(): StoryEntity {
-    return StoryEntity(
-        title = this.title,
-        body = this.body,
-        coverPath = this.coverPath,
-        authorName = this.authorName,
-        createdAt = this.createdAt
-    )
 }
 
 
