@@ -51,7 +51,7 @@
     <string name="account_ready">Sudah memiliki akun?</string>
     <string name="find_account">Temukan akun anda</string>
     <string name="input_your_email_to_find">Masukkan alamat email yang terhubung dengan akun Alpaca</string>
-    <string name="label_next">Selanjutnya</string>
+    <string name="label_process">Proses</string>
     <string name="camera_message">Arahkan kamera pada tulisan, pastikan seluruh tulisan terbaca dengan jelas</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="memproses_gambar">Memproses Gambar</string>
@@ -99,7 +99,8 @@
     <string name="remove_session_message">Sesi akun anda akan dihapus, dan anda perlu login kembali untuk menggunakan aplikasi ini</string>
     <string name="label_cancel">Batal</string>
     <string name="dummy_password">adminadmin</string>
-    <string name="loading">Loading…</string>
+    <string name="loading">Memuat…</string>
     <string name="error_lenght_password">Kata sandi minimal 6 karakter</string>
-
+    <string name="password_reset_link">Password reset link successfully sent to your email</string>
+    <string name="feature_not_ready">Feature not ready</string>
 </resources>

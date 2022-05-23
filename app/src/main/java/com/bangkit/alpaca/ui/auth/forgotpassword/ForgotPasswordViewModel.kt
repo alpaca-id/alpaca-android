@@ -1,20 +1,28 @@
 package com.bangkit.alpaca.ui.auth.forgotpassword
 
-import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.viewModelScope
+import com.bangkit.alpaca.data.AuthRepository
+import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.utils.Event
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ForgotPasswordViewModel : ViewModel() {
-    private val _isSuccess = MutableLiveData<Boolean>()
-    val isSuccess: LiveData<Boolean>
-        get() = _isSuccess
+@HiltViewModel
+class ForgotPasswordViewModel @Inject constructor(private val authRepository: AuthRepository) :
+    ViewModel() {
+    private val _result = MutableLiveData<Event<Result<Boolean>>>()
+    val result: LiveData<Event<Result<Boolean>>> get() = _result
 
-    fun sendPassword(activity: Activity, email: String) {
-        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-            .addOnCompleteListener(activity) { task ->
-                _isSuccess.value = task.isSuccessful
+    fun sendPassword(email: String) {
+        viewModelScope.launch {
+            authRepository.sendPasswordReset(email).collect { result ->
+                _result.value = Event(result)
             }
+        }
     }
 }

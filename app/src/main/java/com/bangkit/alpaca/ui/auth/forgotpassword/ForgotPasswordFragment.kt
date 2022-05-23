@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentForgotPasswordBinding
+import com.bangkit.alpaca.utils.LoadingDialog
 import com.bangkit.alpaca.utils.showError
+import com.bangkit.alpaca.utils.showToastMessage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentForgotPasswordBinding? = null
@@ -30,7 +34,7 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupAction()
-        isSendPasswordSuccess()
+        sendPasswordResult()
     }
 
     private fun setupAction() {
@@ -53,23 +57,27 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
         if (!isFormValid()) return
 
         val email = binding?.edtEmailForgotPassword?.text.toString()
-        forgotPasswordViewModel.sendPassword(requireActivity(), email)
+        forgotPasswordViewModel.sendPassword(email)
     }
 
-    private fun isSendPasswordSuccess() {
-        forgotPasswordViewModel.isSuccess.observe(viewLifecycleOwner) { isSuccess ->
-            if (isSuccess) {
-                Toast.makeText(
-                    requireContext(),
-                    "Berhasil mengirim password ke email",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Gagal mengirim password ke email",
-                    Toast.LENGTH_SHORT
-                ).show()
+    private fun sendPasswordResult() {
+        forgotPasswordViewModel.result.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let { result ->
+                when (result) {
+                    is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
+                    is Result.Success -> {
+                        LoadingDialog.hideLoading()
+                        if (result.data) {
+                            getString(R.string.password_reset_link).showToastMessage(requireContext())
+                            binding?.root?.findNavController()
+                                ?.navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+                        }
+                    }
+                    is Result.Error -> {
+                        LoadingDialog.hideLoading()
+                        result.error.showToastMessage(requireContext())
+                    }
+                }
             }
         }
     }

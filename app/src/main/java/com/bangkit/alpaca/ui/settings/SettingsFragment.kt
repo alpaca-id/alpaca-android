@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,16 +13,15 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentSettingsBinding
 import com.bangkit.alpaca.ui.auth.AuthenticationActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.bangkit.alpaca.utils.showToastMessage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding
     private lateinit var settingsViewModel: SettingsViewModel
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +30,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     ): View? {
         settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -68,19 +65,19 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun navigateToCustomisation() {
-        Toast.makeText(requireContext(), "Kustomisasi Teks", Toast.LENGTH_SHORT).show()
+        getString(R.string.feature_not_ready).showToastMessage(requireContext())
     }
 
     private fun navigateToAboutApps() {
-        Toast.makeText(requireContext(), "Tentang Aplikasi", Toast.LENGTH_SHORT).show()
+        getString(R.string.feature_not_ready).showToastMessage(requireContext())
     }
 
     private fun navigateToPrivacyTerms() {
-        Toast.makeText(requireContext(), "Ketentuan Privasi", Toast.LENGTH_SHORT).show()
+        getString(R.string.feature_not_ready).showToastMessage(requireContext())
     }
 
     private fun navigateToUserTerms() {
-        Toast.makeText(requireContext(), "Ketentuan Pengguna", Toast.LENGTH_SHORT).show()
+        getString(R.string.feature_not_ready).showToastMessage(requireContext())
     }
 
     private fun showLogoutAlert() {
@@ -88,7 +85,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             .setTitle(getString(R.string.really_logout))
             .setMessage(getString(R.string.remove_session_message))
             .setPositiveButton(getString(R.string.label_logout)) { _, _ ->
-                mAuth.signOut()
+                settingsViewModel.logoutUser()
                 val authIntent = Intent(requireContext(), AuthenticationActivity::class.java)
                 startActivity(authIntent)
                 activity?.finish()
