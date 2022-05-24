@@ -106,4 +106,6 @@
     <string name="label_account">Akun</string>
     <string name="change_password">Ubah kata sandi</string>
     <string name="change">Ubah</string>
+    <string name="save_update">Simpan perubahan</string>
+    <string name="password_confirmation">Masukkan kata sandi untuk konfirmasi</string>
 </resources>

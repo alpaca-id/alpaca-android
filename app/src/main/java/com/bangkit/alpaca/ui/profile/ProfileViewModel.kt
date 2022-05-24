@@ -19,10 +19,21 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
     private val _user = MutableLiveData<Result<User>>()
     val user: LiveData<Result<User>> get() = _user
 
+    private val _result = MutableLiveData<Result<Boolean>>()
+    val result: LiveData<Result<Boolean>> get() = _result
+
     fun getUserData() {
         viewModelScope.launch {
             userRepository.getUserData().collect { user ->
                 _user.value = user
+            }
+        }
+    }
+
+    fun updateUserData(email: String, name: String, password:String) {
+        viewModelScope.launch {
+            userRepository.updateUserData(email, name, password).collect { result ->
+                _result.value = result
             }
         }
     }
