@@ -20,8 +20,7 @@ class ConfirmationViewModel : ViewModel() {
      */
     fun saveNewStory(story: Story) {
         viewModelScope.launch {
-            val email = Firebase.auth.currentUser?.email
-            FirebaseStoryService.getUserDocumentID(email).collect { documentId ->
+            FirebaseStoryService.getUserDocumentID().collect { documentId ->
                 FirebaseStoryService.saveNewStory(documentId, story)
             }
         }

@@ -3,6 +3,7 @@ package com.bangkit.alpaca.data.remote
 import android.util.Log
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.model.Story.Companion.toStory
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -68,7 +69,8 @@ object FirebaseStoryService {
     /**
      * Get user's document id based on the user's email address
      */
-    fun getUserDocumentID(email: String?): Flow<String?> = callbackFlow {
+    fun getUserDocumentID(): Flow<String?> = callbackFlow {
+        val email = Firebase.auth.currentUser?.email
         val listener = Firebase.firestore.collection("users")
             .whereEqualTo("email", email)
             .limit(1)

@@ -14,8 +14,10 @@ import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.CollectionListAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
 import com.bangkit.alpaca.utils.animateVisibility
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@AndroidEntryPoint
 @ExperimentalCoroutinesApi
 class CollectionFragment : Fragment() {
 
