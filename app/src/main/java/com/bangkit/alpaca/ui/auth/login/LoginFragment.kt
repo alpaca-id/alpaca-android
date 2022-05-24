@@ -17,8 +17,9 @@ import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -26,8 +27,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
     private val loginViewModel: LoginViewModel by viewModels()
-
-    @Inject
     lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
@@ -35,6 +34,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        mAuth = Firebase.auth
         return binding?.root
     }
 
