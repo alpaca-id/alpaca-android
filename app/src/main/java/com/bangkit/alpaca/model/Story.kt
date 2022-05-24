@@ -1,44 +1,10 @@
 package com.bangkit.alpaca.model
 
-import android.os.Parcelable
-import android.util.Log
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.ktx.Firebase
-import kotlinx.parcelize.Parcelize
-import java.util.*
-
-@Parcelize
 data class Story(
+    val id: Int,
     val title: String,
     val body: String,
     val coverPath: String?,
     val authorName: String?,
     val createdAt: Long
-) : Parcelable {
-
-    companion object {
-        fun DocumentSnapshot.toStory(): Story? {
-            return try {
-                val title = getString("title").toString()
-                val body = getString("body").toString()
-                val authorName = getString("authorName")
-                val coverPath = getString("coverPath")
-                val createdAt = getLong("createdAt") ?: Calendar.getInstance().timeInMillis
-
-                Story(title, body, coverPath, authorName, createdAt)
-            } catch (e: Exception) {
-                Firebase.crashlytics.apply {
-                    log("Error converting DocumentSnapshot to Story")
-                    setCustomKey("user_id", id)
-                    recordException(e)
-                }
-
-                Log.e(TAG, "toStory: ${e.message}")
-                null
-            }
-        }
-
-        private const val TAG = "Story"
-    }
-}
+)

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentHomeBinding
@@ -20,15 +21,15 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,8 +40,6 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        binding?.viewPager?.adapter = null
         _binding = null
     }
 
@@ -49,7 +48,7 @@ class HomeFragment : Fragment() {
      */
     private fun handleViewAction() {
         var isExpanded = false
-        binding?.apply {
+        binding.apply {
             fabAction.setOnClickListener {
                 floatingActionButtonHandler(isExpanded)
                 isExpanded = !isExpanded
@@ -86,13 +85,13 @@ class HomeFragment : Fragment() {
      */
     private fun floatingActionButtonHandler(isExpanded: Boolean) {
         if (!isExpanded) {
-            binding?.apply {
+            binding.apply {
                 fabCamera.show()
                 fabGallery.show()
                 fabAction.setImageResource(R.drawable.ic_baseline_close_24)
             }
         } else {
-            binding?.apply {
+            binding.apply {
                 fabCamera.hide()
                 fabGallery.hide()
                 fabAction.setImageResource(R.drawable.ic_baseline_photo_camera_24)
@@ -106,19 +105,17 @@ class HomeFragment : Fragment() {
      * @return Unit
      */
     private fun setViewPager() {
-        val viewPager = binding?.viewPager
-        val tabs = binding?.tabLayout
+        val viewPager = binding.viewPager
+        val tabs = binding.tabLayout
         val tabTitles = intArrayOf(
             R.string.title_koleksi_bacaan,
             R.string.title_edukasi
         )
 
-        viewPager?.adapter = SectionPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
+        viewPager.adapter = SectionPagerAdapter(activity as AppCompatActivity)
 
-        if (tabs != null && viewPager != null) {
-            TabLayoutMediator(tabs, viewPager) { tab, position ->
-                tab.text = resources.getString(tabTitles[position])
-            }.attach()
-        }
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(tabTitles[position])
+        }.attach()
     }
 }

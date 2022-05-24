@@ -88,16 +88,11 @@ class ForgotPasswordFragment : Fragment(), View.OnClickListener {
 
         binding?.tilEmailForgotPassword?.apply {
             if (email.isEmpty()) {
-                isErrorEnabled = true
-                error = getString(R.string.error_empty_email)
                 showError(true, getString(R.string.error_empty_email))
             } else {
                 if (!isEmailFormatValid) {
-                    error = getString(R.string.error_email_format)
                     showError(true, getString(R.string.error_email_format))
                 } else {
-                    isErrorEnabled = false
-                    error = null
                     showError(false)
                 }
             }

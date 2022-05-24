@@ -22,7 +22,7 @@ open class Event<out T>(private val content: T) {
 }
 
 object LoadingDialog {
-    private var dialog: Dialog? = null
+    lateinit var dialog: Dialog
 
     fun displayLoading(
         context: Context,
@@ -30,14 +30,14 @@ object LoadingDialog {
     ) {
         dialog = Dialog(context)
 
-        dialog?.apply {
+        with(dialog) {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setContentView(R.layout.view_loading_screen)
             setCancelable(cancelable)
         }
 
         try {
-            dialog?.show()
+            dialog.show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -45,8 +45,7 @@ object LoadingDialog {
 
     fun hideLoading() {
         try {
-            dialog?.dismiss()
-            dialog = null
+            dialog.dismiss()
         } catch (e: Exception) {
             e.printStackTrace()
         }
