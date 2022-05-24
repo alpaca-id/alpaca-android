@@ -21,6 +21,41 @@ class CustomizationActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
         }
 
+        binding.apply {
+            cardTextSize.setOnClickListener {
+                val modalTextSizeSetting = BottomSheetTextSizeSetting()
+                modalTextSizeSetting.show(supportFragmentManager, BottomSheetTextSizeSetting.TAG)
+            }
+
+            cardAlignment.setOnClickListener {
+                val modalAlignmentSetting = BottomSheetAlignmentSetting()
+                modalAlignmentSetting.show(supportFragmentManager, BottomSheetAlignmentSetting.TAG)
+            }
+
+            cardLineHeight.setOnClickListener {
+                val modalLineHeightSetting = BottomSheetLineHeightSetting()
+                modalLineHeightSetting.show(
+                    supportFragmentManager,
+                    BottomSheetLineHeightSetting.TAG
+                )
+            }
+
+            cardLineSpacing.setOnClickListener {
+                val modalLineSpacingSetting = BottomSheetLineSpacingSetting()
+                modalLineSpacingSetting.show(
+                    supportFragmentManager,
+                    BottomSheetLineSpacingSetting.TAG
+                )
+            }
+
+            cardFontStyle.setOnClickListener {
+                val modalFontFamilySetting = BottomSheetFontFamilySetting()
+                modalFontFamilySetting.show(
+                    supportFragmentManager,
+                    BottomSheetFontFamilySetting.TAG
+                )
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
