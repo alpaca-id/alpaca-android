@@ -33,24 +33,8 @@ class ChangePasswordActivity : AppCompatActivity() {
         val confirmPassword = binding.edtConfirmPasswordProfile.text.toString()
 
         binding.tilCurrentPasswordProfile.apply {
-            if (currentPassword.isEmpty()) {
-                showError(true, getString(R.string.error_empty_password))
-            } else {
-                showError(false)
-            }
-        }
-
-        binding.tilCurrentPasswordProfile.apply {
             if (currentPassword.length < 6) {
                 showError(true, getString(R.string.error_lenght_password))
-            } else {
-                showError(false)
-            }
-        }
-
-        binding.tilNewPasswordProfile.apply {
-            if (newPassword.isEmpty()) {
-                showError(true, getString(R.string.error_empty_password))
             } else {
                 showError(false)
             }
@@ -60,7 +44,11 @@ class ChangePasswordActivity : AppCompatActivity() {
             if (newPassword.length < 6) {
                 showError(true, getString(R.string.error_lenght_password))
             } else {
-                showError(false)
+                if (newPassword == currentPassword) {
+                    showError(true, getString(R.string.same_password))
+                } else {
+                    showError(false)
+                }
             }
         }
 
@@ -68,23 +56,11 @@ class ChangePasswordActivity : AppCompatActivity() {
             if (confirmPassword.isEmpty()) {
                 showError(true, getString(R.string.error_empty_password))
             } else {
-                showError(false)
-            }
-        }
-
-        binding.tilConfirmPasswordProfile.apply {
-            if (confirmPassword.length < 6) {
-                showError(true, getString(R.string.error_lenght_password))
-            } else {
-                showError(false)
-            }
-        }
-
-        binding.tilConfirmPasswordProfile.apply {
-            if (confirmPassword != newPassword) {
-                showError(true, getString(R.string.password_not_match))
-            } else {
-                showError(false)
+                if (confirmPassword != newPassword) {
+                    showError(true, getString(R.string.password_not_match))
+                } else {
+                    showError(false)
+                }
             }
         }
 
