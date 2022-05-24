@@ -14,6 +14,27 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/white_warm</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Alpaca.BottomSheetDialogTheme</item>
+    </style>
+
+    <!--  BottomSheetDialog Theme  -->
+    <style name="Theme.Alpaca.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/yellow_500</item>
+        <item name="colorPrimaryVariant">@color/yellow_700</item>
+        <item name="colorOnPrimary">@color/blue_900</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_top_rounded</item>
+    </style>
+
+    <!--  Custom Chip Style  -->
+    <style name="Theme.Alpaca.Chip" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/color_chip_background</item>
+        <item name="android:textColor">@color/color_chip_text</item>
     </style>
 
     <!--  Text Styles  -->

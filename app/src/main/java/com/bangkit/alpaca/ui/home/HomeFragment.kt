@@ -14,8 +14,10 @@ import com.bangkit.alpaca.ui.adapter.SectionPagerAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
