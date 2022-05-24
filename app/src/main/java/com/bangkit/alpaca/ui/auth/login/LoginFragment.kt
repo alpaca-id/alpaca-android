@@ -96,14 +96,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun isFormValid(): Boolean {
         val email = binding?.edtEmailLogin?.text.toString()
-        val isEmailFormatValid = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val password = binding?.edtPasswordLogin?.text.toString()
 
         binding?.tilEmailLogin?.apply {
             if (email.isEmpty()) {
                 showError(true, getString(R.string.error_empty_email))
             } else {
-                if (!isEmailFormatValid) {
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     showError(true, getString(R.string.error_email_format))
                 } else {
                     showError(false)

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="24dp"
     android:paddingVertical="32dp"
-    tools:context=".ui.education.EducationFragment">
+    tools:context=".ui.home.education.EducationFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_flashcard"

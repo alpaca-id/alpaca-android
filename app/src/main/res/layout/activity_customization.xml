@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.customization.CustomizationActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/Theme.Alpaca.Text.Body.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/lexia_readable_regular"
+        android:lineSpacingExtra="8sp"
+        android:text="@string/dummy_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_font_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:strokeColor="@color/yellow_500"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Label.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/font_style" />
+
+            <TextView
+                android:id="@+id/tv_font_style_status"
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/lexia_readable" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_font_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_font_style" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_alignment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/card_font_style"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/space"
+        app:layout_constraintTop_toTopOf="@+id/card_font_style"
+        app:strokeColor="@color/yellow_500"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Label.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alignment" />
+
+            <TextView
+                android:id="@+id/tv_alignment_status"
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/left" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_text_size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/space2"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/card_font_style"
+        app:strokeColor="@color/yellow_500"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Label.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ukuran_teks" />
+
+            <TextView
+                android:id="@+id/tv_text_size_status"
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/_20px" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_text_size" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_line_height"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/card_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/space2"
+        app:layout_constraintTop_toTopOf="@+id/card_text_size"
+        app:strokeColor="@color/yellow_500"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Label.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/line_height" />
+
+            <TextView
+                android:id="@+id/tv_line_height_status"
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/_2" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_line_spacing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toStartOf="@+id/space3"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/card_text_size"
+        app:strokeColor="@color/yellow_500"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Label.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/line_spacing" />
+
+            <TextView
+                android:id="@+id/tv_line_spacing_status"
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/_plus_2" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_line_spacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_line_spacing" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_background_color"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/card_line_spacing"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/space3"
+        app:layout_constraintTop_toTopOf="@+id/card_line_spacing"
+        app:strokeColor="@color/yellow_500"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Label.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/background" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/tv_background_status"
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:src="@color/grey_200" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
