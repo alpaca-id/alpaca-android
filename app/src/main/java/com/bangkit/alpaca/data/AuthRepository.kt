@@ -38,7 +38,7 @@ class AuthRepository @Inject constructor(
 
             pathString?.let {
                 db.collection("users")
-                    .document(user.email)
+                    .document(email)
                     .set(user)
             }?.await()
 
