@@ -1,65 +1,25 @@
 package com.bangkit.alpaca.data
 
+import com.bangkit.alpaca.data.remote.FirebaseAuthService
 import com.bangkit.alpaca.data.remote.Result
-import com.bangkit.alpaca.data.remote.firebase.IFirebaseAuth
-import com.bangkit.alpaca.model.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(
-    private val auth: FirebaseAuth,
-    private val db: FirebaseFirestore
-) : IFirebaseAuth {
 
-    override suspend fun loginUser(email: String, password: String) = flow {
-        try {
-            emit(Result.Loading)
-            auth.signInWithEmailAndPassword(email, password).await()
-            emit(Result.Success(true))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
-    }
+class AuthRepository @Inject constructor() {
+    fun loginUsers(email: String, password: String): Flow<Result<Boolean>> =
+        FirebaseAuthService.loginUser(email, password)
 
-    override suspend fun registrationUser(
+    fun registrationUser(
         name: String,
         email: String,
         password: String
-    ) = flow {
-        try {
-            emit(Result.Loading)
-            auth.createUserWithEmailAndPassword(email, password).await()
+    ): Flow<Result<Boolean>> = FirebaseAuthService.registrationUser(name, email, password)
 
-            val user = User(name, email)
-            val pathString = FirebaseAuth.getInstance().currentUser?.uid
+    fun sendPasswordReset(email: String): Flow<Result<Boolean>> =
+        FirebaseAuthService.sendPasswordReset(email)
 
-            pathString?.let {
-                db.collection("users")
-                    .document(email)
-                    .set(user)
-            }?.await()
-
-            emit(Result.Success(true))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
-    }
-
-    override suspend fun sendPasswordReset(email: String) = flow {
-        try {
-            emit(Result.Loading)
-            auth.sendPasswordResetEmail(email).await()
-            emit(Result.Success(true))
-        } catch (e: Exception) {
-            emit(Result.Error(e.message.toString()))
-        }
-
-    }
-
-    override fun logoutUser() {
-        auth.signOut()
+    fun logoutUser() {
+        FirebaseAuthService.logoutUser()
     }
 }
