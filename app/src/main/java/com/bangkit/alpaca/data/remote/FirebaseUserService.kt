@@ -68,4 +68,27 @@ object FirebaseUserService {
             emit(Result.Error(e.message.toString()))
         }
     }
+
+    fun updatePassword(
+        currentPassword: String,
+        newPassword: String
+    ): Flow<Result<Boolean>> = flow {
+        val auth = Firebase.auth
+        emit(Result.Loading)
+        try {
+            val currentEmail = auth.currentUser?.email
+            val user = FirebaseAuth.getInstance().currentUser
+
+            val credential =
+                currentEmail?.let { EmailAuthProvider.getCredential(it, currentPassword) }
+            if (credential != null) {
+                user?.reauthenticate(credential)?.await()
+            }
+
+            auth.currentUser?.updatePassword(newPassword)?.await()
+            emit(Result.Success(true))
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
+        }
+    }
 }

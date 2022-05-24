@@ -111,4 +111,7 @@
     <string name="no_change">No changes</string>
     <string name="password_not_match">Konfirmasi kata sandi tidak cocok</string>
     <string name="same_password">Masukkan kata sandi baru</string>
+    <string name="error_empty_confirm_password">Konfirmasi tidak boleh kosong</string>
+    <string name="saved">Saved</string>
+    <string name="success_change_password">Password changed successfully</string>
 </resources>

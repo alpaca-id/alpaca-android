@@ -76,12 +76,12 @@ class ProfileActivity : AppCompatActivity() {
     private fun updateResult() {
         profileViewModel.result.observe(this) { result ->
             when (result) {
-                is Result.Loading -> {
-                    LoadingDialog.displayLoading(this, false)
-                }
+                is Result.Loading -> LoadingDialog.displayLoading(this, false)
                 is Result.Success -> {
                     LoadingDialog.hideLoading()
-                    "Saved".showToastMessage(this)
+                    if (result.data){
+                        getString(R.string.saved).showToastMessage(this)
+                    }
                 }
                 is Result.Error -> {
                     LoadingDialog.hideLoading()

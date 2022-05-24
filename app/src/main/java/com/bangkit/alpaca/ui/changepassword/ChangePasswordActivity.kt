@@ -1,14 +1,21 @@
 package com.bangkit.alpaca.ui.changepassword
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.ActivityChangePasswordBinding
+import com.bangkit.alpaca.utils.LoadingDialog
 import com.bangkit.alpaca.utils.showError
+import com.bangkit.alpaca.utils.showToastMessage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChangePasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChangePasswordBinding
+    private val changePasswordViewModel: ChangePasswordViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +24,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         setupToolbar()
         setupAction()
+        changePasswordResult()
     }
 
     private fun setupAction() {
@@ -25,6 +33,29 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private fun changePassword() {
         if (!isFormValid()) return
+        val currentPassword = binding.edtCurrentPasswordProfile.text.toString()
+        val newPassword = binding.edtNewPasswordProfile.text.toString()
+
+        changePasswordViewModel.updatePassword(currentPassword, newPassword)
+    }
+
+    private fun changePasswordResult() {
+        changePasswordViewModel.result.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> LoadingDialog.displayLoading(this, false)
+                is Result.Success -> {
+                    LoadingDialog.hideLoading()
+                    if (result.data) {
+                        getString(R.string.success_change_password).showToastMessage(this)
+                        onBackPressed()
+                    }
+                }
+                is Result.Error -> {
+                    LoadingDialog.hideLoading()
+                    result.error.showToastMessage(this)
+                }
+            }
+        }
     }
 
     private fun isFormValid(): Boolean {
@@ -54,7 +85,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         binding.tilConfirmPasswordProfile.apply {
             if (confirmPassword.isEmpty()) {
-                showError(true, getString(R.string.error_empty_password))
+                showError(true, getString(R.string.error_empty_confirm_password))
             } else {
                 if (confirmPassword != newPassword) {
                     showError(true, getString(R.string.password_not_match))

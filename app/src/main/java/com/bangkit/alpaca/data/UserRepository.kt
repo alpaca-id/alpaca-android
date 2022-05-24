@@ -14,4 +14,9 @@ class UserRepository @Inject constructor() {
         name: String,
         password: String
     ): Flow<Result<Boolean>> = FirebaseUserService.updateUserData(email, name, password)
+
+    fun updatePassword(
+        currentPassword: String,
+        newPassword: String
+    ): Flow<Result<Boolean>> = FirebaseUserService.updatePassword(currentPassword, newPassword)
 }
