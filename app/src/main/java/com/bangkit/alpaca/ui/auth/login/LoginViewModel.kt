@@ -19,7 +19,7 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
 
     fun loginUser(email: String, password: String) {
         viewModelScope.launch {
-            authRepository.loginUser(email, password).collect { result ->
+            authRepository.loginUsers(email, password).collect { result ->
                 _result.value = Event(result)
             }
         }

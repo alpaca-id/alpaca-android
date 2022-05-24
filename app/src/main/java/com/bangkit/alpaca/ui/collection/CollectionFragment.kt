@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.home.collection
+package com.bangkit.alpaca.ui.collection
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,10 +13,9 @@ import com.bangkit.alpaca.databinding.FragmentCollectionBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.CollectionListAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
-import com.bangkit.alpaca.utils.animateVisibility
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import dagger.hilt.android.AndroidEntryPoint
 
-@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class CollectionFragment : Fragment() {
 
     private var _binding: FragmentCollectionBinding? = null
@@ -37,7 +36,7 @@ class CollectionFragment : Fragment() {
         handleViewAction()
 
         collectionViewModel.storiesCollection.observe(viewLifecycleOwner) { stories ->
-            if (stories?.isNotEmpty() == true) {
+            if (stories.isNotEmpty()) {
                 val recyclerView = binding?.rvCollection
                 val layoutManager = GridLayoutManager(requireContext(), 2)
                 val adapter = CollectionListAdapter(stories)
@@ -55,13 +54,8 @@ class CollectionFragment : Fragment() {
                 }
             }
 
-            showEmptyCollectionMessage(stories?.isEmpty() == true)
+            showEmptyCollectionMessage(stories.isEmpty())
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding?.root?.requestLayout()
     }
 
     override fun onDestroyView() {
@@ -88,12 +82,6 @@ class CollectionFragment : Fragment() {
      * @param isVisible State of the message visibility
      */
     private fun showEmptyCollectionMessage(isVisible: Boolean) {
-
-        binding?.apply {
-            rvCollection.animateVisibility(!isVisible)
-            containerInfoNoCollection.animateVisibility(isVisible)
-        }
-
         if (isVisible) {
             binding?.containerInfoNoCollection?.visibility = View.VISIBLE
             binding?.rvCollection?.visibility = View.GONE

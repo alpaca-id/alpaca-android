@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.alpaca.databinding.CardLibraryItemBinding
+import com.bangkit.alpaca.databinding.ItemLibraryBinding
 import com.bangkit.alpaca.model.Story
 
 class StoriesAdapter : ListAdapter<Story, StoriesAdapter.ListViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val binding =
-            CardLibraryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemLibraryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
@@ -20,8 +19,7 @@ class StoriesAdapter : ListAdapter<Story, StoriesAdapter.ListViewHolder>(DIFF_CA
         holder.bind(story)
     }
 
-    inner class ListViewHolder(val binding: CardLibraryItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ListViewHolder(val binding: ItemLibraryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             with(binding) {
                 tvItemTitleStory.text = story.title

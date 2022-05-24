@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_navigation_settings_to_profileActivity"
             app:destination="@id/profileActivity" />
+        <action
+            android:id="@+id/action_navigation_settings_to_changePasswordActivity"
+            app:destination="@id/changePasswordActivity" />
     </fragment>
 
     <activity
@@ -32,4 +35,9 @@
         android:name="com.bangkit.alpaca.ui.profile.ProfileActivity"
         android:label="activity_profile"
         tools:layout="@layout/activity_profile" />
+    <activity
+        android:id="@+id/changePasswordActivity"
+        android:name="com.bangkit.alpaca.ui.changepassword.ChangePasswordActivity"
+        android:label="activity_change_password"
+        tools:layout="@layout/activity_change_password" />
 </navigation>

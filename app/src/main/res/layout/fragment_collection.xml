@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.collection.CollectionFragment">
+    tools:context=".ui.collection.CollectionFragment">
 
     <LinearLayout
         android:id="@+id/container_info_no_collection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible"
@@ -55,7 +54,6 @@
         android:id="@+id/rv_collection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0"
         android:paddingHorizontal="16dp"
         android:paddingTop="24dp"
         android:visibility="gone"

@@ -60,7 +60,7 @@
     <string name="simpan_catatan">Simpan Catatan</string>
     <string name="judul">Judul</string>
     <string name="hasil_pemindaian">Hasil Pemindaian</string>
-    <string name="dummy_text">Cerita Pendek atau biasa disingkat cerpen adalah salah satu jenis prosa yang isi ceritanya bukan kejadian nyata dan hanya dibuat-buat. Jumlah kata di dalam cerita pendek tidak lebih dari 10.000 kata. Penulisan cerita pendek menggunakan gaya bahasa yang naratif.</string>
+    <string name="dummy_text">Cerita Pendek atau biasa disingkat cerpen adalah salah satu jenis prosa yang isi ceritanya bukan kejadian nyata dan hanya dibuat-buat. Jumlah kata di dalam cerita pendek tidak lebih dari 10.000 kata. Penulisan cerita pendek menggunakan gaya bahasa yang naratif</string>
     <string name="helper_scan_result">*Anda dapat melakukan penyesuaian sebelum menyimpan cerita</string>
     <string name="label_settings">Pengaturan</string>
     <string name="label_profile">Profil</string>
@@ -103,16 +103,15 @@
     <string name="error_lenght_password">Kata sandi minimal 6 karakter</string>
     <string name="password_reset_link">Password reset link successfully sent to your email</string>
     <string name="feature_not_ready">Feature not ready</string>
-    <string name="customization">Kustomisasi</string>
-    <string name="background">Latar Belakang</string>
-    <string name="alignment">Alignment</string>
-    <string name="left">Kiri</string>
-    <string name="lexia_readable">Lexia Readable</string>
-    <string name="font_style">Font Style</string>
-    <string name="line_height">Line Height</string>
-    <string name="_2">2</string>
-    <string name="ukuran_teks">Ukuran Teks</string>
-    <string name="_20px">20px</string>
-    <string name="line_spacing">Line Spacing</string>
-    <string name="_plus_2">+2</string>
+    <string name="label_account">Akun</string>
+    <string name="change_password">Ubah kata sandi</string>
+    <string name="change">Ubah</string>
+    <string name="save_update">Simpan perubahan</string>
+    <string name="password_confirmation">Masukkan kata sandi untuk konfirmasi</string>
+    <string name="no_change">No changes</string>
+    <string name="password_not_match">Konfirmasi kata sandi tidak cocok</string>
+    <string name="same_password">Masukkan kata sandi baru</string>
+    <string name="error_empty_confirm_password">Konfirmasi tidak boleh kosong</string>
+    <string name="saved">Saved</string>
+    <string name="success_change_password">Password changed successfully</string>
 </resources>

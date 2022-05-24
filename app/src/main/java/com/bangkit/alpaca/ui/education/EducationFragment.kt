@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.home.education
+package com.bangkit.alpaca.ui.education
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bangkit.alpaca.databinding.FragmentEducationBinding
 import com.bangkit.alpaca.utils.animateVisibility
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Runnable
+import java.util.*
+import kotlin.random.Random
 
+@AndroidEntryPoint
 class EducationFragment : Fragment() {
 
     private var _binding: FragmentEducationBinding? = null
@@ -59,13 +63,11 @@ class EducationFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding?.root?.requestLayout()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun generateRandomIndex(maxValue: Int): Int =
+        Random(Calendar.getInstance().timeInMillis).nextInt(maxValue)
 }
