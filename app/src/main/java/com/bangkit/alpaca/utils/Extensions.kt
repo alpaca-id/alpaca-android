@@ -33,35 +33,6 @@ fun View.animateVisibility(isVisible: Boolean, duration: Long = 400) {
     }
 }
 
-/**
- * Convert StoryEntity object to Story object
- */
-fun StoryEntity.toStory(): Story {
-    return Story(
-        id = this.id,
-        title = this.title,
-        body = this.body,
-        coverPath = this.coverPath,
-        authorName = this.authorName,
-        createdAt = this.createdAt
-    )
-}
-
-/**
- * Convert Story object to StoryEntity object
- */
-fun Story.toStoryEntity(): StoryEntity {
-    return StoryEntity(
-        id = this.id,
-        title = this.title,
-        body = this.body,
-        coverPath = this.coverPath,
-        authorName = this.authorName,
-        createdAt = this.createdAt
-    )
-}
-
-
 fun TextInputLayout.showError(isError: Boolean, message: String? = null) {
     if (isError) {
         isErrorEnabled = false
