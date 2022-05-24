@@ -48,6 +48,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name_profile"
         style="@style/Theme.Alpaca.InputLayout.Profile"
+        app:errorIconDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name_profile">
@@ -69,6 +70,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email_profile"
         style="@style/Theme.Alpaca.InputLayout.Profile"
+        app:errorIconDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_email_profile">

@@ -109,4 +109,5 @@
     <string name="save_update">Simpan perubahan</string>
     <string name="password_confirmation">Masukkan kata sandi untuk konfirmasi</string>
     <string name="no_change">No changes</string>
+    <string name="password_not_match">Konfirmasi kata sandi tidak cocok</string>
 </resources>

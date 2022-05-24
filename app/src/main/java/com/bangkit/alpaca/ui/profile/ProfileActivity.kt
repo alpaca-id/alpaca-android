@@ -41,7 +41,7 @@ class ProfileActivity : AppCompatActivity() {
         profileViewModel.getUserData()
         profileViewModel.user.observe(this) { result ->
             when (result) {
-                is Result.Loading -> LoadingDialog.displayLoading(this, true)
+                is Result.Loading -> LoadingDialog.displayLoading(this, false)
                 is Result.Success -> {
                     LoadingDialog.hideLoading()
                     with(binding) {
@@ -77,7 +77,7 @@ class ProfileActivity : AppCompatActivity() {
         profileViewModel.result.observe(this) { result ->
             when (result) {
                 is Result.Loading -> {
-                    LoadingDialog.displayLoading(this, true)
+                    LoadingDialog.displayLoading(this, false)
                 }
                 is Result.Success -> {
                     LoadingDialog.hideLoading()
