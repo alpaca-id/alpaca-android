@@ -9,8 +9,6 @@ import androidx.fragment.app.viewModels
 import com.bangkit.alpaca.databinding.FragmentEducationBinding
 import com.bangkit.alpaca.utils.animateVisibility
 import kotlinx.coroutines.Runnable
-import java.util.*
-import kotlin.random.Random
 
 class EducationFragment : Fragment() {
 

@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentSettingsBinding
 import com.bangkit.alpaca.ui.auth.AuthenticationActivity
+import com.bangkit.alpaca.ui.customization.CustomizationActivity
 import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +57,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 v.findNavController().navigate(R.id.action_navigation_settings_to_profileActivity)
             }
 
-            R.id.btn_customisation_profile -> navigateToCustomisation()
+            R.id.btn_customisation_profile -> navigateToCustomization()
             R.id.btn_logout -> showLogoutAlert()
             R.id.btn_about_apps -> navigateToAboutApps()
             R.id.btn_privacy_terms -> navigateToPrivacyTerms()
@@ -64,8 +65,10 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun navigateToCustomisation() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
+    private fun navigateToCustomization() {
+        Intent(requireContext(), CustomizationActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     private fun navigateToAboutApps() {
@@ -81,20 +84,26 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showLogoutAlert() {
-        val builder = AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.really_logout))
             .setMessage(getString(R.string.remove_session_message))
             .setPositiveButton(getString(R.string.label_logout)) { _, _ ->
                 settingsViewModel.logoutUser()
-                val authIntent = Intent(requireContext(), AuthenticationActivity::class.java)
-                startActivity(authIntent)
-                activity?.finish()
-            }
-            .setNegativeButton(getString(R.string.label_cancel)) { _, _ -> }
-            .show()
 
-        builder.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
-        builder.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+                Intent(requireContext(), AuthenticationActivity::class.java).also { intent ->
+                    startActivity(intent)
+                }
+
+                requireActivity().finish()
+            }
+            .setNegativeButton(getString(R.string.label_cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+            .apply {
+                getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+            }
     }
 
     override fun onDestroyView() {

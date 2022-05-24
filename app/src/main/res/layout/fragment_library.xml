@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_new_collection"
-            tools:listitem="@layout/item_library" />
+            tools:listitem="@layout/card_library_item" />
 
         <TextView
             android:id="@+id/tv_search_result"
