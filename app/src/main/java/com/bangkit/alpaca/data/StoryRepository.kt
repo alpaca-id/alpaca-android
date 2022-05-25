@@ -5,11 +5,9 @@ import com.bangkit.alpaca.model.Flashcard
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.utils.DataDummy
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 class StoryRepository {
