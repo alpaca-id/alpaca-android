@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentSettingsBinding
 import com.bangkit.alpaca.ui.auth.AuthenticationActivity
+import com.bangkit.alpaca.ui.customization.CustomizationActivity
 import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +57,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.btn_user_profile -> v.findNavController()
                 .navigate(R.id.action_navigation_settings_to_profileActivity)
 
-            R.id.btn_customisation_profile -> navigateToCustomisation()
+            R.id.btn_customisation_profile -> navigateToCustomization()
 
             R.id.btn_logout -> showLogoutAlert()
 
@@ -69,8 +70,10 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun navigateToCustomisation() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
+    private fun navigateToCustomization() {
+        Intent(requireContext(), CustomizationActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     private fun navigateToAboutApps() {
