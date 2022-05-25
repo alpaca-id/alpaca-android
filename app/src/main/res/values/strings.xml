@@ -127,4 +127,6 @@
     <string name="error_empty_confirm_password">Konfirmasi tidak boleh kosong</string>
     <string name="saved">Saved</string>
     <string name="success_change_password">Password changed successfully</string>
+    <string name="pixel_suffix">%dpx</string>
+    <string name="prefix_plus">+%d</string>
 </resources>

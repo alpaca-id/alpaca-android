@@ -4,14 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.children
+import androidx.fragment.app.activityViewModels
 import com.bangkit.alpaca.databinding.ModalBottomSheetLineHeightBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BottomSheetLineHeightSetting : BottomSheetDialogFragment() {
 
     private var _binding: ModalBottomSheetLineHeightBinding? = null
     private val binding get() = _binding
+
+    private val customizationViewModel: CustomizationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,10 +31,24 @@ class BottomSheetLineHeightSetting : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        customizationViewModel.lineHeightPreference.observe(viewLifecycleOwner) { lineHeight ->
+            when (lineHeight) {
+                1 -> binding?.chipLine1?.isChecked = true
+                2 -> binding?.chipLine2?.isChecked = true
+                3 -> binding?.chipLine3?.isChecked = true
+                4 -> binding?.chipLine4?.isChecked = true
+            }
+        }
+
         binding?.apply {
             btnSave.setOnClickListener {
-                val chip = this.chipGroup.checkedChipId
-                Toast.makeText(requireContext(), chip.toString(), Toast.LENGTH_SHORT).show()
+                val chips = this.chipGroup
+                val selectedChip = chips.children
+                    .filter { (it as Chip).isChecked }
+                    .map { (it as Chip).text.toString().toIntOrNull() }
+                    .first()
+
+                customizationViewModel.saveLineHeightPreference(selectedChip ?: 1)
                 dismiss()
             }
         }
