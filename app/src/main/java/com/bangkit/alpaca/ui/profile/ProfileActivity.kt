@@ -33,6 +33,12 @@ class ProfileActivity : AppCompatActivity() {
         updateResult()
     }
 
+    private fun setupToolbar() {
+        binding.toolbarProfile.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
     private fun setupAction() {
         binding.btnSaveProfile.setOnClickListener { updateUser() }
     }
@@ -91,11 +97,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupToolbar() {
-        binding.toolbarProfile.setNavigationOnClickListener {
-            onBackPressed()
-        }
-    }
+
 
     private fun showConfirmation(email: String, name: String) {
         val inflate = layoutInflater

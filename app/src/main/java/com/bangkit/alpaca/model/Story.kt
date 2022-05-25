@@ -1,11 +1,14 @@
 package com.bangkit.alpaca.model
 
+import android.os.Parcelable
 import android.util.Log
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.ktx.Firebase
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 data class Story(
     val id: String?,
     val title: String,
@@ -13,7 +16,7 @@ data class Story(
     val coverPath: String?,
     val authorName: String?,
     val createdAt: Long
-) {
+) : Parcelable {
     companion object {
         fun DocumentSnapshot.toStory(): Story? {
             return try {

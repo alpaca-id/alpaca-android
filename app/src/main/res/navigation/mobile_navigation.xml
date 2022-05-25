@@ -15,7 +15,11 @@
         android:id="@+id/navigation_library"
         android:name="com.bangkit.alpaca.ui.library.LibraryFragment"
         android:label="@string/title_perpustakaan"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_navigation_library_to_readingActivity"
+            app:destination="@id/readingActivity" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -40,4 +44,13 @@
         android:name="com.bangkit.alpaca.ui.changepassword.ChangePasswordActivity"
         android:label="activity_change_password"
         tools:layout="@layout/activity_change_password" />
+    <activity
+        android:id="@+id/readingActivity"
+        android:name="com.bangkit.alpaca.ui.reading.ReadingActivity"
+        android:label="activity_reading"
+        tools:layout="@layout/activity_reading">
+        <argument
+            android:name="story"
+            app:argType="com.bangkit.alpaca.model.Story" />
+    </activity>
 </navigation>

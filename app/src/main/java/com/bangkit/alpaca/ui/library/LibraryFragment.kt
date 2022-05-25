@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLibraryBinding
+import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.LibraryListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -39,6 +41,18 @@ class LibraryFragment : Fragment() {
 
         setupStories()
         setupSearchBar()
+        setupAction()
+    }
+
+    private fun setupAction() {
+        libraryListAdapter.setOnItemClickCallback(object : LibraryListAdapter.OnItemClickCallback {
+            override fun onItemClicked(story: Story) {
+                val toReadingActivity =
+                    LibraryFragmentDirections.actionNavigationLibraryToReadingActivity(story)
+                binding?.root?.findNavController()
+                    ?.navigate(toReadingActivity)
+            }
+        })
     }
 
     private fun setupStories() {

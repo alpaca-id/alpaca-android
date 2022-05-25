@@ -12,6 +12,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 class LibraryListAdapter : ListAdapter<Story, LibraryListAdapter.ListViewHolder>(DIFF_CALLBACK) {
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemLibraryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
@@ -20,6 +27,9 @@ class LibraryListAdapter : ListAdapter<Story, LibraryListAdapter.ListViewHolder>
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val story = getItem(position)
         holder.bind(story)
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClicked(story)
+        }
     }
 
     inner class ListViewHolder(val binding: ItemLibraryBinding) :
@@ -31,11 +41,13 @@ class LibraryListAdapter : ListAdapter<Story, LibraryListAdapter.ListViewHolder>
                 tvItemAuthorStory.text = story.authorName
                 Glide.with(itemView)
                     .load(story.coverPath)
-                    .apply(RequestOptions().placeholder(R.color.yellow_500))
+                    .apply(
+                        RequestOptions().placeholder(R.color.yellow_500)
+                            .error(R.drawable.ic_broken_image)
+                    )
                     .into(imgItemCoverStory)
             }
         }
-
     }
 
     companion object {
@@ -49,5 +61,9 @@ class LibraryListAdapter : ListAdapter<Story, LibraryListAdapter.ListViewHolder>
             }
 
         }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(story: Story)
     }
 }
