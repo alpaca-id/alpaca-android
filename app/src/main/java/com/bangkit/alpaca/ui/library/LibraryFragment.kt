@@ -8,18 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLibraryBinding
-import com.bangkit.alpaca.ui.adapter.StoriesAdapter
-import com.bangkit.alpaca.utils.DataDummy
+import com.bangkit.alpaca.ui.adapter.LibraryListAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class LibraryFragment : Fragment() {
 
     private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding
-    private val dummyStories = DataDummy.provideDummyStories()
-    private val storiesAdapter: StoriesAdapter by lazy { StoriesAdapter() }
+    private val libraryListAdapter: LibraryListAdapter by lazy { LibraryListAdapter() }
+    private val libraryViewModel: LibraryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,10 +42,12 @@ class LibraryFragment : Fragment() {
     }
 
     private fun setupStories() {
-        storiesAdapter.submitList(dummyStories)
-        binding?.rvStoryLibrary?.apply {
-            adapter = storiesAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+        libraryViewModel.storiesLibrary.observe(viewLifecycleOwner) {
+            libraryListAdapter.submitList(it)
+            binding?.rvStoryLibrary?.apply {
+                adapter = libraryListAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
         }
     }
 
