@@ -79,7 +79,7 @@ class ProfileActivity : AppCompatActivity() {
                 is Result.Loading -> LoadingDialog.displayLoading(this, false)
                 is Result.Success -> {
                     LoadingDialog.hideLoading()
-                    if (result.data){
+                    if (result.data) {
                         getString(R.string.saved).showToastMessage(this)
                     }
                 }

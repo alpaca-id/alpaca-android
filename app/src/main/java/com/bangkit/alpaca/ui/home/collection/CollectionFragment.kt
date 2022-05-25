@@ -61,6 +61,11 @@ class CollectionFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding?.root?.requestLayout()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
