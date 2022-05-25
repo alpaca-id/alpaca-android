@@ -129,4 +129,6 @@
     <string name="success_change_password">Password changed successfully</string>
     <string name="pixel_suffix">%dpx</string>
     <string name="prefix_plus">+%d</string>
+    <string name="center">Tengah</string>
+    <string name="right">Kanan</string>
 </resources>

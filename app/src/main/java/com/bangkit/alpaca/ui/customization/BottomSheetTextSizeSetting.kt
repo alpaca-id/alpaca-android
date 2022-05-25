@@ -32,29 +32,11 @@ class BottomSheetTextSizeSetting : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         customizationViewModel.textSizePreference.observe(viewLifecycleOwner) { textSize ->
-            binding?.apply {
-                when (textSize) {
-                    16 -> textSize16.isChecked = true
-                    18 -> textSize18.isChecked = true
-                    20 -> textSize20.isChecked = true
-                    24 -> textSize24.isChecked = true
-                    28 -> textSize28.isChecked = true
-                    32 -> textSize32.isChecked = true
-                    38 -> textSize38.isChecked = true
-                }
-            }
+            setChipsState(textSize)
         }
 
         binding?.btnSave?.setOnClickListener {
-            val chips = binding?.chipGroup?.children
-                ?.filter { (it as Chip).isChecked }
-                ?.map {
-                    (it as Chip).text.toString()
-                        .replace("[^0-9]".toRegex(), "")
-                        .toIntOrNull()
-                }
-
-            customizationViewModel.saveTextSizePreference(chips?.first() ?: 16)
+            saveSelectedChipState()
             dismiss()
         }
     }
@@ -62,6 +44,43 @@ class BottomSheetTextSizeSetting : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Save selected chip data to the database
+     */
+    private fun saveSelectedChipState() {
+        binding?.apply {
+            val chips = this.chipGroup.children
+                .filter { (it as Chip).isChecked }
+                .map {
+                    (it as Chip).text.toString()
+                        .replace("[^0-9]".toRegex(), "")
+                        .toIntOrNull()
+                }
+                .first()
+
+            customizationViewModel.saveTextSizePreference(chips ?: 16)
+        }
+    }
+
+    /**
+     * Highlight the selected chip based on the textSize
+     *
+     * @param textSize Int
+     */
+    private fun setChipsState(textSize: Int) {
+        binding?.apply {
+            when (textSize) {
+                16 -> textSize16.isChecked = true
+                18 -> textSize18.isChecked = true
+                20 -> textSize20.isChecked = true
+                24 -> textSize24.isChecked = true
+                28 -> textSize28.isChecked = true
+                32 -> textSize32.isChecked = true
+                38 -> textSize38.isChecked = true
+            }
+        }
     }
 
     companion object {

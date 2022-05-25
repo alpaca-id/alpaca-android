@@ -46,21 +46,21 @@
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kiri" />
+            android:text="@string/left" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/text_align_center"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tengah" />
+            android:text="@string/center" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/text_align_right"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kanan" />
+            android:text="@string/right" />
 
     </com.google.android.material.chip.ChipGroup>
 

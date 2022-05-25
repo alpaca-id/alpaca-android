@@ -68,7 +68,7 @@ class TextStyleRepository @Inject constructor(private val settingPreferences: Se
     /**
      * Save customized text size setting to DataStore
      *
-     * @param textSize Int
+     * @param size Int
      */
     suspend fun saveTextSizePreference(size: Int) {
         settingPreferences.saveTextSize(size)

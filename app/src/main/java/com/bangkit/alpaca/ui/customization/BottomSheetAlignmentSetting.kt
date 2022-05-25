@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
+import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ModalBottomSheetTextAlignmentBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
@@ -33,28 +34,12 @@ class BottomSheetAlignmentSetting : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         customizationViewModel.textAlignmentPreference.observe(viewLifecycleOwner) { alignType ->
-            when (alignType) {
-                Gravity.START -> binding?.textAlignLeft?.isChecked = true
-                Gravity.CENTER -> binding?.textAlignCenter?.isChecked = true
-                Gravity.END -> binding?.textAlignRight?.isChecked = true
-            }
+            setChipsState(alignType)
         }
 
         binding?.apply {
             btnSave.setOnClickListener {
-                val chips = this.chipGroup
-                val selectedChip = chips.children
-                    .filter { (it as Chip).isChecked }
-                    .map { (it as Chip).text.toString() }
-                    .first()
-
-                val type = when (selectedChip) {
-                    "Kiri" -> Gravity.START
-                    "Tengah" -> Gravity.CENTER
-                    else -> Gravity.END
-                }
-
-                customizationViewModel.saveTextAlignmentPreference(type)
+                saveSelectedChipState()
                 dismiss()
             }
         }
@@ -63,6 +48,41 @@ class BottomSheetAlignmentSetting : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Save selected chip data to the database
+     */
+    private fun saveSelectedChipState() {
+        binding?.apply {
+            val selectedChip = this.chipGroup.children
+                .filter { (it as Chip).isChecked }
+                .map { (it as Chip).text.toString() }
+                .first()
+
+            val type = when (selectedChip) {
+                getString(R.string.left) -> Gravity.START
+                getString(R.string.center) -> Gravity.CENTER
+                else -> Gravity.END
+            }
+
+            customizationViewModel.saveTextAlignmentPreference(type)
+        }
+    }
+
+    /**
+     * Highlight the selected chip based on the alignType
+     *
+     * @param alignType Int
+     */
+    private fun setChipsState(alignType: Int) {
+        binding?.apply {
+            when (alignType) {
+                Gravity.START -> textAlignLeft.isChecked = true
+                Gravity.CENTER -> textAlignCenter.isChecked = true
+                Gravity.END -> textAlignRight.isChecked = true
+            }
+        }
     }
 
     companion object {

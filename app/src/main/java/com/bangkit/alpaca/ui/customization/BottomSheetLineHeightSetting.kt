@@ -32,23 +32,12 @@ class BottomSheetLineHeightSetting : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         customizationViewModel.lineHeightPreference.observe(viewLifecycleOwner) { lineHeight ->
-            when (lineHeight) {
-                1 -> binding?.chipLine1?.isChecked = true
-                2 -> binding?.chipLine2?.isChecked = true
-                3 -> binding?.chipLine3?.isChecked = true
-                4 -> binding?.chipLine4?.isChecked = true
-            }
+            setChipsState(lineHeight)
         }
 
         binding?.apply {
             btnSave.setOnClickListener {
-                val chips = this.chipGroup
-                val selectedChip = chips.children
-                    .filter { (it as Chip).isChecked }
-                    .map { (it as Chip).text.toString().toIntOrNull() }
-                    .first()
-
-                customizationViewModel.saveLineHeightPreference(selectedChip ?: 1)
+                saveSelectedChipState()
                 dismiss()
             }
         }
@@ -57,6 +46,36 @@ class BottomSheetLineHeightSetting : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /**
+     * Save selected chip data to the database
+     */
+    private fun saveSelectedChipState() {
+        binding?.apply {
+            val selectedChip = this.chipGroup.children
+                .filter { (it as Chip).isChecked }
+                .map { (it as Chip).text.toString().toIntOrNull() }
+                .first()
+
+            customizationViewModel.saveLineHeightPreference(selectedChip ?: 1)
+        }
+    }
+
+    /**
+     * Highlight the selected chip based on the lineHeight
+     *
+     * @param lineHeight Int
+     */
+    private fun setChipsState(lineHeight: Int) {
+        binding?.apply {
+            when (lineHeight) {
+                1 -> chipLine1.isChecked = true
+                2 -> chipLine2.isChecked = true
+                3 -> chipLine3.isChecked = true
+                4 -> chipLine4.isChecked = true
+            }
+        }
     }
 
     companion object {

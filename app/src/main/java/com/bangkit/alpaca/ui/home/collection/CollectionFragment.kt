@@ -42,8 +42,9 @@ class CollectionFragment : Fragment() {
             if (stories?.isNotEmpty() == true) {
                 val recyclerView = binding?.rvCollection
                 val layoutManager = GridLayoutManager(requireContext(), 2)
-                val adapter = CollectionListAdapter(stories)
+                val adapter = CollectionListAdapter()
 
+                adapter.submitList(stories)
                 adapter.setOnItemClickCallback(object : CollectionListAdapter.OnItemClickCallback {
                     override fun onItemClicked(story: Story) {
                         // FIXME: Navigate to the ReadingActivity later
