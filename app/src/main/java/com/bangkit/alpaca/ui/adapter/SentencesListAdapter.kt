@@ -40,6 +40,10 @@ class SentencesListAdapter :
         }
     }
 
+    interface OnItemClickCallback {
+        fun onItemClicked(sentence: String)
+    }
+
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<String> =
             object : DiffUtil.ItemCallback<String>() {
@@ -52,9 +56,5 @@ class SentencesListAdapter :
                 }
 
             }
-    }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(sentence: String)
     }
 }
