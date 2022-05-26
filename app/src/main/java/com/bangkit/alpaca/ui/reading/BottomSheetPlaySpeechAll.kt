@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.databinding.ModalBottomSheetPlayAllBinding
 import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
+import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
@@ -27,7 +28,17 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupAction()
         setupListSentence()
+    }
+
+    private fun setupAction() {
+        sentencesListAdapter.setOnItemClickCallback(object :
+            SentencesListAdapter.OnItemClickCallback {
+            override fun onItemClicked(sentence: String) {
+                "Play...".showToastMessage(requireContext())
+            }
+        })
     }
 
     private fun setupListSentence() {

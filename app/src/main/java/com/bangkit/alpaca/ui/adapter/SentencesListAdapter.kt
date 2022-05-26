@@ -10,7 +10,13 @@ import com.bangkit.alpaca.databinding.ItemTextSpeechBinding
 class SentencesListAdapter :
     ListAdapter<String, SentencesListAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
-    class ListViewHolder(private val binding: ItemTextSpeechBinding) :
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    class ListViewHolder(val binding: ItemTextSpeechBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(sentence: String?) {
             binding.tvSentence.text = sentence
@@ -29,6 +35,9 @@ class SentencesListAdapter :
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val sentence = getItem(position)
         holder.bind(sentence)
+        holder.binding.btnPlaySentence.setOnClickListener {
+            onItemClickCallback.onItemClicked(sentence)
+        }
     }
 
     companion object {
@@ -43,5 +52,9 @@ class SentencesListAdapter :
                 }
 
             }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(sentence: String)
     }
 }

@@ -133,4 +133,7 @@
     <string name="play_auto">Putar otomatis</string>
     <string name="dummy_sentence">Beruang itu mulai mengendus-endus dengan hati-hati di sekitar pohon tumbang.</string>
     <string name="desc_play_sentence">putar kalimat</string>
+    <string name="label_word">Kata</string>
+    <string name="label_syllables">Suku kata</string>
+    <string name="label_letter">Huruf</string>
 </resources>
