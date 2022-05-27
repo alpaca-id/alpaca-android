@@ -96,4 +96,29 @@ object FirebaseStoryService {
 
     }
 
+    fun getLibraryStory(): Flow<List<Story>?> = callbackFlow {
+        val listener = Firebase.firestore.collection("stories")
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    Firebase.crashlytics.apply {
+                        log("Error get user stories-scan")
+                        recordException(error)
+                    }
+
+                    cancel(message = "Error get user stories-scan", cause = error)
+                    return@addSnapshotListener
+                }
+
+                val stories = value?.documents
+                    ?.mapNotNull { it.toStory() }
+                    ?.sortedByDescending { it.createdAt }
+
+                trySend(stories)
+            }
+        awaitClose {
+            Log.d(TAG, "getUserDocumentID: Cancelling document id listener")
+            listener.remove()
+        }
+    }
+
 }
