@@ -77,14 +77,17 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.2"
 
     // Firebase
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.4'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.5'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.2'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.10'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.11'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
 
     // Data Store
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // LeakCanary
+    // debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -7,6 +7,23 @@ import javax.inject.Inject
 class TextStyleRepository @Inject constructor(private val settingPreferences: SettingPreferences) {
 
     /**
+     * Get customized text background setting from Datastore
+     * Has default value which 0
+     *
+     * @return Flow
+     */
+    fun getTextBackgroundPreference(): Flow<Int> = settingPreferences.getTextBackground()
+
+    /**
+     * Save customized text background setting to DataStore
+     *
+     * @param type Int
+     */
+    suspend fun saveTextBackgroundPreference(type: Int) {
+        settingPreferences.saveTextBackground(type)
+    }
+
+    /**
      * Get customized line spacing from Datastore
      * Default value is 1
      *

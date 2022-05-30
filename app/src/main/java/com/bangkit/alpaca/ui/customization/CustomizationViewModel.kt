@@ -18,6 +18,9 @@ class CustomizationViewModel @Inject constructor(private val textStyleRepository
     val textAlignmentPreference: LiveData<Int> =
         textStyleRepository.getTextAlignmentPreference().asLiveData()
 
+    val textBackgroundPreference: LiveData<Int> =
+        textStyleRepository.getTextBackgroundPreference().asLiveData()
+
     val lineHeightPreference: LiveData<Int> =
         textStyleRepository.getLineHeightPreference().asLiveData()
 
@@ -39,6 +42,12 @@ class CustomizationViewModel @Inject constructor(private val textStyleRepository
     fun saveTextAlignmentPreference(type: Int) {
         viewModelScope.launch {
             textStyleRepository.saveTextAlignmentPreference(type)
+        }
+    }
+
+    fun saveTextBackgroundPreferences(type: Int) {
+        viewModelScope.launch {
+            textStyleRepository.saveTextBackgroundPreference(type)
         }
     }
 

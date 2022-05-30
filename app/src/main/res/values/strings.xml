@@ -131,4 +131,9 @@
     <string name="prefix_plus">+%d</string>
     <string name="center">Tengah</string>
     <string name="right">Kanan</string>
+    <string name="white">Putih</string>
+    <string name="yellow">Kuning</string>
+    <string name="blue">Biru</string>
+    <string name="grey">Abu-abu</string>
+    <string name="black">Hitam</string>
 </resources>

@@ -96,9 +96,32 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    /**
+     * Get customized text background setting from Datastore
+     * Has default value which 0
+     *
+     * @return Flow
+     */
+    fun getTextBackground(): Flow<Int> = dataStore.data.map { preferences ->
+        preferences[TEXT_BACKGROUND_KEY] ?: 0
+    }
+
+    /**
+     * Save customized text background setting to DataStore
+     *
+     * @param type Int
+     */
+    suspend fun saveTextBackground(type: Int) {
+        dataStore.edit { preference ->
+            preference[TEXT_BACKGROUND_KEY] = type
+        }
+    }
+
+
     companion object {
         private val TEXT_SIZE_KEY = intPreferencesKey("text_size_setting")
         private val TEXT_ALIGNMENT_KEY = intPreferencesKey("text_alignment_setting")
+        private val TEXT_BACKGROUND_KEY = intPreferencesKey("text_background_setting")
         private val LINE_HEIGHT_KEY = intPreferencesKey("line_height_setting")
         private val LINE_SPACING_KEY = intPreferencesKey("line_spacing_setting")
     }

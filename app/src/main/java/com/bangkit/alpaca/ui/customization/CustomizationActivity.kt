@@ -1,5 +1,6 @@
 package com.bangkit.alpaca.ui.customization
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -56,7 +57,7 @@ class CustomizationActivity : AppCompatActivity() {
 
                 val alignmentTypeString = when (alignmentType) {
                     Gravity.START -> getString(R.string.left)
-                    Gravity.CENTER_HORIZONTAL -> getString(R.string.center)
+                    Gravity.CENTER -> getString(R.string.center)
                     else -> getString(R.string.right)
                 }
 
@@ -72,6 +73,31 @@ class CustomizationActivity : AppCompatActivity() {
                     ), 1f
                 )
                 binding.tvLineHeightStatus.text = lineHeight.toString()
+            }
+
+            textBackgroundPreference.observe(this@CustomizationActivity) { backgroundColor ->
+                val selectedColor = when (backgroundColor) {
+                    0 -> getColor(R.color.bg_white)
+                    1 -> getColor(R.color.bg_warm)
+                    2 -> getColor(R.color.bg_blue)
+                    3 -> getColor(R.color.bg_dark)
+                    else -> getColor(R.color.bg_black)
+                }
+
+                if (backgroundColor > 2) {
+                    binding.textView.setTextColor(getColor(R.color.white))
+                    binding.toolbar.setTitleTextColor(getColor(R.color.white))
+                    binding.toolbar.setNavigationIconTint(getColor(R.color.white))
+                } else {
+                    binding.textView.setTextColor(getColor(R.color.black))
+                    binding.toolbar.setTitleTextColor(getColor(R.color.black))
+                    binding.toolbar.setNavigationIconTint(getColor(R.color.black))
+                }
+
+                binding.root.setBackgroundColor(selectedColor)
+                binding.tvBackgroundStatus.setImageDrawable(ColorDrawable(selectedColor))
+                binding.viewCardsBg.setBackgroundColor(selectedColor)
+
             }
         }
     }
@@ -110,6 +136,13 @@ class CustomizationActivity : AppCompatActivity() {
                 BottomSheetFontFamilySetting().show(
                     supportFragmentManager,
                     BottomSheetFontFamilySetting.TAG
+                )
+            }
+
+            cardBackgroundColor.setOnClickListener {
+                BottomSheetBackgroundSetting().show(
+                    supportFragmentManager,
+                    BottomSheetBackgroundSetting.TAG
                 )
             }
         }
