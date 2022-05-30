@@ -17,7 +17,7 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
     private var _binding: ModalBottomSheetPlayWordBinding? = null
     private val binding get() = _binding
     private var mediaPlayer: MediaPlayer? = null
-    private var isReady = false
+    private lateinit var mWord: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,42 +39,31 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
     private fun setupWord() {
         val word = arguments?.getString(EXTRA_WORD)?.trim()
         binding?.tvSelectedWord?.text = word
+        mWord = word ?: ""
 
         binding?.chipGroupMode?.setOnCheckedStateChangeListener { _, checkedIds ->
             if (checkedIds[0] == R.id.chip_word) {
                 binding?.tvSelectedWord?.text = word
+                mWord = word ?: ""
+
             } else {
                 val wordWithSeparate = word?.replace("\\B".toRegex(), "-")
                 binding?.tvSelectedWord?.text = wordWithSeparate
+
+                val wordWithSpace = word?.replace("\\B".toRegex(), " ")
+                mWord = wordWithSpace ?: ""
             }
         }
     }
 
     private fun setupPlayAction() {
         binding?.btnPlayWord?.setOnClickListener {
-            if (!isReady) {
-                "preparing...".showToastMessage(requireContext())
-                mediaPlayer?.prepareAsync()
-            } else {
-                if (mediaPlayer?.isPlaying as Boolean) {
-                    "pause...".showToastMessage(requireContext())
-                    mediaPlayer?.pause()
-                } else {
-                    "playing...".showToastMessage(requireContext())
-                    mediaPlayer?.start()
-                }
-            }
+            "preparing...".showToastMessage(requireContext())
+            mediaPlayerPrepare()
         }
     }
 
     private fun initMediaPlayer() {
-
-        val lang = "id"
-        val word = arguments?.getString(EXTRA_WORD)?.trim()
-
-        val audioUrl =
-            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${word}"
-
         mediaPlayer = MediaPlayer()
         val attribute = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -82,19 +71,30 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
             .build()
 
         mediaPlayer?.setAudioAttributes(attribute)
+        mediaPlayer?.setOnErrorListener { _, _, _ -> false }
+    }
+
+    private fun mediaPlayerPrepare() {
+        val lang = "id"
+        val audioUrl =
+            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${this.mWord}"
 
         try {
+            mediaPlayer?.reset()
             mediaPlayer?.setDataSource(audioUrl)
+            mediaPlayer?.prepareAsync()
+            mediaPlayer?.setOnPreparedListener {
+                mediaPlayer?.start()
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
 
-        mediaPlayer?.setOnPreparedListener {
-            isReady = true
-            mediaPlayer?.start()
-        }
-
-        mediaPlayer?.setOnErrorListener { _, _, _ -> false }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        mediaPlayer?.stop()
     }
 
     companion object {

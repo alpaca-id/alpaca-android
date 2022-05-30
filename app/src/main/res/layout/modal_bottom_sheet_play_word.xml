@@ -35,7 +35,7 @@
         android:layout_marginStart="8dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/desc_play_sentence"
-        android:src="@drawable/ic_play_sentence"
+        android:src="@drawable/ic_play_word"
         app:layout_constraintBottom_toBottomOf="@+id/tv_selected_word"
         app:layout_constraintStart_toEndOf="@id/tv_selected_word"
         app:layout_constraintTop_toTopOf="@+id/tv_selected_word" />

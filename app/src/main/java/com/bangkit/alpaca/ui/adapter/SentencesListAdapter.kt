@@ -2,6 +2,7 @@ package com.bangkit.alpaca.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,12 +37,12 @@ class SentencesListAdapter :
         val sentence = getItem(position)
         holder.bind(sentence)
         holder.binding.btnPlaySentence.setOnClickListener {
-            onItemClickCallback.onItemClicked(sentence)
+            onItemClickCallback.onItemClicked(sentence, holder.binding.btnPlaySentence)
         }
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(sentence: String)
+        fun onItemClicked(sentence: String, btn: ImageButton)
     }
 
     companion object {
