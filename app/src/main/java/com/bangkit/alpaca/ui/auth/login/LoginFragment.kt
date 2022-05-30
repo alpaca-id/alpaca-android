@@ -15,7 +15,6 @@ import com.bangkit.alpaca.ui.main.MainActivity
 import com.bangkit.alpaca.utils.LoadingDialog
 import com.bangkit.alpaca.utils.showError
 import com.bangkit.alpaca.utils.showToastMessage
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -27,14 +26,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding
     private val loginViewModel: LoginViewModel by viewModels()
-    lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        mAuth = Firebase.auth
         return binding?.root
     }
 
@@ -81,7 +78,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     is Result.Success -> {
                         LoadingDialog.hideLoading()
                         if (result.data) {
-                            val user = mAuth.currentUser
+                            val user = Firebase.auth.currentUser
                             updateUI(user)
                         }
                     }
@@ -140,7 +137,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = mAuth.currentUser
+        val currentUser = Firebase.auth.currentUser
         updateUI(currentUser)
     }
 

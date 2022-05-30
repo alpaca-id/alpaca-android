@@ -14,10 +14,11 @@
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/drawable/state_chip_text_color.xml" value="0.2945" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_authentication.xml" value="0.19947916666666668" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_camera.xml" value="0.2015625" />
-        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_customization.xml" value="0.203125" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_customization.xml" value="0.33" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/card_collection_item.xml" value="0.3859375" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_collection.xml" value="0.38697916666666665" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_confirmation.xml" value="0.13958333333333334" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_education.xml" value="0.3729166666666667" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_forgot_password.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_home.xml" value="0.33" />
@@ -26,6 +27,7 @@
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_registration.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_settings.xml" value="0.5" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/item_library.xml" value="0.38697916666666665" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_background_color.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_font_family.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_line_height.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_line_spacing.xml" value="0.38697916666666665" />
@@ -33,6 +35,7 @@
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_text_size.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/model_bottom_sheet_text_alignment.xml" value="0.3859375" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/view_loading_screen.xml" value="0.38697916666666665" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/view_password_confirmation.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/gradient_image.xml" value="0.1265" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/drawable/hover_text_button.xml" value="0.1355" />

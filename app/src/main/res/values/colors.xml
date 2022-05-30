@@ -18,6 +18,12 @@
     <color name="grey_200">#C4C4C4</color>
     <color name="grey_500">#646464</color>
 
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_warm">#F7F6EB</color>
+    <color name="bg_blue">#DFECF4</color>
+    <color name="bg_dark">#23272A</color>
+    <color name="bg_black">#000000</color>
+
     <color name="black">#FF000000</color>
     <color name="white_warm">#FFFFFB</color>
     <color name="white">#FFFFFFFF</color>

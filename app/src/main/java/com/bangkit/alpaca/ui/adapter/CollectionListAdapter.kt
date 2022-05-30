@@ -3,14 +3,15 @@ package com.bangkit.alpaca.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.alpaca.databinding.CardCollectionItemBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.utils.toFormattedString
 import com.bumptech.glide.Glide
 
-class CollectionListAdapter(private val stories: List<Story>) :
-    RecyclerView.Adapter<CollectionListAdapter.ViewHolder>() {
+class CollectionListAdapter : ListAdapter<Story, CollectionListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -42,12 +43,10 @@ class CollectionListAdapter(private val stories: List<Story>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story = stories[position]
+        val story = getItem(position)
         holder.bind(story)
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(story) }
     }
-
-    override fun getItemCount(): Int = stories.size
 
     /**
      * Set an item click callback
@@ -61,5 +60,18 @@ class CollectionListAdapter(private val stories: List<Story>) :
 
     interface OnItemClickCallback {
         fun onItemClicked(story: Story)
+    }
+
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Story> = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem.title == newItem.title
+            }
+
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
+
+        }
     }
 }

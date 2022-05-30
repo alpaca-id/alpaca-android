@@ -11,8 +11,6 @@ import com.bangkit.alpaca.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Runnable
-import java.util.*
-import kotlin.random.Random
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -63,6 +61,11 @@ class EducationFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.root?.requestLayout()
     }
 
     override fun onDestroyView() {
