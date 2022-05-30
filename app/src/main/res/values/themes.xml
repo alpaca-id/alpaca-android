@@ -158,4 +158,10 @@
         <item name="android:focusable">true</item>
         <item name="android:textColor">?colorPrimary</item>
     </style>
+
+
+    <style name="Theme.Alpaca.Button.Play" parent="Widget.Material3.Button.Icon">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blue_900</item>
+    </style>
 </resources>

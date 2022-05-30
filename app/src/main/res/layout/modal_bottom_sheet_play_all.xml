@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_arrow_down_reading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/arrow_down"
+        android:src="@drawable/ic_baseline_arrow_down_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_play_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_arrow_down_reading"
+        app:thumbTint="@drawable/switch_thumb"
+        app:trackTint="@drawable/switch_track" />
+
+    <TextView
+        android:id="@+id/tv_play_auto"
+        style="@style/Theme.Alpaca.Text.Body.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/play_auto"
+        app:layout_constraintBottom_toBottomOf="@+id/switch_play_auto"
+        app:layout_constraintEnd_toStartOf="@+id/switch_play_auto"
+        app:layout_constraintTop_toTopOf="@+id/switch_play_auto" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sentence"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_play_auto"
+        tools:listitem="@layout/item_text_speech" />
+</androidx.constraintlayout.widget.ConstraintLayout>

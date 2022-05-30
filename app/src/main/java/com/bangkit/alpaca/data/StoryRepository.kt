@@ -36,6 +36,11 @@ class StoryRepository {
         }
     }
 
+    fun getAllStoryLibrary(): Flow<List<Story>?> = flow {
+        FirebaseStoryService.getLibraryStory().collect {
+            emit(it)
+        }
+    }
 
     fun getAllFlashcardContent(): Flow<List<Flashcard>> = flow {
         emit(DataDummy.provideFlashcard())

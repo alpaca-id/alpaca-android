@@ -3,9 +3,9 @@ package com.bangkit.alpaca.data
 import com.bangkit.alpaca.data.remote.FirebaseAuthService
 import com.bangkit.alpaca.data.remote.Result
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class AuthRepository @Inject constructor() {
+
+class AuthRepository {
     fun loginUsers(email: String, password: String): Flow<Result<Boolean>> =
         FirebaseAuthService.loginUser(email, password)
 

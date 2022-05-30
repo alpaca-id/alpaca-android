@@ -4,9 +4,8 @@ import com.bangkit.alpaca.data.remote.FirebaseUserService
 import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.model.User
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
-class UserRepository @Inject constructor() {
+class UserRepository{
     fun getUserData(): Flow<Result<User>> = FirebaseUserService.getUserData()
 
     fun updateUserData(
