@@ -44,12 +44,14 @@ class SentencesListAdapter :
         val sentence = getItem(position)
         holder.bind(sentence)
         holder.binding.btnPlaySentence.setOnClickListener {
-            lastIndex?.let { index ->
-                getItem(index).isPlaying = false
-                notifyItemChanged(index)
+            if (lastIndex != holder.adapterPosition) {
+                lastIndex?.let { index ->
+                    getItem(index).isPlaying = false
+                    notifyItemChanged(index)
+                }
             }
 
-            sentence.isPlaying = true
+            sentence.isPlaying = !sentence.isPlaying
             notifyItemChanged(position)
 
             onItemClickCallback.onItemClicked(sentence.text, holder.binding.btnPlaySentence)

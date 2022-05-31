@@ -1,5 +1,6 @@
 package com.bangkit.alpaca.ui.reading
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.MenuItem
@@ -8,9 +9,11 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.navigation.navArgs
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityReadingBinding
+import com.bangkit.alpaca.ui.customization.CustomizationActivity
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,27 +46,43 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
                     else -> getColor(R.color.bg_black)
                 }
 
-                with(binding) {
+                binding.apply {
                     if (backgroundColor > 2) {
                         tvBodyReading.setTextColor(getColor(R.color.white))
-                        toolbarReading.setNavigationIconTint(getColor(R.color.white))
-                        collapsingReading.setCollapsedTitleTextColor(getColor(R.color.white))
-                        collapsingReading.setExpandedTitleColor(getColor(R.color.white))
-                        collapsingReading.setCollapsedTitleTextColor(getColor(R.color.white))
                         gradientCover.setImageResource(R.drawable.gradient_image_black)
-                        toolbarReading.menu.getItem(0).setIcon(R.drawable.ic_play_all_white)
+
+                        with(collapsingReading) {
+                            setCollapsedTitleTextColor(getColor(R.color.white))
+                            setExpandedTitleColor(getColor(R.color.white))
+                            setCollapsedTitleTextColor(getColor(R.color.white))
+                        }
+
+                        with(toolbarReading) {
+                            setNavigationIconTint(getColor(R.color.white))
+                            menu.getItem(1).setIcon(R.drawable.ic_play_all_white)
+                            overflowIcon =
+                                ContextCompat.getDrawable(baseContext, R.drawable.ic_option_white)
+                        }
                     } else {
                         tvBodyReading.setTextColor(getColor(R.color.black))
-                        toolbarReading.setTitleTextColor(getColor(R.color.black))
-                        collapsingReading.setCollapsedTitleTextColor(getColor(R.color.black))
-                        collapsingReading.setExpandedTitleColor(getColor(R.color.black))
-                        collapsingReading.setCollapsedTitleTextColor(getColor(R.color.black))
                         gradientCover.setImageResource(R.drawable.gradient_image_white)
-                        toolbarReading.menu.getItem(0).setIcon(R.drawable.ic_play_all_black)
+
+                        with(collapsingReading) {
+                            setCollapsedTitleTextColor(getColor(R.color.black))
+                            setExpandedTitleColor(getColor(R.color.black))
+                            setCollapsedTitleTextColor(getColor(R.color.black))
+                        }
+
+                        with(toolbarReading) {
+                            toolbarReading.setNavigationIconTint(getColor(R.color.black))
+                            menu.getItem(1).setIcon(R.drawable.ic_play_all_black)
+                            overflowIcon =
+                                ContextCompat.getDrawable(baseContext, R.drawable.ic_option_black)
+                        }
                     }
 
-                    binding.collapsingReading.setContentScrimColor(selectedColor)
-                    binding.root.setBackgroundColor(selectedColor)
+                    collapsingReading.setContentScrimColor(selectedColor)
+                    root.setBackgroundColor(selectedColor)
                 }
             }
 
@@ -129,6 +148,12 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
                     supportFragmentManager,
                     BottomSheetPlaySpeechAll::class.java.simpleName
                 )
+                true
+            }
+
+            R.id.reading_customization_text -> {
+                val customizationIntent = Intent(this, CustomizationActivity::class.java)
+                startActivity(customizationIntent)
                 true
             }
             else -> false
