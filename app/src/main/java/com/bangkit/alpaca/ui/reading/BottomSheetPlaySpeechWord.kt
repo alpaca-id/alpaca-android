@@ -43,10 +43,12 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
 
         binding?.chipGroupMode?.setOnCheckedStateChangeListener { _, checkedIds ->
             if (checkedIds[0] == R.id.chip_word) {
+                mediaPlayer?.stop()
                 binding?.tvSelectedWord?.text = word
                 mWord = word ?: ""
 
             } else {
+                mediaPlayer?.stop()
                 val wordWithSeparate = word?.replace("\\B".toRegex(), "-")
                 binding?.tvSelectedWord?.text = wordWithSeparate
 

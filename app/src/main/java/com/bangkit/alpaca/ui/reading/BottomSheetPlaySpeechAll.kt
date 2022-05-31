@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ModalBottomSheetPlayAllBinding
 import com.bangkit.alpaca.model.Sentence
 import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
@@ -109,6 +108,7 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        mediaPlayer?.stop()
     }
 
     companion object {

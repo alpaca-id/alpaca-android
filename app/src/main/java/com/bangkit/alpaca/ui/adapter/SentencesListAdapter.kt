@@ -54,8 +54,6 @@ class SentencesListAdapter :
 
             onItemClickCallback.onItemClicked(sentence.text, holder.binding.btnPlaySentence)
             lastIndex = holder.adapterPosition
-
-
         }
     }
 
@@ -75,7 +73,6 @@ class SentencesListAdapter :
                 }
 
             }
-
         private const val TAG = "SentencesListAdapter"
     }
 }
