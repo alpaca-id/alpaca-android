@@ -2,8 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/reading_customization_text"
+        android:title="@string/text_customisation" />
+    <item
         android:id="@+id/reading_speech_play_all"
-        android:icon="@drawable/ic_play_all"
+        android:icon="@drawable/ic_play_all_black"
         android:title="@string/play_all"
         app:showAsAction="collapseActionView|always" />
 </menu>

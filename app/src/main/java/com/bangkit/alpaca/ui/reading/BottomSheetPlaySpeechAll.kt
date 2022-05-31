@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.databinding.ModalBottomSheetPlayAllBinding
+import com.bangkit.alpaca.model.Sentence
 import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,6 +22,7 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     private val sentencesListAdapter by lazy { SentencesListAdapter() }
     private var mediaPlayer: MediaPlayer? = null
     private var isReady = false
+    private var mSentence = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,15 +38,16 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
 
         setupAction()
         setupListSentence()
+        initMediaPlayer()
     }
 
     private fun setupAction() {
         sentencesListAdapter.setOnItemClickCallback(object :
             SentencesListAdapter.OnItemClickCallback {
-            override fun onItemClicked(sentence: String) {
-                if (!isReady) {
+            override fun onItemClicked(sentence: String, btn: ImageButton) {
+                if (!isReady || mSentence != sentence) {
                     "preparing...".showToastMessage(requireContext())
-                    initMediaPlayer(sentence)
+                    mediaPlayerPrepare(sentence)
                 } else {
                     if (mediaPlayer?.isPlaying as Boolean) {
                         "pause...".showToastMessage(requireContext())
@@ -58,8 +62,13 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     }
 
     private fun setupListSentence() {
+        val sentences = mutableListOf<Sentence>()
         val bundle = arguments?.getStringArrayList(EXTRA_SENTENCES)
-        sentencesListAdapter.submitList(bundle)
+        bundle?.forEach { string ->
+            sentences.add(Sentence(string, false))
+        }
+
+        sentencesListAdapter.submitList(sentences)
 
         binding?.rvSentence?.apply {
             adapter = sentencesListAdapter
@@ -67,36 +76,39 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
         }
     }
 
-    private fun initMediaPlayer(sentence: String) {
-
-        val lang = "id"
-        val audioUrl =
-            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${sentence}"
-
+    private fun initMediaPlayer() {
         mediaPlayer = MediaPlayer()
         val attribute = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_MEDIA)
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .build()
         mediaPlayer?.setAudioAttributes(attribute)
+        mediaPlayer?.setOnErrorListener { _, _, _ -> false }
+    }
+
+    private fun mediaPlayerPrepare(sentence: String) {
+        val lang = "id"
+        val audioUrl =
+            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${sentence}"
 
         try {
+            mediaPlayer?.reset()
             mediaPlayer?.setDataSource(audioUrl)
             mediaPlayer?.prepareAsync()
             mediaPlayer?.setOnPreparedListener {
                 isReady = true
+                mSentence = sentence
                 mediaPlayer?.start()
             }
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
-        mediaPlayer?.setOnErrorListener { _, _, _ -> false }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        mediaPlayer?.stop()
     }
 
     companion object {
