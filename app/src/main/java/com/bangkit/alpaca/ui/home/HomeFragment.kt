@@ -1,16 +1,21 @@
 package com.bangkit.alpaca.ui.home
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentHomeBinding
 import com.bangkit.alpaca.ui.adapter.SectionPagerAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity
+import com.bangkit.alpaca.utils.MediaUtility.uriToFile
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,6 +26,20 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            val picture = uriToFile(selectedImg, requireContext())
+
+            Intent(requireActivity(), ProcessingActivity::class.java).also { intent ->
+                intent.putExtra("picture", picture)
+                startActivity(intent)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +61,14 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    private fun startIntentGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
+
     /**
      * Handling views' action
      */
@@ -60,13 +87,7 @@ class HomeFragment : Fragment() {
             }
 
             fabGallery.setOnClickListener {
-                Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    type = "image/*"
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                }.also { intent ->
-                    startActivity(intent)
-                }
+                startIntentGallery()
             }
 
             ivProfileIcon.setOnClickListener {
@@ -118,5 +139,9 @@ class HomeFragment : Fragment() {
                 tab.text = resources.getString(tabTitles[position])
             }.attach()
         }
+    }
+
+    companion object {
+        private const val TAG = "HomeFragment"
     }
 }
