@@ -25,6 +25,17 @@ class StoryRepository {
         }
     }
 
+    /**
+     * Save a new story to the database
+     *
+     * @param story Story
+     */
+    suspend fun saveNewStory(story: Story) {
+        FirebaseStoryService.getUserDocumentID().collect { documentId ->
+            FirebaseStoryService.saveNewStory(documentId, story)
+        }
+    }
+
     fun getAllStoryLibrary(): Flow<List<Story>?> = flow {
         FirebaseStoryService.getLibraryStory().collect {
             emit(it)

@@ -42,42 +42,49 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_16"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="16px" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_18"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="18px" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_20"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20px" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_24"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="24px" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_28"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="28px" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_32"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="32px" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/text_size_38"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -4,8 +4,6 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.View
 import android.widget.Toast
-import com.bangkit.alpaca.data.local.entity.StoryEntity
-import com.bangkit.alpaca.model.Story
 import com.google.android.material.textfield.TextInputLayout
 import java.text.DateFormat
 import java.util.*
@@ -48,3 +46,4 @@ fun TextInputLayout.showError(isError: Boolean, message: String? = null) {
 fun String.showToastMessage(context: Context) {
     Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
+

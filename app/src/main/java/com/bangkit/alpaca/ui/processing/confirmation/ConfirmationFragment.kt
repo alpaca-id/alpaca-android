@@ -9,14 +9,24 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentConfirmationBinding
+import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.*
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class ConfirmationFragment : Fragment() {
 
     private var _binding: FragmentConfirmationBinding? = null
     private val binding get() = _binding!!
+
+    private val confirmationViewModel: ConfirmationViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +64,20 @@ class ConfirmationFragment : Fragment() {
         }
 
         binding.btnSaveResult.setOnClickListener {
+            val title = binding.etTitle.text.toString()
+            val content = binding.etContent.text.toString()
+
+            val story = Story(
+                id = null,
+                title = title,
+                body = content,
+                coverPath = null,
+                authorName = null,
+                createdAt = Calendar.getInstance().timeInMillis
+            )
+
+            confirmationViewModel.saveNewStory(story)
+
             Intent(requireContext(), MainActivity::class.java).also { intent ->
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/line_height"
+        android:text="@string/background"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,32 +42,59 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_line_1"
+            android:id="@+id/bg_white"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1" />
+            android:text="@string/white"
+            app:chipIcon="@drawable/ic_baseline_circle_24"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/bg_white"
+            app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_line_2"
+            android:id="@+id/bg_warm"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2" />
+            android:text="@string/yellow"
+            app:chipIcon="@drawable/ic_baseline_circle_24"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/bg_warm"
+            app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_line_3"
+            android:id="@+id/bg_blue"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3" />
+            android:text="@string/blue"
+            app:chipIcon="@drawable/ic_baseline_circle_24"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/bg_blue"
+            app:chipIconVisible="true" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_line_4"
+            android:id="@+id/bg_grey"
             style="@style/Theme.Alpaca.Chip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4" />
+            android:text="@string/grey"
+            app:chipIcon="@drawable/ic_baseline_circle_24"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/bg_dark"
+            app:chipIconVisible="true" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/bg_black"
+            style="@style/Theme.Alpaca.Chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/black"
+            app:chipIcon="@drawable/ic_baseline_circle_24"
+            app:chipIconEnabled="true"
+            app:chipIconTint="@color/bg_black"
+            app:chipIconVisible="true" />
 
     </com.google.android.material.chip.ChipGroup>
 

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.alpaca.databinding.CardLibraryItemBinding
 import com.bangkit.alpaca.R
-import com.bangkit.alpaca.databinding.ItemLibraryBinding
 import com.bangkit.alpaca.model.Story
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -20,7 +20,8 @@ class LibraryListAdapter : ListAdapter<Story, LibraryListAdapter.ListViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val binding = ItemLibraryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            CardLibraryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
@@ -32,7 +33,7 @@ class LibraryListAdapter : ListAdapter<Story, LibraryListAdapter.ListViewHolder>
         }
     }
 
-    inner class ListViewHolder(val binding: ItemLibraryBinding) :
+    inner class ListViewHolder(val binding: CardLibraryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             with(binding) {

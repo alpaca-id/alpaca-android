@@ -1,22 +1,19 @@
 package com.bangkit.alpaca.ui.customization
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.children
 import androidx.fragment.app.activityViewModels
 import com.bangkit.alpaca.R
-import com.bangkit.alpaca.databinding.ModalBottomSheetTextAlignmentBinding
+import com.bangkit.alpaca.databinding.ModalBottomSheetBackgroundColorBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class BottomSheetAlignmentSetting : BottomSheetDialogFragment() {
+class BottomSheetBackgroundSetting : BottomSheetDialogFragment() {
 
-    private var _binding: ModalBottomSheetTextAlignmentBinding? = null
+    private var _binding: ModalBottomSheetBackgroundColorBinding? = null
     private val binding get() = _binding
 
     private val customizationViewModel: CustomizationViewModel by activityViewModels()
@@ -26,15 +23,15 @@ class BottomSheetAlignmentSetting : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ModalBottomSheetTextAlignmentBinding.inflate(inflater, container, false)
+        _binding = ModalBottomSheetBackgroundColorBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        customizationViewModel.textAlignmentPreference.observe(viewLifecycleOwner) { alignType ->
-            setChipsState(alignType)
+        customizationViewModel.textBackgroundPreference.observe(viewLifecycleOwner) { backgroundColor ->
+            setChipsState(backgroundColor)
         }
 
         binding?.apply {
@@ -61,31 +58,35 @@ class BottomSheetAlignmentSetting : BottomSheetDialogFragment() {
                 .first()
 
             val type = when (selectedChip) {
-                getString(R.string.left) -> Gravity.START
-                getString(R.string.center) -> Gravity.CENTER
-                else -> Gravity.END
+                getString(R.string.white) -> 0
+                getString(R.string.yellow) -> 1
+                getString(R.string.blue) -> 2
+                getString(R.string.grey) -> 3
+                else -> 4
             }
 
-            customizationViewModel.saveTextAlignmentPreference(type)
+            customizationViewModel.saveTextBackgroundPreferences(type)
         }
     }
 
     /**
      * Highlight the selected chip based on the alignType
      *
-     * @param alignType Int
+     * @param backgroundColor Int
      */
-    private fun setChipsState(alignType: Int) {
+    private fun setChipsState(backgroundColor: Int) {
         binding?.apply {
-            when (alignType) {
-                Gravity.START -> textAlignLeft.isChecked = true
-                Gravity.CENTER -> textAlignCenter.isChecked = true
-                Gravity.END -> textAlignRight.isChecked = true
+            when (backgroundColor) {
+                0 -> bgWhite.isChecked = true
+                1 -> bgWarm.isChecked = true
+                2 -> bgBlue.isChecked = true
+                3 -> bgGrey.isChecked = true
+                4 -> bgBlack.isChecked = true
             }
         }
     }
 
     companion object {
-        const val TAG = "BottomSheetAlignmentSet"
+        const val TAG = "BottomSheetBackground"
     }
 }
