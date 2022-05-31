@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ModalBottomSheetPlayAllBinding
+import com.bangkit.alpaca.model.Sentence
 import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -47,16 +48,13 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
             override fun onItemClicked(sentence: String, btn: ImageButton) {
                 if (!isReady || mSentence != sentence) {
                     "preparing...".showToastMessage(requireContext())
-                    btn.setImageResource(R.drawable.ic_pause_sentence)
                     mediaPlayerPrepare(sentence)
                 } else {
                     if (mediaPlayer?.isPlaying as Boolean) {
                         "pause...".showToastMessage(requireContext())
-                        btn.setImageResource(R.drawable.ic_play_sentence)
                         mediaPlayer?.pause()
                     } else {
                         "playing...".showToastMessage(requireContext())
-                        btn.setImageResource(R.drawable.ic_pause_sentence)
                         mediaPlayer?.start()
                     }
                 }
@@ -65,8 +63,13 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     }
 
     private fun setupListSentence() {
+        val sentences = mutableListOf<Sentence>()
         val bundle = arguments?.getStringArrayList(EXTRA_SENTENCES)
-        sentencesListAdapter.submitList(bundle)
+        bundle?.forEach { string ->
+            sentences.add(Sentence(string, false))
+        }
+
+        sentencesListAdapter.submitList(sentences)
 
         binding?.rvSentence?.apply {
             adapter = sentencesListAdapter

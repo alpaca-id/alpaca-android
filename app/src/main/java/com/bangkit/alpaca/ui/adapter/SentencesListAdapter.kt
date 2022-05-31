@@ -6,12 +6,15 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ItemTextSpeechBinding
+import com.bangkit.alpaca.model.Sentence
 
 class SentencesListAdapter :
-    ListAdapter<String, SentencesListAdapter.ListViewHolder>(DIFF_CALLBACK) {
+    ListAdapter<Sentence, SentencesListAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
+    private var lastIndex: Int? = null
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -19,8 +22,12 @@ class SentencesListAdapter :
 
     class ListViewHolder(val binding: ItemTextSpeechBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(sentence: String?) {
-            binding.tvSentence.text = sentence
+        fun bind(sentence: Sentence) {
+            binding.tvSentence.text = sentence.text
+            binding.btnPlaySentence.setImageResource(
+                if (sentence.isPlaying) R.drawable.ic_pause_sentence
+                else R.drawable.ic_play_sentence
+            )
         }
     }
 
@@ -37,7 +44,18 @@ class SentencesListAdapter :
         val sentence = getItem(position)
         holder.bind(sentence)
         holder.binding.btnPlaySentence.setOnClickListener {
-            onItemClickCallback.onItemClicked(sentence, holder.binding.btnPlaySentence)
+            lastIndex?.let { index ->
+                getItem(index).isPlaying = false
+                notifyItemChanged(index)
+            }
+
+            sentence.isPlaying = true
+            notifyItemChanged(position)
+
+            onItemClickCallback.onItemClicked(sentence.text, holder.binding.btnPlaySentence)
+            lastIndex = holder.adapterPosition
+
+
         }
     }
 
@@ -46,16 +64,18 @@ class SentencesListAdapter :
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<String> =
-            object : DiffUtil.ItemCallback<String>() {
-                override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Sentence> =
+            object : DiffUtil.ItemCallback<Sentence>() {
+                override fun areItemsTheSame(oldItem: Sentence, newItem: Sentence): Boolean {
                     return oldItem == newItem
                 }
 
-                override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-                    return oldItem == newItem
+                override fun areContentsTheSame(oldItem: Sentence, newItem: Sentence): Boolean {
+                    return oldItem.isPlaying == newItem.isPlaying
                 }
 
             }
+
+        private const val TAG = "SentencesListAdapter"
     }
 }
