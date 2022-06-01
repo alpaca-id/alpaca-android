@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.navArgs
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityReadingBinding
+import com.bangkit.alpaca.model.Story
 import com.bumptech.glide.Glide
 
 class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, View.OnTouchListener {
@@ -33,15 +34,21 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
     }
 
     private fun setupStory() {
-        val story = arg.story
+        val story: Story? = try {
+            arg.story
+        } catch (e: Exception) {
+            intent.getParcelableExtra(EXTRA_STORY)
+        }
 
-        if (story.coverPath != null) {
+        if (story?.coverPath != null) {
             Glide.with(binding.root)
                 .load(story.coverPath)
                 .into(binding.imgCoverReading)
         }
-        binding.toolbarReading.title = story.title
-        binding.tvBodyReading.text = story.body
+        binding.toolbarReading.title = story?.title
+        binding.tvBodyReading.text = story?.body
+
+
     }
 
     private fun setupAction() {
@@ -52,12 +59,19 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.reading_speech_play_all -> {
-                val story = arg.story
+                val story: Story? = try {
+                    arg.story
+                } catch (e: Exception) {
+                    intent.getParcelableExtra(EXTRA_STORY)
+                }
+
                 val bundle = Bundle()
-                bundle.putStringArrayList(
-                    BottomSheetPlaySpeechAll.EXTRA_SENTENCES,
-                    separateStoryToSentence(story.body)
-                )
+                if (story != null) {
+                    bundle.putStringArrayList(
+                        BottomSheetPlaySpeechAll.EXTRA_SENTENCES,
+                        separateStoryToSentence(story.body)
+                    )
+                }
 
                 val modalBottomSheetPlayAllBinding = BottomSheetPlaySpeechAll()
                 modalBottomSheetPlayAllBinding.arguments = bundle
@@ -139,5 +153,9 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
             endIndex--
         }
         return word.substring(startIndex, endIndex)
+    }
+
+    companion object {
+        const val EXTRA_STORY = "extra_story"
     }
 }
