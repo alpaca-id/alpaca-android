@@ -1,7 +1,9 @@
 package com.bangkit.alpaca.utils
 
 import com.bangkit.alpaca.model.Flashcard
+import com.bangkit.alpaca.model.Level
 import com.bangkit.alpaca.model.Story
+import com.bangkit.alpaca.model.Stage
 
 object DataDummy {
 
@@ -83,6 +85,132 @@ object DataDummy {
                     "Bicara dengan anak tentang kondisinya\n" +
                     "Batasi menonton televisi\n" +
                     "Bergabung dengan support group"
+        )
+    )
+
+    fun providesWordOrderLevel(): List<Level> = listOf(
+        Level(
+            id = "L1",
+            level = 1,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L2",
+            level = 2,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L3",
+            level = 3,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L4",
+            level = 4,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L5",
+            level = 5,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L6",
+            level = 6,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L7",
+            level = 7,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L8",
+            level = 8,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L9",
+            level = 9,
+            stages = providesWords(),
+            isComplete = false
+        ),
+        Level(
+            id = "L10",
+            level = 10,
+            stages = providesWords(),
+            isComplete = false
+        ),
+    )
+
+    private fun providesWords(): List<Stage> = listOf(
+        Stage(
+            id = "1a",
+            stage = 1,
+            word = "Meja",
+            isComplete = false
+        ),
+        Stage(
+            id = "1b",
+            stage = 2,
+            word = "Buku",
+            isComplete = false
+        ),
+        Stage(
+            id = "1c",
+            stage = 3,
+            word = "Baju",
+            isComplete = false
+        ),
+        Stage(
+            id = "1d",
+            stage = 4,
+            word = "Ikan",
+            isComplete = false
+        ),
+        Stage(
+            id = "1e",
+            stage = 5,
+            word = "Kaki",
+            isComplete = false
+        ),
+        Stage(
+            id = "1f",
+            stage = 6,
+            word = "Mata",
+            isComplete = false
+        ),
+        Stage(
+            id = "1g",
+            stage = 7,
+            word = "Baru",
+            isComplete = false
+        ),
+        Stage(
+            id = "1h",
+            stage = 8,
+            word = "Saya",
+            isComplete = false
+        ),
+        Stage(
+            id = "1i",
+            stage = 9,
+            word = "Batu",
+            isComplete = false
+        ),
+        Stage(
+            id = "1j",
+            stage = 10,
+            word = "Ayam",
+            isComplete = false
         )
     )
 }
