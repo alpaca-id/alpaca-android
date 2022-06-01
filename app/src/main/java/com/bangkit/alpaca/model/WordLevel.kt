@@ -1,8 +1,8 @@
 package com.bangkit.alpaca.model
 
-class Stage(
+class WordLevel(
     val id: String,
-    val stage: Int,
-    val word: String,
+    val level: Int,
+    val wordStages: List<WordStage>,
     val isComplete: Boolean
 )

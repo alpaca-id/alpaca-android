@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ItemLevelBinding
-import com.bangkit.alpaca.model.Level
+import com.bangkit.alpaca.model.WordLevel
 
-class WordOrderAdapter : ListAdapter<Level, WordOrderAdapter.ListViewAdapter>(DIFF_CALLBACK) {
+class WordOrderLevelAdapter :
+    ListAdapter<WordLevel, WordOrderLevelAdapter.ListViewAdapter>(DIFF_CALLBACK) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -27,17 +28,17 @@ class WordOrderAdapter : ListAdapter<Level, WordOrderAdapter.ListViewAdapter>(DI
     }
 
     override fun onBindViewHolder(holder: ListViewAdapter, position: Int) {
-        val level = getItem(position)
-        holder.bind(level)
+        val wordLevel = getItem(position)
+        holder.bind(wordLevel)
         holder.binding.cardLevel.setOnClickListener {
-            onItemClickCallback.onItemClicked(level)
+            onItemClickCallback.onItemClicked(wordLevel)
         }
     }
 
     class ListViewAdapter(val binding: ItemLevelBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(level: Level) {
-            binding.tvWordOrderLevel.text = level.level.toString()
-            if (level.isComplete) {
+        fun bind(wordLevel: WordLevel) {
+            binding.tvWordOrderLevel.text = wordLevel.level.toString()
+            if (wordLevel.isComplete) {
                 binding.cardLevel.setBackgroundColor(itemView.context.getColor(R.color.yellow_500))
             } else {
                 binding.cardLevel.background =
@@ -47,19 +48,19 @@ class WordOrderAdapter : ListAdapter<Level, WordOrderAdapter.ListViewAdapter>(DI
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<Level> =
-            object : DiffUtil.ItemCallback<Level>() {
-                override fun areItemsTheSame(oldItem: Level, newItem: Level): Boolean {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<WordLevel> =
+            object : DiffUtil.ItemCallback<WordLevel>() {
+                override fun areItemsTheSame(oldItem: WordLevel, newItem: WordLevel): Boolean {
                     return oldItem == newItem
                 }
 
-                override fun areContentsTheSame(oldItem: Level, newItem: Level): Boolean {
+                override fun areContentsTheSame(oldItem: WordLevel, newItem: WordLevel): Boolean {
                     return oldItem.id == newItem.id
                 }
             }
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(level: Level)
+        fun onItemClicked(wordLevel: WordLevel)
     }
 }

@@ -1,9 +1,9 @@
 package com.bangkit.alpaca.utils
 
 import com.bangkit.alpaca.model.Flashcard
-import com.bangkit.alpaca.model.Level
 import com.bangkit.alpaca.model.Story
-import com.bangkit.alpaca.model.Stage
+import com.bangkit.alpaca.model.WordLevel
+import com.bangkit.alpaca.model.WordStage
 
 object DataDummy {
 
@@ -88,125 +88,125 @@ object DataDummy {
         )
     )
 
-    fun providesWordOrderLevel(): List<Level> = listOf(
-        Level(
+    fun providesWordOrderLevel(): List<WordLevel> = listOf(
+        WordLevel(
             id = "L1",
             level = 1,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L2",
             level = 2,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L3",
             level = 3,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L4",
             level = 4,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L5",
             level = 5,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L6",
             level = 6,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L7",
             level = 7,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L8",
             level = 8,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L9",
             level = 9,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
-        Level(
+        WordLevel(
             id = "L10",
             level = 10,
-            stages = providesWords(),
+            wordStages = providesWords(),
             isComplete = false
         ),
     )
 
-    private fun providesWords(): List<Stage> = listOf(
-        Stage(
+    private fun providesWords(): List<WordStage> = listOf(
+        WordStage(
             id = "1a",
             stage = 1,
             word = "Meja",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1b",
             stage = 2,
             word = "Buku",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1c",
             stage = 3,
             word = "Baju",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1d",
             stage = 4,
             word = "Ikan",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1e",
             stage = 5,
             word = "Kaki",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1f",
             stage = 6,
             word = "Mata",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1g",
             stage = 7,
             word = "Baru",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1h",
             stage = 8,
             word = "Saya",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1i",
             stage = 9,
             word = "Batu",
             isComplete = false
         ),
-        Stage(
+        WordStage(
             id = "1j",
             stage = 10,
             word = "Ayam",
