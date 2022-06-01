@@ -145,4 +145,5 @@
     <string name="label_word">Kata</string>
     <string name="label_syllables">Suku kata</string>
     <string name="label_letter">Huruf</string>
+    <string name="camera_capture_failed">Gagal mengambil gambar</string>
 </resources>

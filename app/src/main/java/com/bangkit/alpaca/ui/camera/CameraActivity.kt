@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityCameraBinding
 import com.bangkit.alpaca.ui.processing.ProcessingActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity.Companion.EXTRA_IMAGE
 import com.bangkit.alpaca.utils.MediaUtility.createFile
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -94,6 +95,9 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
         return super.onSupportNavigateUp()
     }
 
+    /**
+     * Take a photo from the CameraX
+     */
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
         val photoFile = createFile(application)
@@ -104,8 +108,9 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    // Redirect to the ProcessingActivity to starting the upload process
                     Intent(this@CameraActivity, ProcessingActivity::class.java).also { intent ->
-                        intent.putExtra("picture", photoFile)
+                        intent.putExtra(EXTRA_IMAGE, photoFile)
                         startActivity(intent)
                     }
                     finish()
@@ -114,7 +119,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
                 override fun onError(exception: ImageCaptureException) {
                     Toast.makeText(
                         this@CameraActivity,
-                        "Gagal mengambil gambar",
+                        getString(R.string.camera_capture_failed),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

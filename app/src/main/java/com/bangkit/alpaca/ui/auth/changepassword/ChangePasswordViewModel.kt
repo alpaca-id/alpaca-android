@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.changepassword
+package com.bangkit.alpaca.ui.auth.changepassword
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

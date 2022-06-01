@@ -15,6 +15,7 @@ import com.bangkit.alpaca.databinding.FragmentHomeBinding
 import com.bangkit.alpaca.ui.adapter.SectionPagerAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
 import com.bangkit.alpaca.ui.processing.ProcessingActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity.Companion.EXTRA_IMAGE
 import com.bangkit.alpaca.utils.MediaUtility.uriToFile
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,11 +32,13 @@ class HomeFragment : Fragment() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
+            // Get the result from the gallery and convert the URI to File
             val selectedImg: Uri = result.data?.data as Uri
             val picture = uriToFile(selectedImg, requireContext())
 
+            // Send File to the ProcessingActivity to start upload process
             Intent(requireActivity(), ProcessingActivity::class.java).also { intent ->
-                intent.putExtra("picture", picture)
+                intent.putExtra(EXTRA_IMAGE, picture)
                 startActivity(intent)
             }
         }
@@ -61,6 +64,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    /**
+     * Start an intent to select a picture from the gallery
+     */
     private fun startIntentGallery() {
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
@@ -139,9 +145,5 @@ class HomeFragment : Fragment() {
                 tab.text = resources.getString(tabTitles[position])
             }.attach()
         }
-    }
-
-    companion object {
-        private const val TAG = "HomeFragment"
     }
 }

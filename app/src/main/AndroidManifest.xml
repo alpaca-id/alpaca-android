@@ -30,7 +30,7 @@
             android:name=".ui.customization.CustomizationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.changepassword.ChangePasswordActivity"
+            android:name=".ui.auth.changepassword.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.processing.ProcessingActivity"

@@ -16,9 +16,9 @@ class ProcessingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_processing)
 
-        val picture = intent.getSerializableExtra("picture") as File
+        // Upload image to the database
+        val picture = intent.getSerializableExtra(EXTRA_IMAGE) as File
         processingViewModel.uploadImage(picture)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -29,5 +29,9 @@ class ProcessingActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    companion object {
+        const val EXTRA_IMAGE = "extra_image"
     }
 }

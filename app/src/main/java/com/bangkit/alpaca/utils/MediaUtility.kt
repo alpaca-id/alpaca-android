@@ -54,6 +54,12 @@ object MediaUtility {
         return myFile
     }
 
+    /**
+     * Create temporary file
+     *
+     * @param application Application context
+     * @return File
+     */
     fun createFile(application: Application): File {
         val mediaDir = application.externalMediaDirs.firstOrNull()?.let {
             File(it, application.resources.getString(R.string.app_name)).apply { mkdirs() }
