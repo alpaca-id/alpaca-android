@@ -155,61 +155,61 @@ object DataDummy {
         WordStage(
             id = "1a",
             stage = 1,
-            word = "Meja",
+            word = "MEJA",
             isComplete = false
         ),
         WordStage(
             id = "1b",
             stage = 2,
-            word = "Buku",
+            word = "BUKU",
             isComplete = false
         ),
         WordStage(
             id = "1c",
             stage = 3,
-            word = "Baju",
+            word = "BAJU",
             isComplete = false
         ),
         WordStage(
             id = "1d",
             stage = 4,
-            word = "Ikan",
+            word = "IKAN",
             isComplete = false
         ),
         WordStage(
             id = "1e",
             stage = 5,
-            word = "Kaki",
+            word = "KAKI",
             isComplete = false
         ),
         WordStage(
             id = "1f",
             stage = 6,
-            word = "Mata",
+            word = "MATA",
             isComplete = false
         ),
         WordStage(
             id = "1g",
             stage = 7,
-            word = "Baru",
+            word = "BARU",
             isComplete = false
         ),
         WordStage(
             id = "1h",
             stage = 8,
-            word = "Saya",
+            word = "SAYA",
             isComplete = false
         ),
         WordStage(
             id = "1i",
             stage = 9,
-            word = "Batu",
+            word = "BATU",
             isComplete = false
         ),
         WordStage(
             id = "1j",
             stage = 10,
-            word = "Ayam",
+            word = "AYAM",
             isComplete = false
         )
     )

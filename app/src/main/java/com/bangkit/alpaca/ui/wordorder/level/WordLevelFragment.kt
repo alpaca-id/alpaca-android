@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bangkit.alpaca.databinding.FragmentLevelBinding
+import com.bangkit.alpaca.databinding.FragmentWordLevelBinding
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.ui.adapter.WordOrderLevelAdapter
 import com.bangkit.alpaca.utils.DataDummy
-import com.bangkit.alpaca.utils.showToastMessage
 
 class WordLevelFragment : Fragment() {
 
-    private var _binding: FragmentLevelBinding? = null
+    private var _binding: FragmentWordLevelBinding? = null
     private val binding get() = _binding
     private val wordOrderLevelAdapter by lazy { WordOrderLevelAdapter() }
 
@@ -22,7 +22,7 @@ class WordLevelFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLevelBinding.inflate(inflater, container, false)
+        _binding = FragmentWordLevelBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -52,8 +52,15 @@ class WordLevelFragment : Fragment() {
         wordOrderLevelAdapter.setonItemClickCallback(object :
             WordOrderLevelAdapter.OnItemClickCallback {
             override fun onItemClicked(wordLevel: WordLevel) {
-                wordLevel.level.toString().showToastMessage(requireContext())
+                val toWordStage =
+                    WordLevelFragmentDirections.actionLevelFragmentToWordStageFragment(wordLevel)
+                binding?.root?.findNavController()?.navigate(toWordStage)
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
