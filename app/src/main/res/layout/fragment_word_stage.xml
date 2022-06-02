@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/lexia_readable_regular"
         android:gravity="center"
+        android:letterSpacing="0.2"
         android:text="@string/label_word"
         android:textColor="@color/black"
         android:textSize="40sp"

@@ -14,7 +14,6 @@ import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.model.WordStage
 import com.bangkit.alpaca.ui.adapter.AnswerButtonAdapter
 
-
 class WordStageFragment : Fragment() {
 
     private var _binding: FragmentWordStageBinding? = null
@@ -45,7 +44,6 @@ class WordStageFragment : Fragment() {
         setupStage()
         setupAnswerButton()
         setupAction()
-        setupEditText()
     }
 
     private fun setupToolbar() {
@@ -76,19 +74,32 @@ class WordStageFragment : Fragment() {
         nextStage()
         previousStage()
         answerButtonClick()
+        checkAnswer()
     }
 
     private fun nextStage() {
-        binding?.btnNextStage?.setOnClickListener {
-            if (currentStage.stage < wordStage.size) {
+        binding?.btnNextStage?.apply {
+            visibility = if (currentStage.stage == wordStage.size || !currentStage.isComplete) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+            setOnClickListener {
                 moveStage(wordStage[currentStage.stage])
             }
         }
     }
 
     private fun previousStage() {
-        binding?.btnPreviousStage?.setOnClickListener {
-            if (currentStage.stage > 1) {
+        binding?.btnPreviousStage?.apply {
+            visibility = if (currentStage.stage == 1) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+            setOnClickListener {
                 moveStage(wordStage[currentStage.stage - 2])
             }
         }
@@ -99,6 +110,8 @@ class WordStageFragment : Fragment() {
         binding?.edtAnswer?.setText("")
         answer.clear()
 
+        nextStage()
+        previousStage()
         setupStage()
         setupAnswerButton()
     }
@@ -117,18 +130,33 @@ class WordStageFragment : Fragment() {
         })
     }
 
-    private fun setupEditText() {
+    private fun checkAnswer() {
+        binding?.btnCheck?.setOnClickListener {
+            val userAnswer = binding?.edtAnswer?.text?.toString()
 
+            if (currentStage.word == userAnswer) {
+                val modalBottomSheetRightAnswer = BottomSheetRightAnswer()
+                modalBottomSheetRightAnswer.show(
+                    parentFragmentManager,
+                    BottomSheetRightAnswer::class.java.simpleName
+                )
+            } else {
+                val modalBottomSheetWrongAnswer = BottomSheetWrongAnswer()
+                modalBottomSheetWrongAnswer.show(
+                    parentFragmentManager,
+                    BottomSheetWrongAnswer::class.java.simpleName
+                )
+            }
+        }
     }
 
     private fun getCurrentStage(wordStage: List<WordStage>): WordStage {
-        val stages = arrayListOf(wordStage[0])
         for (stage in wordStage) {
-            if (stage.isComplete) {
-                stages.add(stage)
+            if (!stage.isComplete) {
+                return stage
             }
         }
-        return stages[0]
+        return wordStage[0]
     }
 
     private fun convertCurrentWordToListChar(currentStage: WordStage): List<AnswerButton> {

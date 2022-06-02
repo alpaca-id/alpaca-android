@@ -154,5 +154,11 @@
     <string name="desc_play_word">putar suara</string>
     <string name="word_check">Periksa</string>
     <string name="dummy_char">A</string>
+    <string name="wrong">Waduh!</string>
+    <string name="wrong_answer">Jawaban kamu kurang tepat</string>
+    <string name="try_again">Ulangi</string>
+    <string name="hurray">Hore!</string>
+    <string name="right_answer">Jawaban kamu benar</string>
+    <string name="continue_stage">Lanjutkan</string>
 
 </resources>

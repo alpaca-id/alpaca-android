@@ -78,6 +78,7 @@
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_registration.xml" value="0.2" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_word_level.xml" value="0.22780797101449277" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/fragment_word_stage.xml" value="0.2" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/item_char_button.xml" value="0.2" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/item_level.xml" value="0.21600771456123433" />
@@ -87,8 +88,10 @@
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_line_spacing.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_play_all.xml" value="0.264" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_play_word.xml" value="0.4" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_right_answer.xml" value="0.22780797101449277" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_text_alignment.xml" value="0.25" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_text_size.xml" value="0.25" />
+        <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/modal_bottom_sheet_wrong_answer.xml" value="0.264" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/view_loading_dialog.xml" value="0.24895833333333334" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/view_loading_screen.xml" value="0.22871376811594202" />
         <entry key="..\:/Fatkhu/Bangkit Academy/Materi/6. Capstone Project/alpaca-android/app/src/main/res/layout/view_password_confirmation.xml" value="0.22871376811594202" />

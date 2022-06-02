@@ -27,7 +27,7 @@ class AnswerButtonAdapter :
                 if (answerButton.isClicked) {
                     btnAnswerChar.setTextColor(itemView.context.getColor(R.color.black))
                     btnAnswerChar.backgroundTintList =
-                        itemView.context.getColorStateList(R.color.white)
+                        itemView.context.getColorStateList(R.color.grey_200)
                 } else {
                     btnAnswerChar.setTextColor(itemView.context.getColor(R.color.white))
                     btnAnswerChar.backgroundTintList =
