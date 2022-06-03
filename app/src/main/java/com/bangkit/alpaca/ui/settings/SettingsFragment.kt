@@ -82,11 +82,15 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun navigateToAboutApps() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
+        Intent(requireContext(), AboutActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     private fun navigateToPrivacyTerms() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
+        Intent(requireContext(), PrivacyStatementActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     private fun navigateToUserTerms() {
