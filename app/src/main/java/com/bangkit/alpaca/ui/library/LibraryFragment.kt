@@ -12,9 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentLibraryBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.LibraryListAdapter
+import com.bangkit.alpaca.utils.LoadingDialog
+import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -56,11 +59,22 @@ class LibraryFragment : Fragment() {
     }
 
     private fun setupStories() {
-        libraryViewModel.storiesLibrary.observe(viewLifecycleOwner) {
-            libraryListAdapter.submitList(it)
-            binding?.rvStoryLibrary?.apply {
-                adapter = libraryListAdapter
-                layoutManager = LinearLayoutManager(requireContext())
+        libraryViewModel.storiesLibrary.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
+                is Result.Success -> {
+                    LoadingDialog.hideLoading()
+                    val stories = result.data
+                    libraryListAdapter.submitList(stories)
+                    binding?.rvStoryLibrary?.apply {
+                        adapter = libraryListAdapter
+                        layoutManager = LinearLayoutManager(requireContext())
+                    }
+                }
+                is Result.Error -> {
+                    LoadingDialog.hideLoading()
+                    result.error.showToastMessage(requireContext())
+                }
             }
         }
     }

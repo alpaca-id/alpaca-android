@@ -2,6 +2,7 @@ package com.bangkit.alpaca.model
 
 import android.os.Parcelable
 import android.util.Log
+import com.bangkit.alpaca.data.local.entity.StoryEntity
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.ktx.Firebase
@@ -38,6 +39,17 @@ data class Story(
                 Log.e(TAG, "toStory: ${e.message}")
                 null
             }
+        }
+
+        fun StoryEntity.toStory(): Story {
+            return Story(
+                id = id,
+                title = title,
+                body = body,
+                coverPath = coverPath,
+                authorName = authorName,
+                createdAt = createdAt.toLong()
+            )
         }
 
         private const val TAG = "Story"
