@@ -17,6 +17,12 @@
         <item name="bottomSheetDialogTheme">@style/Theme.Alpaca.BottomSheetDialogTheme</item>
     </style>
 
+    <style name="Theme.Alpaca.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white_warm</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_alpaca</item>
+        <item name="postSplashScreenTheme">@style/Theme.Alpaca</item>
+    </style>
+
     <!--  BottomSheetDialog Theme  -->
     <style name="Theme.Alpaca.BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
