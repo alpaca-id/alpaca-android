@@ -2,7 +2,9 @@ package com.bangkit.alpaca.ui.wordorder.stage
 
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +31,9 @@ class WordStageFragment : Fragment() {
     private lateinit var wordStage: List<WordStage>
     private lateinit var currentStage: WordStage
     private var mediaPlayer: MediaPlayer? = null
+    private lateinit var sp: SoundPool
+    private var spLoaded = false
+    private var soundId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +55,7 @@ class WordStageFragment : Fragment() {
         setupAnswerButton()
         setupAction()
         initMediaPlayer()
+        initSoundAnswer()
     }
 
     private fun setupToolbar() {
@@ -85,6 +91,40 @@ class WordStageFragment : Fragment() {
 
         mediaPlayer?.setAudioAttributes(attribute)
         mediaPlayer?.setOnErrorListener { _, _, _ -> false }
+    }
+
+    private fun initSoundAnswer() {
+        sp = SoundPool.Builder()
+            .setMaxStreams(10)
+            .build()
+
+        sp.setOnLoadCompleteListener { _, _, status ->
+            if (status == 0) {
+                spLoaded = true
+            }
+        }
+        soundId = sp.load(requireContext(), R.raw.correct_answer, 1)
+    }
+
+    private fun correctAnswerAction() {
+        if (spLoaded) {
+            Log.d("TAG", "wrongAnswerAction: cek true")
+            sp.play(soundId, 1f, 1f, 0, 0, 1f)
+        }
+
+        val modalBottomSheetRightAnswer = BottomSheetRightAnswer()
+        modalBottomSheetRightAnswer.show(
+            parentFragmentManager,
+            BottomSheetRightAnswer::class.java.simpleName
+        )
+    }
+
+    private fun wrongAnswerAction() {
+        val modalBottomSheetWrongAnswer = BottomSheetWrongAnswer()
+        modalBottomSheetWrongAnswer.show(
+            parentFragmentManager,
+            BottomSheetWrongAnswer::class.java.simpleName
+        )
     }
 
 
@@ -159,19 +199,10 @@ class WordStageFragment : Fragment() {
     private fun checkAnswer() {
         binding?.btnCheck?.setOnClickListener {
             val userAnswer = binding?.edtAnswer?.text?.toString()
-
             if (currentStage.word == userAnswer) {
-                val modalBottomSheetRightAnswer = BottomSheetRightAnswer()
-                modalBottomSheetRightAnswer.show(
-                    parentFragmentManager,
-                    BottomSheetRightAnswer::class.java.simpleName
-                )
+                correctAnswerAction()
             } else {
-                val modalBottomSheetWrongAnswer = BottomSheetWrongAnswer()
-                modalBottomSheetWrongAnswer.show(
-                    parentFragmentManager,
-                    BottomSheetWrongAnswer::class.java.simpleName
-                )
+                wrongAnswerAction()
             }
         }
     }
