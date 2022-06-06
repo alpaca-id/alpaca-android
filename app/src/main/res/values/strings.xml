@@ -158,4 +158,5 @@
     <string name="text_style_title">Sesuaikan gaya tulisan pada halaman baca.</string>
     <string name="tts_description">Layanan text-to-speech dapat membantu pengguna untuk mengetahui cara pelafalan dari suatu kata atau kalimat dari sebuah cerita.</string>
     <string name="term_of_privacy">Ketentuan Privasi</string>
+    <string name="selesai">- selesai -</string>
 </resources>
