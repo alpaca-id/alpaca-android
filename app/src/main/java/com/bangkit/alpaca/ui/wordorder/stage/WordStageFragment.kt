@@ -1,5 +1,7 @@
 package com.bangkit.alpaca.ui.wordorder.stage
 
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,8 @@ import com.bangkit.alpaca.model.AnswerButton
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.model.WordStage
 import com.bangkit.alpaca.ui.adapter.AnswerButtonAdapter
+import com.bangkit.alpaca.utils.showToastMessage
+import java.io.IOException
 
 class WordStageFragment : Fragment() {
 
@@ -24,6 +28,7 @@ class WordStageFragment : Fragment() {
     private lateinit var wordLevel: WordLevel
     private lateinit var wordStage: List<WordStage>
     private lateinit var currentStage: WordStage
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +49,7 @@ class WordStageFragment : Fragment() {
         setupStage()
         setupAnswerButton()
         setupAction()
+        initMediaPlayer()
     }
 
     private fun setupToolbar() {
@@ -70,11 +76,31 @@ class WordStageFragment : Fragment() {
         }
     }
 
+    private fun initMediaPlayer() {
+        mediaPlayer = MediaPlayer()
+        val attribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        mediaPlayer?.setAudioAttributes(attribute)
+        mediaPlayer?.setOnErrorListener { _, _, _ -> false }
+    }
+
+
     private fun setupAction() {
+        playWord()
         nextStage()
         previousStage()
         answerButtonClick()
         checkAnswer()
+    }
+
+    private fun playWord() {
+        binding?.btnPlayWordStage?.setOnClickListener {
+            "preparing...".showToastMessage(requireContext())
+            mediaPlayerPrepare()
+        }
     }
 
     private fun nextStage() {
@@ -147,6 +173,23 @@ class WordStageFragment : Fragment() {
                     BottomSheetWrongAnswer::class.java.simpleName
                 )
             }
+        }
+    }
+
+    private fun mediaPlayerPrepare() {
+        val lang = "id"
+        val audioUrl =
+            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${this.currentStage.word}"
+
+        try {
+            mediaPlayer?.reset()
+            mediaPlayer?.setDataSource(audioUrl)
+            mediaPlayer?.prepareAsync()
+            mediaPlayer?.setOnPreparedListener {
+                mediaPlayer?.start()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
