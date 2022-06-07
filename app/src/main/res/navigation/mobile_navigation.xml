@@ -41,7 +41,7 @@
         tools:layout="@layout/activity_profile" />
     <activity
         android:id="@+id/changePasswordActivity"
-        android:name="com.bangkit.alpaca.ui.changepassword.ChangePasswordActivity"
+        android:name="com.bangkit.alpaca.ui.auth.changepassword.ChangePasswordActivity"
         android:label="activity_change_password"
         tools:layout="@layout/activity_change_password" />
     <activity

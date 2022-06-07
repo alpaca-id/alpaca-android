@@ -49,6 +49,7 @@ class LibraryFragment : Fragment() {
             override fun onItemClicked(story: Story) {
                 val toReadingActivity =
                     LibraryFragmentDirections.actionNavigationLibraryToReadingActivity(story)
+
                 binding?.root?.findNavController()
                     ?.navigate(toReadingActivity)
             }

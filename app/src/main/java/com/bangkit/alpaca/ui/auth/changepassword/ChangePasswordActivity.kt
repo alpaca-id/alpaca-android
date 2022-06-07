@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.ui.changepassword
+package com.bangkit.alpaca.ui.auth.changepassword
 
 import android.os.Bundle
 import androidx.activity.viewModels

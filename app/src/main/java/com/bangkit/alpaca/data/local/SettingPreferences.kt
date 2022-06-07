@@ -11,6 +11,11 @@ import javax.inject.Inject
 
 class SettingPreferences @Inject constructor(private val dataStore: DataStore<Preferences>) {
 
+    private val keyTextSize = intPreferencesKey("text_size_setting")
+    private val keyTextAlignment = intPreferencesKey("text_alignment_setting")
+    private val keyTextBackground = intPreferencesKey("text_background_setting")
+    private val keyLineHeight = intPreferencesKey("line_height_setting")
+    private val keyLineSpacing = intPreferencesKey("line_spacing_setting")
 
     /**
      * Get customized line spacing from Datastore
@@ -19,7 +24,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      * @return Flow
      */
     fun getLineSpacing(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[LINE_SPACING_KEY] ?: 1
+        preferences[keyLineSpacing] ?: 1
     }
 
     /**
@@ -29,7 +34,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      */
     suspend fun saveLineSpacing(value: Int) {
         dataStore.edit { preference ->
-            preference[LINE_SPACING_KEY] = value
+            preference[keyLineSpacing] = value
         }
     }
 
@@ -40,7 +45,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      * @return Flow
      */
     fun getLineHeight(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[LINE_HEIGHT_KEY] ?: 1
+        preferences[keyLineHeight] ?: 1
     }
 
     /**
@@ -50,7 +55,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      */
     suspend fun saveLineHeight(value: Int) {
         dataStore.edit { preference ->
-            preference[LINE_HEIGHT_KEY] = value
+            preference[keyLineHeight] = value
         }
     }
 
@@ -61,7 +66,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      * @return Flow
      */
     fun getTextAlignment(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[TEXT_ALIGNMENT_KEY] ?: View.TEXT_ALIGNMENT_TEXT_START
+        preferences[keyTextAlignment] ?: View.TEXT_ALIGNMENT_TEXT_START
     }
 
     /**
@@ -71,7 +76,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      */
     suspend fun saveTextAlignment(type: Int) {
         dataStore.edit { preference ->
-            preference[TEXT_ALIGNMENT_KEY] = type
+            preference[keyTextAlignment] = type
         }
     }
 
@@ -82,7 +87,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      * @return Flow
      */
     fun getTextSize(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[TEXT_SIZE_KEY] ?: 18
+        preferences[keyTextSize] ?: 18
     }
 
     /**
@@ -92,7 +97,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      */
     suspend fun saveTextSize(textSize: Int) {
         dataStore.edit { preference ->
-            preference[TEXT_SIZE_KEY] = textSize
+            preference[keyTextSize] = textSize
         }
     }
 
@@ -103,7 +108,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      * @return Flow
      */
     fun getTextBackground(): Flow<Int> = dataStore.data.map { preferences ->
-        preferences[TEXT_BACKGROUND_KEY] ?: 0
+        preferences[keyTextBackground] ?: 0
     }
 
     /**
@@ -113,16 +118,7 @@ class SettingPreferences @Inject constructor(private val dataStore: DataStore<Pr
      */
     suspend fun saveTextBackground(type: Int) {
         dataStore.edit { preference ->
-            preference[TEXT_BACKGROUND_KEY] = type
+            preference[keyTextBackground] = type
         }
-    }
-
-
-    companion object {
-        private val TEXT_SIZE_KEY = intPreferencesKey("text_size_setting")
-        private val TEXT_ALIGNMENT_KEY = intPreferencesKey("text_alignment_setting")
-        private val TEXT_BACKGROUND_KEY = intPreferencesKey("text_background_setting")
-        private val LINE_HEIGHT_KEY = intPreferencesKey("line_height_setting")
-        private val LINE_SPACING_KEY = intPreferencesKey("line_spacing_setting")
     }
 }

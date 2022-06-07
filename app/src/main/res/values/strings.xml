@@ -117,8 +117,8 @@
     <string name="_plus_2">+2</string>
     <string name="arrow_down">Arrow down</string>
     <string name="label_account">Akun</string>
-    <string name="change_password">Ubah kata sandi</string>
-    <string name="change">Ubah</string>
+    <string name="change_password">Ganti kata sandi</string>
+    <string name="change">Ganti</string>
     <string name="save_update">Simpan perubahan</string>
     <string name="password_confirmation">Masukkan kata sandi untuk konfirmasi</string>
     <string name="no_change">No changes</string>
@@ -145,4 +145,18 @@
     <string name="label_word">Kata</string>
     <string name="label_syllables">Suku kata</string>
     <string name="label_letter">Huruf</string>
+    <string name="camera_capture_failed">Gagal mengambil gambar</string>
+    <string name="about_application">Tentang Aplikasi</string>
+    <string name="deskripsi_umum">Deskripsi Umum</string>
+    <string name="general_description_of_alpaca">Aplikasi ini membantu pengguna dengan disleksia untuk dapat membaca dengan cara yang lebih nyaman.\n\nAplikasi ini dapat mengubah tulisan pada suatu objek yang ditangkap oleh kamera dan mengubahnya menjadi sebuah tulisan yang dapat dikustomisasi berdasarkan preferensi pengguna. Selain itu terdapat fitur lain seperti layanan text-to-speech dan permainan.</string>
+    <string name="alpaca_desciription">Alpaca - Aplikasi untuk Membantu Membaca, Mengeja, dan Menulis.</string>
+    <string name="main_feature">Fitur Utama</string>
+    <string name="deteksi_tulisan_pada_objek_dengan_bantuan_kamera">Deteksi tulisan pada objek dengan bantuan kamera.</string>
+    <string name="dengan_bantuan_alat_pendeteksi_tulisan_ocr_pengguna_dapat_mengambil_gambar_dari_berbagai_macam_objek_dan_menyimpannya_ke_dalam_perpustakaan_pribadi">Dengan bantuan alat pendeteksi tulisan (OCR) pengguna dapat mengambil gambar dari berbagai macam objek dan menyimpannya ke dalam perpustakaan pribadi.</string>
+    <string name="ocr_description">Pengguna dapat mengatur gaya tulisan pada halaman baca, mulai dari ukuran font, warna latar belakang, alignment text, hingga line spacing dan line height. Dengan fitur ini, pengguna dapat melakukan eksplorasi untuk menemukan gaya tulisan yang paling nyaman.</string>
+    <string name="tts_service_title">Layanan text-to-speech pada halaman baca.</string>
+    <string name="text_style_title">Sesuaikan gaya tulisan pada halaman baca.</string>
+    <string name="tts_description">Layanan text-to-speech dapat membantu pengguna untuk mengetahui cara pelafalan dari suatu kata atau kalimat dari sebuah cerita.</string>
+    <string name="term_of_privacy">Ketentuan Privasi</string>
+    <string name="selesai">- selesai -</string>
 </resources>
