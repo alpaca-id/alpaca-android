@@ -54,7 +54,7 @@ class WordLevelFragment : Fragment() {
     }
 
     private fun setupLevel() {
-        wordLevelViewModel.getGameDataSource().observe(viewLifecycleOwner){
+        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner){
             wordOrderLevelAdapter.submitList(it)
         }
     }

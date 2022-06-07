@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class WordStage(
+data class WordStage(
     val id: String,
     val stage: Int,
     val word: String,
