@@ -27,12 +27,6 @@
             android:name=".ui.wordorder.WordOrderActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.reading.ReadingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.customization.CustomizationActivity"
-            android:exported="false" />    
-        <activity
             android:name=".ui.settings.PrivacyStatementActivity"
             android:exported="false"
             android:screenOrientation="portrait"
