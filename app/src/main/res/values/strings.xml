@@ -145,6 +145,22 @@
     <string name="label_word">Kata</string>
     <string name="label_syllables">Suku kata</string>
     <string name="label_letter">Huruf</string>
+    <string name="word_order">Susun Kata</string>
+    <string name="level">Level</string>
+    <string name="title_level">Level %s</string>
+    <string name="stages">%s/%s</string>
+    <string name="desc_before_stage">Tahap sebelumnya</string>
+    <string name="desc_after_stage">Tahap selanjutnya</string>
+    <string name="desc_play_word">putar suara</string>
+    <string name="word_check">Periksa</string>
+    <string name="dummy_char">A</string>
+    <string name="wrong">Waduh!</string>
+    <string name="wrong_answer">Jawaban kamu kurang tepat</string>
+    <string name="try_again">Ulangi</string>
+    <string name="hurray">Hore!</string>
+    <string name="right_answer">Jawaban kamu benar</string>
+    <string name="continue_stage">Lanjutkan</string>
+
     <string name="camera_capture_failed">Gagal mengambil gambar</string>
     <string name="about_application">Tentang Aplikasi</string>
     <string name="deskripsi_umum">Deskripsi Umum</string>

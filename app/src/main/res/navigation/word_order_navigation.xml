@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/word_order_navigation"
+    app:startDestination="@id/wordLevelFragment">
+
+    <fragment
+        android:id="@+id/wordLevelFragment"
+        android:name="com.bangkit.alpaca.ui.wordorder.level.WordLevelFragment"
+        android:label="fragment_level"
+        tools:layout="@layout/fragment_word_level" >
+        <action
+            android:id="@+id/action_levelFragment_to_wordStageFragment"
+            app:destination="@id/wordStageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordStageFragment"
+        android:name="com.bangkit.alpaca.ui.wordorder.stage.WordStageFragment"
+        android:label="fragment_word_stage"
+        tools:layout="@layout/fragment_word_stage" >
+        <argument
+            android:name="wordLevel"
+            app:argType="com.bangkit.alpaca.model.WordLevel" />
+        <action
+            android:id="@+id/action_wordStageFragment_to_wordLevelFragment"
+            app:destination="@id/wordLevelFragment"
+            app:popUpTo="@id/wordLevelFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

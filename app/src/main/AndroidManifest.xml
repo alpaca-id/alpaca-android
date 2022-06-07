@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Alpaca"
         tools:targetApi="31">
         <activity
+            android:name=".ui.wordorder.WordOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.settings.PrivacyStatementActivity"
             android:exported="false"
             android:screenOrientation="portrait"

@@ -1,5 +1,6 @@
 package com.bangkit.alpaca.ui.home.education
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bangkit.alpaca.databinding.FragmentEducationBinding
+import com.bangkit.alpaca.ui.wordorder.WordOrderActivity
 import com.bangkit.alpaca.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -60,6 +62,11 @@ class EducationFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        binding?.cardWordGame?.setOnClickListener {
+            val wordOrderIntent = Intent(requireContext(), WordOrderActivity::class.java)
+            startActivity(wordOrderIntent)
         }
     }
 

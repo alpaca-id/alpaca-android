@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.wordorder.stage.WordStageFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_stages"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back_button"
+        app:title="@string/level" />
+
+    <TextView
+        android:id="@+id/label_current_stage"
+        style="@style/Theme.Alpaca.Text.Body.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/stages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_stages" />
+
+    <ImageButton
+        android:id="@+id/btn_play_word_stage"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/desc_play_word"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:src="@drawable/ic_play_word"
+        app:layout_constraintEnd_toEndOf="@+id/tv_current_word"
+        app:layout_constraintStart_toStartOf="@+id/tv_current_word"
+        app:layout_constraintTop_toBottomOf="@+id/label_current_stage"
+        app:tint="?colorSecondary" />
+
+    <TextView
+        android:id="@+id/tv_current_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lexia_readable_regular"
+        android:gravity="center"
+        android:letterSpacing="0.2"
+        android:text="@string/label_word"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_play_word_stage" />
+
+    <EditText
+        android:id="@+id/edt_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="62dp"
+        android:enabled="false"
+        android:fontFamily="@font/lexia_readable_regular"
+        android:importantForAutofill="no"
+        android:letterSpacing="0.3"
+        android:lineSpacingExtra="2sp"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_word"
+        tools:ignore="LabelFor,TextFields" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_answer_char"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="62dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_answer"
+        app:spanCount="5"
+        tools:listitem="@layout/item_char_button" />
+
+    <ImageButton
+        android:id="@+id/btn_previous_stage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/desc_before_stage"
+        android:padding="4dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_previous"
+        app:layout_constraintBottom_toBottomOf="@id/btn_check"
+        app:layout_constraintEnd_toStartOf="@+id/btn_check"
+        app:layout_constraintTop_toTopOf="@+id/btn_check"
+        app:tint="@color/black" />
+
+    <ImageButton
+        android:id="@+id/btn_next_stage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/desc_after_stage"
+        android:padding="4dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/ic_next"
+        app:layout_constraintBottom_toBottomOf="@id/btn_check"
+        app:layout_constraintStart_toEndOf="@+id/btn_check"
+        app:layout_constraintTop_toTopOf="@+id/btn_check"
+        app:tint="@color/black" />
+
+    <Button
+        android:id="@+id/btn_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/word_check"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rv_answer_char"
+        app:layout_constraintStart_toStartOf="@+id/rv_answer_char" />
+</androidx.constraintlayout.widget.ConstraintLayout>

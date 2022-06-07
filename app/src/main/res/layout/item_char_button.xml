@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/btn_answer_char"
+    style="@style/Theme.Alpaca.Text.Headline.Large"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:text="@string/dummy_char"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
