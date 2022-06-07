@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,124 +7,121 @@
     android:orientation="vertical"
     tools:context=".ui.auth.login.LoginFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/img_logo1"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="64dp"
+        android:contentDescription="@string/desc_alpaca_logo"
+        android:src="@drawable/logo_alpaca"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_login1"
+        style="@style/Theme.Alpaca.Text.Headline.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/welcome"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo1"
+        app:layout_constraintStart_toStartOf="@+id/img_logo1"
+        app:layout_constraintTop_toBottomOf="@id/img_logo1" />
+
+    <TextView
+        android:id="@+id/tv_login2"
+        style="@style/Theme.Alpaca.Text.Body.Medium.Auth"
+        android:layout_marginTop="4dp"
+        android:text="@string/login_to_continue"
+        app:layout_constraintEnd_toEndOf="@+id/tv_login1"
+        app:layout_constraintStart_toStartOf="@+id/tv_login1"
+        app:layout_constraintTop_toBottomOf="@id/tv_login1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email_login"
+        style="@style/Theme.Alpaca.InputLayout.Auth"
+        android:layout_marginTop="32dp"
+        android:hint="@string/label_email"
+        app:errorIconDrawable="@null"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo1"
+        app:layout_constraintStart_toStartOf="@+id/img_logo1"
+        app:layout_constraintTop_toBottomOf="@id/tv_login2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_email_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password_login"
+        style="@style/Theme.Alpaca.InputLayout.Auth"
+        android:layout_marginTop="16dp"
+        android:hint="@string/label_password"
+        app:endIconMode="password_toggle"
+        app:errorIconDrawable="@null"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo1"
+        app:layout_constraintStart_toStartOf="@+id/img_logo1"
+        app:layout_constraintTop_toBottomOf="@id/til_email_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_password_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_process_login"
+        style="@style/Theme.Alpaca.Button.Auth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/label_login"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo1"
+        app:layout_constraintStart_toStartOf="@+id/img_logo1"
+        app:layout_constraintTop_toBottomOf="@+id/til_password_login" />
 
-        <ImageView
-            android:id="@+id/img_logo1"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:contentDescription="@string/desc_alpaca_logo"
-            android:src="@drawable/logo_alpaca"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/btn_to_forgot_password"
+        style="@style/Theme.Alpaca.Text.Body.Medium.Button"
+        android:layout_marginBottom="8dp"
+        android:text="@string/forgot_password"
+        android:textColor="#827717"
+        app:layout_constraintBottom_toTopOf="@+id/liner_layout_login"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo1"
+        app:layout_constraintStart_toStartOf="@+id/img_logo1"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <LinearLayout
+        android:id="@+id/liner_layout_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo1"
+        app:layout_constraintStart_toStartOf="@+id/img_logo1">
 
         <TextView
-            android:id="@+id/tv_login1"
-            style="@style/Theme.Alpaca.Text.Headline.Large"
+            style="@style/Theme.Alpaca.Text.Body.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/welcome"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@id/img_logo1" />
+            android:layout_marginEnd="4dp"
+            android:text="@string/no_account_ready" />
 
         <TextView
-            android:id="@+id/tv_login2"
-            style="@style/Theme.Alpaca.Text.Body.Medium.Auth"
-            android:layout_marginTop="4dp"
-            android:text="@string/login_to_continue"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@id/tv_login1" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_email_login"
-            style="@style/Theme.Alpaca.InputLayout.Auth"
-            android:layout_marginTop="32dp"
-            android:hint="@string/label_email"
-            app:errorIconDrawable="@null"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@id/tv_login2">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_email_login"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:text="@string/dummy_email" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_password_login"
-            style="@style/Theme.Alpaca.InputLayout.Auth"
-            android:layout_marginTop="16dp"
-            android:hint="@string/label_password"
-            app:endIconMode="password_toggle"
-            app:errorIconDrawable="@null"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@id/til_email_login">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_password_login"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPassword"
-                android:text="@string/dummy_password" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/btn_process_login"
-            style="@style/Theme.Alpaca.Button.Auth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
-            android:text="@string/label_login"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@+id/til_password_login" />
-
-        <TextView
-            android:id="@+id/btn_to_forgot_password"
-            style="@style/Theme.Alpaca.Text.Body.Small.Button"
-            android:layout_marginTop="40dp"
-            android:text="@string/forgot_password"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@+id/btn_process_login" />
-
-        <LinearLayout
-            android:id="@+id/liner_layout_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="40dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/img_logo1"
-            app:layout_constraintStart_toStartOf="@+id/img_logo1"
-            app:layout_constraintTop_toBottomOf="@+id/btn_to_forgot_password">
-
-            <TextView
-                style="@style/Theme.Alpaca.Text.Body.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@string/no_account_ready" />
-
-            <TextView
-                android:id="@+id/btn_to_registration_from_login"
-                style="@style/Theme.Alpaca.Text.Body.Small.Button"
-                android:text="@string/label_registration" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            android:id="@+id/btn_to_registration_from_login"
+            style="@style/Theme.Alpaca.Text.Body.Medium.Button"
+            android:text="@string/label_registration"
+            android:textColor="#827717"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

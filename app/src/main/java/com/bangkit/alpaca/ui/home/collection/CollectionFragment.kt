@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,6 +12,8 @@ import com.bangkit.alpaca.databinding.FragmentCollectionBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.CollectionListAdapter
 import com.bangkit.alpaca.ui.camera.CameraActivity
+import com.bangkit.alpaca.ui.reading.ReadingActivity
+import com.bangkit.alpaca.ui.reading.ReadingActivity.Companion.EXTRA_STORY
 import com.bangkit.alpaca.utils.animateVisibility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,8 +48,10 @@ class CollectionFragment : Fragment() {
                 adapter.submitList(stories)
                 adapter.setOnItemClickCallback(object : CollectionListAdapter.OnItemClickCallback {
                     override fun onItemClicked(story: Story) {
-                        // FIXME: Navigate to the ReadingActivity later
-                        Toast.makeText(requireContext(), story.title, Toast.LENGTH_SHORT).show()
+                        Intent(requireContext(), ReadingActivity::class.java).also { intent ->
+                            intent.putExtra(EXTRA_STORY, story)
+                            startActivity(intent)
+                        }
                     }
                 })
 

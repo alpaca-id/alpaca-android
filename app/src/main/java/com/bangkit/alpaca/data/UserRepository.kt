@@ -5,7 +5,7 @@ import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.model.User
 import kotlinx.coroutines.flow.Flow
 
-class UserRepository{
+class UserRepository {
     fun getUserData(): Flow<Result<User>> = FirebaseUserService.getUserData()
 
     fun updateUserData(

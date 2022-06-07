@@ -96,16 +96,19 @@ object FirebaseStoryService {
 
     }
 
+    /**
+     * Get all books from library
+     */
     fun getLibraryStory(): Flow<List<Story>?> = callbackFlow {
         val listener = Firebase.firestore.collection("stories")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Firebase.crashlytics.apply {
-                        log("Error get user stories-scan")
+                        log("Error get stories from library")
                         recordException(error)
                     }
 
-                    cancel(message = "Error get user stories-scan", cause = error)
+                    cancel(message = "Error get stories from library", cause = error)
                     return@addSnapshotListener
                 }
 
@@ -116,7 +119,7 @@ object FirebaseStoryService {
                 trySend(stories)
             }
         awaitClose {
-            Log.d(TAG, "getUserDocumentID: Cancelling document id listener")
+            Log.d(TAG, "getLibraryStory: Cancelling document id listener")
             listener.remove()
         }
     }

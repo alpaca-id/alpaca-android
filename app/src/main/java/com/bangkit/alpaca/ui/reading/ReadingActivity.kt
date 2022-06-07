@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.navArgs
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityReadingBinding
+import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.customization.CustomizationActivity
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +50,8 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
                 binding.apply {
                     if (backgroundColor > 2) {
                         tvBodyReading.setTextColor(getColor(R.color.white))
-                        gradientCover.setImageResource(R.drawable.gradient_image_black)
+                        tvEndOfStory.setTextColor(getColor(R.color.white))
+                        tvTitle.setTextColor(getColor(R.color.white))
 
                         with(collapsingReading) {
                             setCollapsedTitleTextColor(getColor(R.color.white))
@@ -59,13 +61,15 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
 
                         with(toolbarReading) {
                             setNavigationIconTint(getColor(R.color.white))
+                            setTitleTextColor(getColor(R.color.white))
                             menu.getItem(1).setIcon(R.drawable.ic_play_all_white)
                             overflowIcon =
                                 ContextCompat.getDrawable(baseContext, R.drawable.ic_option_white)
                         }
                     } else {
                         tvBodyReading.setTextColor(getColor(R.color.black))
-                        gradientCover.setImageResource(R.drawable.gradient_image_white)
+                        tvEndOfStory.setTextColor(getColor(R.color.black))
+                        tvTitle.setTextColor(getColor(R.color.black))
 
                         with(collapsingReading) {
                             setCollapsedTitleTextColor(getColor(R.color.black))
@@ -75,6 +79,7 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
 
                         with(toolbarReading) {
                             toolbarReading.setNavigationIconTint(getColor(R.color.black))
+                            setTitleTextColor(getColor(R.color.black))
                             menu.getItem(1).setIcon(R.drawable.ic_play_all_black)
                             overflowIcon =
                                 ContextCompat.getDrawable(baseContext, R.drawable.ic_option_black)
@@ -83,6 +88,8 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
 
                     collapsingReading.setContentScrimColor(selectedColor)
                     root.setBackgroundColor(selectedColor)
+                    titleBackground.setBackgroundColor(selectedColor)
+                    toolbarReading.setBackgroundColor(selectedColor)
                 }
             }
 
@@ -116,15 +123,25 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
     }
 
     private fun setupStory() {
-        val story = arg.story
+        val story: Story? = try {
+            arg.story
+        } catch (e: Exception) {
+            intent.getParcelableExtra(EXTRA_STORY)
+        }
 
-        if (story.coverPath != null) {
+        if (story?.coverPath != null) {
             Glide.with(binding.root)
                 .load(story.coverPath)
-                .into(binding.imgCoverReading)
+                .into(binding.ivCover)
+
+            binding.tvCollectionItemTitleCover.visibility = View.GONE
         }
-        binding.toolbarReading.title = story.title
-        binding.tvBodyReading.text = story.body
+        binding.toolbarReading.title = story?.title
+        binding.tvTitle.text = story?.title
+        binding.tvCollectionItemTitleCover.text = story?.title
+        binding.tvBodyReading.text = story?.body
+
+
     }
 
     private fun setupAction() {
@@ -135,12 +152,19 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.reading_speech_play_all -> {
-                val story = arg.story
+                val story: Story? = try {
+                    arg.story
+                } catch (e: Exception) {
+                    intent.getParcelableExtra(EXTRA_STORY)
+                }
+
                 val bundle = Bundle()
-                bundle.putStringArrayList(
-                    BottomSheetPlaySpeechAll.EXTRA_SENTENCES,
-                    separateStoryToSentence(story.body)
-                )
+                if (story != null) {
+                    bundle.putStringArrayList(
+                        BottomSheetPlaySpeechAll.EXTRA_SENTENCES,
+                        separateStoryToSentence(story.body)
+                    )
+                }
 
                 val modalBottomSheetPlayAllBinding = BottomSheetPlaySpeechAll()
                 modalBottomSheetPlayAllBinding.arguments = bundle
@@ -228,5 +252,9 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
             endIndex--
         }
         return word.substring(startIndex, endIndex)
+    }
+
+    companion object {
+        const val EXTRA_STORY = "extra_story"
     }
 }

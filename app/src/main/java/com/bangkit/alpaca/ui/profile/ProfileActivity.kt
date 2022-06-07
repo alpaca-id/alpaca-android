@@ -98,7 +98,6 @@ class ProfileActivity : AppCompatActivity() {
     }
 
 
-
     private fun showConfirmation(email: String, name: String) {
         val inflate = layoutInflater
         val dialogLayout = inflate.inflate(R.layout.view_password_confirmation, null)

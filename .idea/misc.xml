@@ -12,11 +12,15 @@
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/drawable/ic_profile_picture.xml" value="0.29" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/drawable/state_chip_background.xml" value="0.2945" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/drawable/state_chip_text_color.xml" value="0.2945" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_about.xml" value="0.33" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_authentication.xml" value="0.19947916666666668" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_camera.xml" value="0.2015625" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_customization.xml" value="0.203125" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_privacy_statement.xml" value="0.33" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/activity_reading.xml" value="0.34629629629629627" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/card_collection_item.xml" value="0.3859375" />
+        <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_about.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_collection.xml" value="0.38697916666666665" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_education.xml" value="0.3729166666666667" />
         <entry key="..\:/Code/Android/alpaca-android/app/src/main/res/layout/fragment_forgot_password.xml" value="0.38697916666666665" />
