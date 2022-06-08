@@ -49,11 +49,16 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             btnPrivacyTerms.setOnClickListener(this@SettingsFragment)
             btnUserTerms.setOnClickListener(this@SettingsFragment)
             btnChangePassword.setOnClickListener(this@SettingsFragment)
+            ivProfileIcon.setOnClickListener(this@SettingsFragment)
         }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.iv_profile_icon -> {
+                v.findNavController().navigate(R.id.action_navigation_settings_to_profileActivity)
+            }
+
             R.id.btn_user_profile -> v.findNavController()
                 .navigate(R.id.action_navigation_settings_to_profileActivity)
 
@@ -77,11 +82,15 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun navigateToAboutApps() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
+        Intent(requireContext(), AboutActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     private fun navigateToPrivacyTerms() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
+        Intent(requireContext(), PrivacyStatementActivity::class.java).also { intent ->
+            startActivity(intent)
+        }
     }
 
     private fun navigateToUserTerms() {

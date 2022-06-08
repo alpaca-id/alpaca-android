@@ -10,16 +10,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.Camera
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityCameraBinding
 import com.bangkit.alpaca.ui.processing.ProcessingActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity.Companion.EXTRA_IMAGE
+import com.bangkit.alpaca.utils.MediaUtility.createFile
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class CameraActivity : AppCompatActivity(), View.OnClickListener {
@@ -81,10 +80,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.btn_camera_shutter -> {
-                // FIXME: Implement the right camera shutter method
-                Intent(this@CameraActivity, ProcessingActivity::class.java).also { intent ->
-                    startActivity(intent)
-                }
+                takePhoto()
             }
         }
     }
@@ -97,6 +93,38 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    /**
+     * Take a photo from the CameraX
+     */
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+        val photoFile = createFile(application)
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    // Redirect to the ProcessingActivity to starting the upload process
+                    Intent(this@CameraActivity, ProcessingActivity::class.java).also { intent ->
+                        intent.putExtra(EXTRA_IMAGE, photoFile)
+                        startActivity(intent)
+                    }
+                    finish()
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    Toast.makeText(
+                        this@CameraActivity,
+                        getString(R.string.camera_capture_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        )
     }
 
     /**

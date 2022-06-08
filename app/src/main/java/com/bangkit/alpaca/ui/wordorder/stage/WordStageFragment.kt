@@ -1,29 +1,46 @@
 package com.bangkit.alpaca.ui.wordorder.stage
 
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentWordStageBinding
 import com.bangkit.alpaca.model.AnswerButton
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.model.WordStage
 import com.bangkit.alpaca.ui.adapter.AnswerButtonAdapter
+import com.bangkit.alpaca.utils.LoadingDialog
+import com.bangkit.alpaca.utils.showToastMessage
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.io.IOException
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class WordStageFragment : Fragment() {
 
     private var _binding: FragmentWordStageBinding? = null
     private val binding get() = _binding
+    private val wordStageViewModel: WordStageViewModel by viewModels()
     private val args: WordStageFragmentArgs by navArgs()
     private val answerButtonAdapter by lazy { AnswerButtonAdapter() }
     val answer = arrayListOf<String>()
     private lateinit var wordLevel: WordLevel
     private lateinit var wordStage: List<WordStage>
     private lateinit var currentStage: WordStage
+    private var mediaPlayer: MediaPlayer? = null
+    private lateinit var sp: SoundPool
+    private var spLoaded = false
+    private var soundId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +61,8 @@ class WordStageFragment : Fragment() {
         setupStage()
         setupAnswerButton()
         setupAction()
+        initMediaPlayer()
+        initSoundAnswer()
     }
 
     private fun setupToolbar() {
@@ -70,11 +89,101 @@ class WordStageFragment : Fragment() {
         }
     }
 
+    private fun initMediaPlayer() {
+        mediaPlayer = MediaPlayer()
+        val attribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+
+        mediaPlayer?.setAudioAttributes(attribute)
+        mediaPlayer?.setOnErrorListener { _, _, _ -> false }
+    }
+
+    private fun initSoundAnswer() {
+        sp = SoundPool.Builder()
+            .setMaxStreams(10)
+            .build()
+
+        sp.setOnLoadCompleteListener { _, _, status ->
+            if (status == 0) {
+                spLoaded = true
+            }
+        }
+        soundId = sp.load(requireContext(), R.raw.correct_answer, 1)
+    }
+
+    private fun correctAnswerAction() {
+        val level = String.format("%04d", wordLevel.level)
+        val stage = String.format("%04d", currentStage.stage)
+        val isComplete = currentStage.stage == wordStage.last().stage
+        val modalBottomSheetRightAnswer = BottomSheetRightAnswer()
+
+        if (!currentStage.isComplete) {
+            wordStageViewModel.userProgressUpdate(level, stage, isComplete)
+                .observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
+                        is Result.Success -> {
+                            if (result.data) {
+                                LoadingDialog.hideLoading()
+
+                                currentStage.isComplete = true
+
+                                if (!isComplete){
+                                    binding?.btnNextStage?.visibility = View.VISIBLE
+                                }
+
+                                if (spLoaded) {
+                                    sp.play(soundId, 1f, 1f, 0, 0, 1f)
+                                }
+
+                                modalBottomSheetRightAnswer.show(
+                                    parentFragmentManager,
+                                    BottomSheetRightAnswer::class.java.simpleName
+                                )
+                            }
+                        }
+                        is Result.Error -> {
+                            LoadingDialog.hideLoading()
+                            result.error.showToastMessage(requireContext())
+                        }
+                    }
+                }
+        }else{
+            if (spLoaded) {
+                sp.play(soundId, 1f, 1f, 0, 0, 1f)
+            }
+
+            modalBottomSheetRightAnswer.show(
+                parentFragmentManager,
+                BottomSheetRightAnswer::class.java.simpleName
+            )
+        }
+    }
+
+    private fun wrongAnswerAction() {
+        val modalBottomSheetWrongAnswer = BottomSheetWrongAnswer()
+        modalBottomSheetWrongAnswer.show(
+            parentFragmentManager,
+            BottomSheetWrongAnswer::class.java.simpleName
+        )
+    }
+
+
     private fun setupAction() {
+        playWord()
         nextStage()
         previousStage()
         answerButtonClick()
         checkAnswer()
+    }
+
+    private fun playWord() {
+        binding?.btnPlayWordStage?.setOnClickListener {
+            "preparing...".showToastMessage(requireContext())
+            mediaPlayerPrepare()
+        }
     }
 
     private fun nextStage() {
@@ -133,20 +242,28 @@ class WordStageFragment : Fragment() {
     private fun checkAnswer() {
         binding?.btnCheck?.setOnClickListener {
             val userAnswer = binding?.edtAnswer?.text?.toString()
-
             if (currentStage.word == userAnswer) {
-                val modalBottomSheetRightAnswer = BottomSheetRightAnswer()
-                modalBottomSheetRightAnswer.show(
-                    parentFragmentManager,
-                    BottomSheetRightAnswer::class.java.simpleName
-                )
+                correctAnswerAction()
             } else {
-                val modalBottomSheetWrongAnswer = BottomSheetWrongAnswer()
-                modalBottomSheetWrongAnswer.show(
-                    parentFragmentManager,
-                    BottomSheetWrongAnswer::class.java.simpleName
-                )
+                wrongAnswerAction()
             }
+        }
+    }
+
+    private fun mediaPlayerPrepare() {
+        val lang = "id"
+        val audioUrl =
+            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${this.currentStage.word}"
+
+        try {
+            mediaPlayer?.reset()
+            mediaPlayer?.setDataSource(audioUrl)
+            mediaPlayer?.prepareAsync()
+            mediaPlayer?.setOnPreparedListener {
+                mediaPlayer?.start()
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 

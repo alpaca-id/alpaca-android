@@ -27,6 +27,15 @@ object FirebaseAuthService {
     ) = flow {
         val auth = Firebase.auth
         val db = Firebase.firestore
+
+        val initWordOrder = hashMapOf(
+            "id" to "word-order"
+        )
+
+        val initLeveling = hashMapOf(
+            "isComplete" to false
+        )
+
         try {
             emit(Result.Loading)
             auth.createUserWithEmailAndPassword(email, password).await()
@@ -38,6 +47,15 @@ object FirebaseAuthService {
                 db.collection("users")
                     .add(user)
             }?.await()
+
+            val users = db.collection("users").whereEqualTo("email", email).limit(1).get().await()
+            val id = users.documents.first().id
+
+            db.document("/users/$id/games/word-order").apply {
+                set(initWordOrder).await()
+                collection("levelling").document("0001").set(initLeveling).await()
+                collection("levelling/0001/words").document("0001").set(initLeveling).await()
+            }
 
             emit(Result.Success(true))
         } catch (e: Exception) {
