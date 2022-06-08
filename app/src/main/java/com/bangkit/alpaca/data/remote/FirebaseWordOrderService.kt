@@ -92,15 +92,16 @@ object FirebaseWordOrderService {
                         value?.documents?.forEach { docs ->
                             val wordsProgressMap = mutableMapOf<String, Boolean>()
 
-                            docs.reference.collection("words").get().addOnSuccessListener { wordDocuments ->
-                                wordDocuments.documents.forEach { words ->
-                                    wordsProgressMap[words.id] =
-                                        words.get("isComplete").toString().toBoolean()
-                                }
+                            docs.reference.collection("words").get()
+                                .addOnSuccessListener { wordDocuments ->
+                                    wordDocuments.documents.forEach { words ->
+                                        wordsProgressMap[words.id] =
+                                            words.get("isComplete").toString().toBoolean()
+                                    }
 
-                                levelProgressMap[docs.id] = wordsProgressMap
-                                trySend(levelProgressMap)
-                            }
+                                    levelProgressMap[docs.id] = wordsProgressMap
+                                    trySend(levelProgressMap)
+                                }
                         }
                     }
 

@@ -20,7 +20,7 @@ class WordLevelFragment : Fragment() {
 
     private var _binding: FragmentWordLevelBinding? = null
     private val binding get() = _binding
-    private val wordLevelViewModel : WordLevelViewModel by viewModels()
+    private val wordLevelViewModel: WordLevelViewModel by viewModels()
     private val wordOrderLevelAdapter by lazy { WordOrderLevelAdapter() }
 
     override fun onCreateView(
@@ -54,7 +54,7 @@ class WordLevelFragment : Fragment() {
     }
 
     private fun setupLevel() {
-        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner){
+        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner) {
             wordOrderLevelAdapter.submitList(it)
         }
     }

@@ -11,7 +11,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-import kotlin.math.log
 
 @ExperimentalCoroutinesApi
 @HiltViewModel

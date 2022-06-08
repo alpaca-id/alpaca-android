@@ -9,4 +9,4 @@ data class WordLevel(
     val level: Int,
     val wordStages: List<WordStage>,
     var isComplete: Boolean
-):Parcelable
+) : Parcelable
