@@ -46,17 +46,11 @@ class StoryRepository @Inject constructor(
         }
     }
 
-    fun getAllStoryLibrary(): Flow<List<Story>?> = flow {
-        FirebaseStoryService.getLibraryStory().collect {
-            emit(it)
-        }
-    }
-
     fun getAllFlashcardContent(): Flow<List<Flashcard>> = flow {
         emit(DataDummy.provideFlashcard())
     }
 
-    fun getAllBookStory(): Flow<Result<List<Story>>> = flow {
+    fun getAllStoryBook(): Flow<Result<List<Story>>> = flow {
         emit(Result.Loading)
         try {
             val response = apiService.getAllStoryBook()
@@ -79,6 +73,19 @@ class StoryRepository @Inject constructor(
             }
 
         localData.collect {
+            emit(it)
+        }
+    }
+
+    fun getSearchStoryBook(keyword: String): Flow<Result<List<Story>>> = flow {
+        val result = storyDao.getSearchStoryBook("%$keyword%").map {
+            val story = it.map { storyEntity ->
+                storyEntity.toStory()
+            }
+            Result.Success(story)
+        }
+
+        result.collect {
             emit(it)
         }
     }

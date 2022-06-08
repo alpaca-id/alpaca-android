@@ -17,4 +17,7 @@ interface StoryDao {
 
     @Query("SELECT * FROM story")
     fun getAllStoryBook(): Flow<List<StoryEntity>>
+
+    @Query("SELECT * FROM story WHERE title LIKE :keyword")
+    fun getSearchStoryBook(keyword: String): Flow<List<StoryEntity>>
 }

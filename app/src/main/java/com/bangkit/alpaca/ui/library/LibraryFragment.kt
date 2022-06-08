@@ -90,14 +90,39 @@ class LibraryFragment : Fragment() {
             queryHint = "Cari cerita"
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    if (query != null) {
-                        searchNotFound(query)
-                    }
-                    clearFocus()
+                    searchView.clearFocus()
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null) {
+                        libraryViewModel.findBook(newText).observe(viewLifecycleOwner) { result ->
+                            when (result) {
+                                is Result.Loading -> LoadingDialog.displayLoading(
+                                    requireContext(),
+                                    false
+                                )
+                                is Result.Success -> {
+                                    LoadingDialog.hideLoading()
+                                    val stories = result.data
+                                    if (stories.isNotEmpty()) {
+                                        searchResult(isNotFound = false)
+                                        libraryListAdapter.submitList(stories)
+                                        binding?.rvStoryLibrary?.apply {
+                                            adapter = libraryListAdapter
+                                            layoutManager = LinearLayoutManager(requireContext())
+                                        }
+                                    } else {
+                                        searchResult(newText, isNotFound = true)
+                                    }
+                                }
+                                is Result.Error -> {
+                                    LoadingDialog.hideLoading()
+                                    result.error.showToastMessage(requireContext())
+                                }
+                            }
+                        }
+                    }
                     return false
                 }
 
@@ -105,15 +130,18 @@ class LibraryFragment : Fragment() {
         }
     }
 
-    private fun searchNotFound(query: String) {
-        binding?.apply {
-            tvSearchResult.visibility = View.VISIBLE
-            containerSearchNotFound.visibility = View.VISIBLE
-            tvNewCollection.visibility = View.GONE
-            rvStoryLibrary.visibility = View.GONE
-
-            tvSearchResult.text = getString(R.string.search_result, 0)
-            tvSearchNotFound.text = getString(R.string.result_not_found2, query)
+    private fun searchResult(query: String = "", isNotFound: Boolean) {
+        if (isNotFound) {
+            binding?.apply {
+                containerSearchNotFound.visibility = View.VISIBLE
+                rvStoryLibrary.visibility = View.GONE
+                tvSearchNotFound.text = getString(R.string.result_not_found2, query)
+            }
+        } else {
+            binding?.apply {
+                containerSearchNotFound.visibility = View.GONE
+                rvStoryLibrary.visibility = View.VISIBLE
+            }
         }
     }
 

@@ -12,8 +12,12 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @HiltViewModel
-class LibraryViewModel @Inject constructor(storyRepository: StoryRepository) :
+class LibraryViewModel @Inject constructor(private val storyRepository: StoryRepository) :
     ViewModel() {
     val storiesLibrary: LiveData<Result<List<Story>>> =
-        storyRepository.getAllBookStory().asLiveData()
+        storyRepository.getAllStoryBook().asLiveData()
+
+    fun findBook(keyword: String): LiveData<Result<List<Story>>> {
+        return storyRepository.getSearchStoryBook(keyword).asLiveData()
+    }
 }
