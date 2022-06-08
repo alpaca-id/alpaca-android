@@ -9,9 +9,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentWordLevelBinding
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.ui.adapter.WordOrderLevelAdapter
+import com.bangkit.alpaca.utils.LoadingDialog
 import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -56,8 +58,18 @@ class WordLevelFragment : Fragment() {
     }
 
     private fun setupLevel() {
-        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner) {
-            wordOrderLevelAdapter.submitList(it)
+        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
+                is Result.Success -> {
+                    LoadingDialog.hideLoading()
+                    wordOrderLevelAdapter.submitList(result.data)
+                }
+                is Result.Error -> {
+                    LoadingDialog.hideLoading()
+                    result.error.showToastMessage(requireContext())
+                }
+            }
         }
     }
 

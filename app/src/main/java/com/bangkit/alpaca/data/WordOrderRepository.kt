@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @ExperimentalCoroutinesApi
 class WordOrderRepository {
-    fun getGameDataSource(): Flow<List<WordLevel>> =
+    fun getGameDataSource(): Flow<Result<List<WordLevel>>> =
         FirebaseWordOrderService.getWordOrderDataSource()
 
     fun getGameProgressDataSource(): Flow<MutableMap<String, Map<String, Boolean>>> =

@@ -17,13 +17,15 @@ import kotlinx.coroutines.tasks.await
 
 @ExperimentalCoroutinesApi
 object FirebaseWordOrderService {
-    fun getWordOrderDataSource(): Flow<List<WordLevel>> = callbackFlow {
+    fun getWordOrderDataSource(): Flow<Result<List<WordLevel>>> = callbackFlow {
+        trySend(Result.Loading)
         val listener = Firebase.firestore.collection("games/word-order/levelling")
             .addSnapshotListener { value, error ->
                 if (error != null) {
                     Firebase.crashlytics.apply {
                         log("Error when get the word order data")
                         recordException(error)
+                        trySend(Result.Error(error.message.toString()))
                     }
 
                     cancel(message = "Error when get the word order data", cause = error)
@@ -55,7 +57,7 @@ object FirebaseWordOrderService {
                     )
                 }
 
-                if (wordLevel != null) trySend(wordLevel)
+                if (wordLevel != null) trySend(Result.Success(wordLevel))
             }
 
         awaitClose {
