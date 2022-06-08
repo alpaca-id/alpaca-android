@@ -10,13 +10,15 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/paper_processing_animation" />
+        app:lottie_rawRes="@raw/ocr_processing_animation"
+        app:lottie_speed="1.5" />
 
     <TextView
         style="@style/Theme.Alpaca.Text.Headline.Small"

@@ -78,10 +78,11 @@
             app:layout_constraintTop_toBottomOf="@id/appbar_library">
 
             <ImageView
-                android:layout_width="172dp"
-                android:layout_height="wrap_content"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
                 android:contentDescription="@string/desc_not_found"
-                android:src="@drawable/ic_illustration_not_found" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/illustration_alpin_not_found" />
 
             <TextView
                 style="@style/Theme.Alpaca.Text.Headline.Small"
