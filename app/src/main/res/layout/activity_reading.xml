@@ -57,24 +57,10 @@
                             android:layout_height="200dp"
                             android:contentDescription="@string/content_description_item_book_cover"
                             android:scaleType="centerCrop"
-                            android:src="@color/yellow_500"
+                            android:src="@drawable/illustration_dummy_cover"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/tv_collection_item_title_cover"
-                            style="@style/Theme.Alpaca.Text.Headline.Small"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:ellipsize="end"
-                            android:maxLines="4"
-                            android:text="@string/dummy_collection_title"
-                            app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/iv_cover" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
