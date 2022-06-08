@@ -3,45 +3,46 @@ package com.bangkit.alpaca.ui.wordorder.level
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.bangkit.alpaca.data.WordOrderRepository
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.model.WordLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
-import kotlin.math.log
 
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class WordLevelViewModel @Inject constructor(private val wordOrderRepository: WordOrderRepository) :
     ViewModel() {
-    fun getGameDataSource(): LiveData<List<WordLevel>?> =
-        wordOrderRepository.getGameDataSource().asLiveData()
+    fun getWordLevelData(): LiveData<Result<List<WordLevel>>> = liveData {
+        wordOrderRepository.getGameDataSource().collect { result ->
+            when (result) {
+                is Result.Loading -> emit(Result.Loading)
+                is Result.Success -> {
+                    wordOrderRepository.getGameProgressDataSource().collect { progress ->
+                        result.data.forEach { wordLevel ->
+                            val wordProgress = progress[wordLevel.id]
 
+                            wordLevel.wordStages.forEach { wordStage ->
+                                wordStage.isComplete = wordProgress?.get(wordStage.id) ?: false
+                            }
 
-    fun getWordLevelData(): LiveData<List<WordLevel>> = liveData {
-        wordOrderRepository.getGameDataSource().collect { wordLevels ->
-            wordOrderRepository.getGameProgressDataSource().collect { progress ->
+                            if (wordLevel.wordStages.size == (wordProgress?.size ?: 0))
+                                wordLevel.isComplete = true
 
-                wordLevels.forEach { wordLevel ->
-                    val wordProgress = progress[wordLevel.id]
+                            Log.d(TAG, "getWordLevelData: $wordLevel")
+                            Log.d(TAG, "getWordLevelData: $progress")
 
-                    wordLevel.wordStages.forEach { wordStage ->
-                        wordStage.isComplete = wordProgress?.get(wordStage.id) ?: false
+                        }
+
+                        emit(result)
                     }
-
-                    if (wordLevel.wordStages.size == (wordProgress?.size ?: 0))
-                        wordLevel.isComplete = true
-
-                    Log.d(TAG, "getWordLevelData: $wordLevel")
-                    Log.d(TAG, "getWordLevelData: $progress")
-
                 }
-
-                emit(wordLevels)
+                is Result.Error -> emit(Result.Error(result.error))
             }
+
         }
     }
 
