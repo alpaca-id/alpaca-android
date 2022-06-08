@@ -39,6 +39,7 @@ class WordOrderLevelAdapter :
                     onItemClickCallback.onItemClicked(wordLevel, true)
                 }
             } else {
+                imgLocked.visibility = View.GONE
                 cardLevel.setOnClickListener {
                     onItemClickCallback.onItemClicked(wordLevel, false)
                 }

@@ -117,11 +117,6 @@ class WordStageFragment : Fragment() {
         val level = String.format("%04d", wordLevel.level)
         val stage = String.format("%04d", currentStage.stage)
         val isComplete = currentStage.stage == wordStage.last().stage
-
-        if (spLoaded) {
-            sp.play(soundId, 1f, 1f, 0, 0, 1f)
-        }
-
         val modalBottomSheetRightAnswer = BottomSheetRightAnswer()
 
         if (!currentStage.isComplete) {
@@ -139,6 +134,10 @@ class WordStageFragment : Fragment() {
                                     binding?.btnNextStage?.visibility = View.VISIBLE
                                 }
 
+                                if (spLoaded) {
+                                    sp.play(soundId, 1f, 1f, 0, 0, 1f)
+                                }
+
                                 modalBottomSheetRightAnswer.show(
                                     parentFragmentManager,
                                     BottomSheetRightAnswer::class.java.simpleName
@@ -152,6 +151,10 @@ class WordStageFragment : Fragment() {
                     }
                 }
         }else{
+            if (spLoaded) {
+                sp.play(soundId, 1f, 1f, 0, 0, 1f)
+            }
+
             modalBottomSheetRightAnswer.show(
                 parentFragmentManager,
                 BottomSheetRightAnswer::class.java.simpleName
