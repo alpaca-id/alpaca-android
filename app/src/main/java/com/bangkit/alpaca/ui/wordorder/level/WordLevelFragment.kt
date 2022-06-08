@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentWordLevelBinding
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.ui.adapter.WordOrderLevelAdapter
+import com.bangkit.alpaca.utils.LoadingDialog
+import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -54,18 +58,32 @@ class WordLevelFragment : Fragment() {
     }
 
     private fun setupLevel() {
-        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner) {
-            wordOrderLevelAdapter.submitList(it)
+        wordLevelViewModel.getWordLevelData().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
+                is Result.Success -> {
+                    LoadingDialog.hideLoading()
+                    wordOrderLevelAdapter.submitList(result.data)
+                }
+                is Result.Error -> {
+                    LoadingDialog.hideLoading()
+                    result.error.showToastMessage(requireContext())
+                }
+            }
         }
     }
 
     private fun setupAction() {
         wordOrderLevelAdapter.setonItemClickCallback(object :
             WordOrderLevelAdapter.OnItemClickCallback {
-            override fun onItemClicked(wordLevel: WordLevel) {
-                val toWordStage =
-                    WordLevelFragmentDirections.actionLevelFragmentToWordStageFragment(wordLevel)
-                binding?.root?.findNavController()?.navigate(toWordStage)
+            override fun onItemClicked(wordLevel: WordLevel, isLocked: Boolean) {
+                if (isLocked) {
+                    getString(R.string.level_locked).showToastMessage(requireContext())
+                } else {
+                    val toWordStage =
+                        WordLevelFragmentDirections.actionLevelFragmentToWordStageFragment(wordLevel)
+                    binding?.root?.findNavController()?.navigate(toWordStage)
+                }
             }
         })
     }

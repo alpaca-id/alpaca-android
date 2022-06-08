@@ -1,6 +1,7 @@
 package com.bangkit.alpaca.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.recyclerview.widget.DiffUtil
@@ -30,8 +31,19 @@ class WordOrderLevelAdapter :
     override fun onBindViewHolder(holder: ListViewAdapter, position: Int) {
         val wordLevel = getItem(position)
         holder.bind(wordLevel)
-        holder.binding.cardLevel.setOnClickListener {
-            onItemClickCallback.onItemClicked(wordLevel)
+
+        holder.binding.apply {
+            if (position > 0 && !getItem(position - 1).isComplete) {
+                imgLocked.visibility = View.VISIBLE
+                cardLevel.setOnClickListener {
+                    onItemClickCallback.onItemClicked(wordLevel, true)
+                }
+            } else {
+                imgLocked.visibility = View.GONE
+                cardLevel.setOnClickListener {
+                    onItemClickCallback.onItemClicked(wordLevel, false)
+                }
+            }
         }
     }
 
@@ -61,6 +73,6 @@ class WordOrderLevelAdapter :
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(wordLevel: WordLevel)
+        fun onItemClicked(wordLevel: WordLevel, isLocked: Boolean)
     }
 }
