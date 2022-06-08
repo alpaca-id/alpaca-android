@@ -114,6 +114,5 @@ object FirebaseWordOrderService {
             }
         }
 
-    private const val TAG = "FirebaseWordOrderService"
 }
 
