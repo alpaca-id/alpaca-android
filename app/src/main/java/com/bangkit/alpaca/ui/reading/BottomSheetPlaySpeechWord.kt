@@ -65,9 +65,6 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
     }
 
     private fun setupPlayAction() {
-
-        binding
-
         binding?.btnPlayWord?.setOnClickListener {
             readingViewModel.getTextToSpeech(mWord)
             binding?.btnPlayWord?.playAnimation()
@@ -93,7 +90,6 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
                 is Result.Error -> result.error.showToastMessage(requireContext())
             }
         }
-
     }
 
     private fun mediaPlayerPrepare(audioUrl: String) {
