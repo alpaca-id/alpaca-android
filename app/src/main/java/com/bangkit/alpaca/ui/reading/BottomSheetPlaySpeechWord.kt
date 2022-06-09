@@ -91,7 +91,6 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
                 is Result.Loading -> {}
                 is Result.Success -> mediaPlayerPrepare(result.data.audioUrl)
                 is Result.Error -> result.error.showToastMessage(requireContext())
-
             }
         }
 
