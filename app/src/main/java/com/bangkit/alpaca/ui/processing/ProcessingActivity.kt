@@ -5,20 +5,23 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.alpaca.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.File
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ProcessingActivity : AppCompatActivity() {
 
     private val processingViewModel: ProcessingViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_processing)
 
-        // Upload image to the database
-        val picture = intent.getSerializableExtra(EXTRA_IMAGE) as File
-        processingViewModel.uploadImage(picture)
+        // automatically process and predict the image
+        val imageFile = intent.getSerializableExtra(EXTRA_IMAGE) as File
+        processingViewModel.predictImage(this, imageFile)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -30,6 +33,7 @@ class ProcessingActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
+
 
     companion object {
         const val EXTRA_IMAGE = "extra_image"
