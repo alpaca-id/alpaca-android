@@ -130,7 +130,7 @@ class WordStageFragment : Fragment() {
 
                                 currentStage.isComplete = true
 
-                                if (!isComplete){
+                                if (!isComplete) {
                                     binding?.btnNextStage?.visibility = View.VISIBLE
                                 }
 
@@ -150,7 +150,7 @@ class WordStageFragment : Fragment() {
                         }
                     }
                 }
-        }else{
+        } else {
             if (spLoaded) {
                 sp.play(soundId, 1f, 1f, 0, 0, 1f)
             }

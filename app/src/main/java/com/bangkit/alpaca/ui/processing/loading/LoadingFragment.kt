@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentLoadingBinding
 import com.bangkit.alpaca.ui.processing.ProcessingViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class LoadingFragment : Fragment() {
 
     private var _binding: FragmentLoadingBinding? = null
@@ -31,8 +32,7 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         handleViewAction()
 
-        processingViewModel.uploadedImageUrl.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        processingViewModel.stringResultPredict.observe(viewLifecycleOwner) {
             findNavController().navigate(R.id.action_loadingFragment_to_confirmationFragment)
         }
     }
@@ -43,7 +43,6 @@ class LoadingFragment : Fragment() {
     private fun handleViewAction() {
         binding?.apply {
             btnCancel.setOnClickListener {
-                // FIXME: Cancel scanning job, and navigate back to the camera
                 requireActivity().finish()
             }
         }
