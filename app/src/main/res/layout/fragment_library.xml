@@ -53,18 +53,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_new_collection"
             tools:listitem="@layout/card_library_item" />
 
-        <TextView
-            android:id="@+id/tv_search_result"
-            style="@style/Theme.Alpaca.Text.Label.Large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/search_result"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbar_library" />
-
         <LinearLayout
             android:id="@+id/container_search_not_found"
             android:layout_width="match_parent"

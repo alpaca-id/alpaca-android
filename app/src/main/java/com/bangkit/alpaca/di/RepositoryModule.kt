@@ -4,6 +4,9 @@ import com.bangkit.alpaca.data.AuthRepository
 import com.bangkit.alpaca.data.StoryRepository
 import com.bangkit.alpaca.data.UserRepository
 import com.bangkit.alpaca.data.WordOrderRepository
+import com.bangkit.alpaca.data.local.room.StoryDao
+import com.bangkit.alpaca.data.remote.TextToSpeechRepository
+import com.bangkit.alpaca.data.remote.retrofit.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +21,8 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideStoryRepository(): StoryRepository = StoryRepository()
+    fun provideStoryRepository(storyDao: StoryDao, apiService: ApiService): StoryRepository =
+        StoryRepository(storyDao, apiService)
 
     @Provides
     @Singleton
@@ -31,4 +35,9 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideWordOrderRepository(): WordOrderRepository = WordOrderRepository()
+
+    @Provides
+    @Singleton
+    fun provideTextToSpeechRepository(apiService: ApiService): TextToSpeechRepository =
+        TextToSpeechRepository(apiService)
 }

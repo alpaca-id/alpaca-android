@@ -12,9 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.FragmentLibraryBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.adapter.LibraryListAdapter
+import com.bangkit.alpaca.utils.LoadingDialog
+import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -57,11 +60,22 @@ class LibraryFragment : Fragment() {
     }
 
     private fun setupStories() {
-        libraryViewModel.storiesLibrary.observe(viewLifecycleOwner) {
-            libraryListAdapter.submitList(it)
-            binding?.rvStoryLibrary?.apply {
-                adapter = libraryListAdapter
-                layoutManager = LinearLayoutManager(requireContext())
+        libraryViewModel.storiesLibrary.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> LoadingDialog.displayLoading(requireContext(), false)
+                is Result.Success -> {
+                    LoadingDialog.hideLoading()
+                    val stories = result.data
+                    libraryListAdapter.submitList(stories)
+                    binding?.rvStoryLibrary?.apply {
+                        adapter = libraryListAdapter
+                        layoutManager = LinearLayoutManager(requireContext())
+                    }
+                }
+                is Result.Error -> {
+                    LoadingDialog.hideLoading()
+                    result.error.showToastMessage(requireContext())
+                }
             }
         }
     }
@@ -76,14 +90,39 @@ class LibraryFragment : Fragment() {
             queryHint = "Cari cerita"
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    if (query != null) {
-                        searchNotFound(query)
-                    }
-                    clearFocus()
+                    searchView.clearFocus()
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null) {
+                        libraryViewModel.findBook(newText).observe(viewLifecycleOwner) { result ->
+                            when (result) {
+                                is Result.Loading -> LoadingDialog.displayLoading(
+                                    requireContext(),
+                                    false
+                                )
+                                is Result.Success -> {
+                                    LoadingDialog.hideLoading()
+                                    val stories = result.data
+                                    if (stories.isNotEmpty()) {
+                                        searchResult(isNotFound = false)
+                                        libraryListAdapter.submitList(stories)
+                                        binding?.rvStoryLibrary?.apply {
+                                            adapter = libraryListAdapter
+                                            layoutManager = LinearLayoutManager(requireContext())
+                                        }
+                                    } else {
+                                        searchResult(newText, isNotFound = true)
+                                    }
+                                }
+                                is Result.Error -> {
+                                    LoadingDialog.hideLoading()
+                                    result.error.showToastMessage(requireContext())
+                                }
+                            }
+                        }
+                    }
                     return false
                 }
 
@@ -91,15 +130,18 @@ class LibraryFragment : Fragment() {
         }
     }
 
-    private fun searchNotFound(query: String) {
-        binding?.apply {
-            tvSearchResult.visibility = View.VISIBLE
-            containerSearchNotFound.visibility = View.VISIBLE
-            tvNewCollection.visibility = View.GONE
-            rvStoryLibrary.visibility = View.GONE
-
-            tvSearchResult.text = getString(R.string.search_result, 0)
-            tvSearchNotFound.text = getString(R.string.result_not_found2, query)
+    private fun searchResult(query: String = "", isNotFound: Boolean) {
+        if (isNotFound) {
+            binding?.apply {
+                containerSearchNotFound.visibility = View.VISIBLE
+                rvStoryLibrary.visibility = View.GONE
+                tvSearchNotFound.text = getString(R.string.result_not_found2, query)
+            }
+        } else {
+            binding?.apply {
+                containerSearchNotFound.visibility = View.GONE
+                rvStoryLibrary.visibility = View.VISIBLE
+            }
         }
     }
 

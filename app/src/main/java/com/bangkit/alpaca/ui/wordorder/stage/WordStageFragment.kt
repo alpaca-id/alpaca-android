@@ -63,6 +63,7 @@ class WordStageFragment : Fragment() {
         setupAction()
         initMediaPlayer()
         initSoundAnswer()
+        resultAudio()
     }
 
     private fun setupToolbar() {
@@ -130,7 +131,7 @@ class WordStageFragment : Fragment() {
 
                                 currentStage.isComplete = true
 
-                                if (!isComplete){
+                                if (!isComplete) {
                                     binding?.btnNextStage?.visibility = View.VISIBLE
                                 }
 
@@ -150,7 +151,7 @@ class WordStageFragment : Fragment() {
                         }
                     }
                 }
-        }else{
+        } else {
             if (spLoaded) {
                 sp.play(soundId, 1f, 1f, 0, 0, 1f)
             }
@@ -181,8 +182,8 @@ class WordStageFragment : Fragment() {
 
     private fun playWord() {
         binding?.btnPlayWordStage?.setOnClickListener {
-            "preparing...".showToastMessage(requireContext())
-            mediaPlayerPrepare()
+            binding?.btnPlayWordStage?.playAnimation()
+            wordStageViewModel.getTextToSpeech(currentStage.word)
         }
     }
 
@@ -250,17 +251,31 @@ class WordStageFragment : Fragment() {
         }
     }
 
-    private fun mediaPlayerPrepare() {
-        val lang = "id"
-        val audioUrl =
-            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${this.currentStage.word}"
+    private fun resultAudio() {
+        wordStageViewModel.audio.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {}
+                is Result.Success -> mediaPlayerPrepare(result.data.audioUrl)
+                is Result.Error -> result.error.showToastMessage(requireContext())
+            }
+        }
+    }
 
+
+    private fun mediaPlayerPrepare(audioUrl: String) {
         try {
-            mediaPlayer?.reset()
-            mediaPlayer?.setDataSource(audioUrl)
-            mediaPlayer?.prepareAsync()
-            mediaPlayer?.setOnPreparedListener {
-                mediaPlayer?.start()
+            mediaPlayer?.apply {
+                reset()
+                setDataSource(audioUrl)
+                prepareAsync()
+                setOnPreparedListener {
+                    start()
+                }
+                setOnCompletionListener {
+                    stop()
+                    binding?.btnPlayWordStage?.progress = 0f
+                    binding?.btnPlayWordStage?.pauseAnimation()
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
