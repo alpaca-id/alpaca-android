@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/img_item_cover_story"
             android:layout_width="120dp"
-            android:layout_height="160dp"
+            android:layout_height="170dp"
             android:contentDescription="@string/desc_story_cover"
             android:scaleType="centerCrop"
             android:src="?colorPrimary"
@@ -50,7 +50,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:lineSpacingExtra="4dp"
-            android:maxLines="4"
+            android:maxLines="3"
             android:text="@string/dummy_story_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_item_cover_story"

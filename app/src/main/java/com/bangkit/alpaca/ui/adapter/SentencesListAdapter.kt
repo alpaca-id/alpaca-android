@@ -2,7 +2,6 @@ package com.bangkit.alpaca.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -54,13 +53,13 @@ class SentencesListAdapter :
             sentence.isPlaying = !sentence.isPlaying
             notifyItemChanged(position)
 
-            onItemClickCallback.onItemClicked(sentence.text, holder.binding.btnPlaySentence)
+            onItemClickCallback.onItemClicked(sentence, position)
             lastIndex = holder.adapterPosition
         }
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(sentence: String, btn: ImageButton)
+        fun onItemClicked(sentence: Sentence, position: Int)
     }
 
     companion object {

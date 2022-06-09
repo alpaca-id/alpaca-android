@@ -6,19 +6,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.ModalBottomSheetPlayAllBinding
 import com.bangkit.alpaca.model.Sentence
 import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
+@AndroidEntryPoint
 class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
 
     private var _binding: ModalBottomSheetPlayAllBinding? = null
     private val binding get() = _binding
+    private val readingViewModel: ReadingViewModel by viewModels()
     private val sentencesListAdapter by lazy { SentencesListAdapter() }
     private var mediaPlayer: MediaPlayer? = null
     private var isReady = false
@@ -39,23 +43,30 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
         setupAction()
         setupListSentence()
         initMediaPlayer()
+        resultAudio()
     }
 
     private fun setupAction() {
         sentencesListAdapter.setOnItemClickCallback(object :
             SentencesListAdapter.OnItemClickCallback {
-            override fun onItemClicked(sentence: String, btn: ImageButton) {
-                if (!isReady || mSentence != sentence) {
-                    "preparing...".showToastMessage(requireContext())
-                    mediaPlayerPrepare(sentence)
+            override fun onItemClicked(sentence: Sentence, position:Int) {
+                if (!isReady || mSentence != sentence.text) {
+                    if (mediaPlayer?.isPlaying as Boolean) {
+                        mediaPlayer?.stop()
+                    }
+                    mSentence = sentence.text
+                    readingViewModel.getTextToSpeech(sentence.text)
                 } else {
                     if (mediaPlayer?.isPlaying as Boolean) {
-                        "pause...".showToastMessage(requireContext())
                         mediaPlayer?.pause()
                     } else {
-                        "playing...".showToastMessage(requireContext())
                         mediaPlayer?.start()
                     }
+                }
+
+                mediaPlayer?.setOnCompletionListener {
+                    sentence.isPlaying = false
+                    sentencesListAdapter.notifyItemChanged(position)
                 }
             }
         })
@@ -67,9 +78,7 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
         bundle?.forEach { string ->
             sentences.add(Sentence(string, false))
         }
-
         sentencesListAdapter.submitList(sentences)
-
         binding?.rvSentence?.apply {
             adapter = sentencesListAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -86,19 +95,26 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
         mediaPlayer?.setOnErrorListener { _, _, _ -> false }
     }
 
-    private fun mediaPlayerPrepare(sentence: String) {
-        val lang = "id"
-        val audioUrl =
-            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${sentence}"
+    private fun resultAudio() {
+        readingViewModel.audio.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {}
+                is Result.Success -> mediaPlayerPrepare(result.data.audioUrl)
+                is Result.Error -> result.error.showToastMessage(requireContext())
+            }
+        }
+    }
 
+    private fun mediaPlayerPrepare(audioUrl: String) {
         try {
-            mediaPlayer?.reset()
-            mediaPlayer?.setDataSource(audioUrl)
-            mediaPlayer?.prepareAsync()
-            mediaPlayer?.setOnPreparedListener {
-                isReady = true
-                mSentence = sentence
-                mediaPlayer?.start()
+            mediaPlayer?.apply {
+                reset()
+                setDataSource(audioUrl)
+                prepareAsync()
+                setOnPreparedListener {
+                    isReady = true
+                    start()
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
