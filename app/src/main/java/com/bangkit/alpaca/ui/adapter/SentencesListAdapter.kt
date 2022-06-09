@@ -74,6 +74,5 @@ class SentencesListAdapter :
                 }
 
             }
-        private const val TAG = "SentencesListAdapter"
     }
 }

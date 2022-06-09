@@ -133,12 +133,9 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
             Glide.with(binding.root)
                 .load(story.coverPath)
                 .into(binding.ivCover)
-
-            binding.tvCollectionItemTitleCover.visibility = View.GONE
         }
         binding.toolbarReading.title = story?.title
         binding.tvTitle.text = story?.title
-        binding.tvCollectionItemTitleCover.text = story?.title
         binding.tvBodyReading.text = story?.body
 
 

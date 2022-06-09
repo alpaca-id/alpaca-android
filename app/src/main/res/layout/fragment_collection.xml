@@ -20,16 +20,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="172dp"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="220dp"
             android:contentDescription="@string/content_description_illustration_no_collection"
-            android:src="@drawable/ic_illustration_not_found" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/illustration_alpin_not_found" />
 
         <TextView
             style="@style/Theme.Alpaca.Text.Headline.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/info_no_collection_message_headline" />
 
         <TextView

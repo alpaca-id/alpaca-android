@@ -9,7 +9,7 @@
         android:id="@+id/wordLevelFragment"
         android:name="com.bangkit.alpaca.ui.wordorder.level.WordLevelFragment"
         android:label="fragment_level"
-        tools:layout="@layout/fragment_word_level" >
+        tools:layout="@layout/fragment_word_level">
         <action
             android:id="@+id/action_levelFragment_to_wordStageFragment"
             app:destination="@id/wordStageFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/wordStageFragment"
         android:name="com.bangkit.alpaca.ui.wordorder.stage.WordStageFragment"
         android:label="fragment_word_stage"
-        tools:layout="@layout/fragment_word_stage" >
+        tools:layout="@layout/fragment_word_stage">
         <argument
             android:name="wordLevel"
             app:argType="com.bangkit.alpaca.model.WordLevel" />

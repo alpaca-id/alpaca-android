@@ -9,4 +9,4 @@ data class WordStage(
     val stage: Int,
     val word: String,
     var isComplete: Boolean
-):Parcelable
+) : Parcelable

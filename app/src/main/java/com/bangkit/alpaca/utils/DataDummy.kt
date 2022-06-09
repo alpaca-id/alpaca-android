@@ -1,7 +1,6 @@
 package com.bangkit.alpaca.utils
 
 import com.bangkit.alpaca.model.Flashcard
-import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.model.WordStage
 

@@ -1,7 +1,6 @@
 package com.bangkit.alpaca.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -20,7 +19,6 @@ class CollectionListAdapter : ListAdapter<Story, CollectionListAdapter.ViewHolde
 
         fun bind(story: Story) {
             binding.tvCollectionItemTitle.text = story.title
-            binding.tvCollectionItemTitleCover.text = story.title
             binding.tvCollectionItemStatus.text =
                 story.authorName ?: story.createdAt.toFormattedString()
 
@@ -30,8 +28,6 @@ class CollectionListAdapter : ListAdapter<Story, CollectionListAdapter.ViewHolde
                     .load(story.coverPath)
                     .centerCrop()
                     .into(binding.ivCollectionItemCover)
-
-                binding.tvCollectionItemTitleCover.visibility = View.GONE
             }
         }
     }
