@@ -6,16 +6,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.databinding.ModalBottomSheetPlayWordBinding
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 
+@AndroidEntryPoint
 class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
 
     private var _binding: ModalBottomSheetPlayWordBinding? = null
     private val binding get() = _binding
+    private val readingViewModel: ReadingViewModel by viewModels()
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var mWord: String
 
@@ -34,6 +39,7 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
         setupWord()
         setupPlayAction()
         initMediaPlayer()
+        resultAudio()
     }
 
     private fun setupWord() {
@@ -59,9 +65,12 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
     }
 
     private fun setupPlayAction() {
+
+        binding
+
         binding?.btnPlayWord?.setOnClickListener {
-            "preparing...".showToastMessage(requireContext())
-            mediaPlayerPrepare()
+            readingViewModel.getTextToSpeech(mWord)
+            binding?.btnPlayWord?.playAnimation()
         }
     }
 
@@ -76,17 +85,32 @@ class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
         mediaPlayer?.setOnErrorListener { _, _, _ -> false }
     }
 
-    private fun mediaPlayerPrepare() {
-        val lang = "id"
-        val audioUrl =
-            "https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${this.mWord}"
+    private fun resultAudio() {
+        readingViewModel.audio.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {}
+                is Result.Success -> mediaPlayerPrepare(result.data.audioUrl)
+                is Result.Error -> result.error.showToastMessage(requireContext())
 
+            }
+        }
+
+    }
+
+    private fun mediaPlayerPrepare(audioUrl: String) {
         try {
-            mediaPlayer?.reset()
-            mediaPlayer?.setDataSource(audioUrl)
-            mediaPlayer?.prepareAsync()
-            mediaPlayer?.setOnPreparedListener {
-                mediaPlayer?.start()
+            mediaPlayer?.apply {
+                reset()
+                setDataSource(audioUrl)
+                prepareAsync()
+                setOnPreparedListener {
+                    start()
+                }
+                setOnCompletionListener {
+                    stop()
+                    binding?.btnPlayWord?.progress = 0f
+                    binding?.btnPlayWord?.pauseAnimation()
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
