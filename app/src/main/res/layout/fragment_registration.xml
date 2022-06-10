@@ -1,132 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:orientation="vertical"
     tools:context=".ui.auth.registration.RegistrationFragment">
 
-    <ImageView
-        android:id="@+id/img_logo2"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="64dp"
-        android:contentDescription="@string/desc_alpaca_logo"
-        android:src="@drawable/logo_alpaca"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_registration1"
-        style="@style/Theme.Alpaca.Text.Headline.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/welcome"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2"
-        app:layout_constraintTop_toBottomOf="@id/img_logo2" />
-
-    <TextView
-        android:id="@+id/tv_registration2"
-        style="@style/Theme.Alpaca.Text.Body.Medium.Auth"
-        android:layout_marginTop="4dp"
-        android:text="@string/create_to_access"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2"
-        app:layout_constraintTop_toBottomOf="@id/tv_registration1" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_name_registration"
-        style="@style/Theme.Alpaca.InputLayout.Auth"
-        android:layout_marginTop="32dp"
-        android:hint="@string/label_name"
-        app:errorIconDrawable="@null"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2"
-        app:layout_constraintTop_toBottomOf="@id/tv_registration2">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_name_registration"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email_registration"
-        style="@style/Theme.Alpaca.InputLayout.Auth"
-        android:layout_marginTop="16dp"
-        android:hint="@string/label_email"
-        app:errorIconDrawable="@null"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2"
-        app:layout_constraintTop_toBottomOf="@id/til_name_registration">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_email_registration"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_password_registration"
-        style="@style/Theme.Alpaca.InputLayout.Auth"
-        android:layout_marginTop="16dp"
-        android:hint="@string/label_password"
-        app:endIconMode="password_toggle"
-        app:errorIconDrawable="@null"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2"
-        app:layout_constraintTop_toBottomOf="@id/til_email_registration">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_password_registration"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_process_registration"
-        style="@style/Theme.Alpaca.Button.Auth"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:text="@string/label_registration"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2"
-        app:layout_constraintTop_toBottomOf="@+id/til_password_registration" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/liner_layout_registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="48dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/img_logo2"
-        app:layout_constraintStart_toStartOf="@+id/img_logo2">
+        <ImageView
+            android:id="@+id/img_logo2"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="64dp"
+            android:contentDescription="@string/desc_alpaca_logo"
+            android:src="@drawable/logo_alpaca"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            style="@style/Theme.Alpaca.Text.Body.Medium"
+            android:id="@+id/tv_registration1"
+            style="@style/Theme.Alpaca.Text.Headline.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:text="@string/account_ready" />
+            android:layout_marginTop="24dp"
+            android:text="@string/welcome"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@id/img_logo2" />
 
         <TextView
-            android:id="@+id/btn_to_login_from_registration"
-            style="@style/Theme.Alpaca.Text.Body.Medium.Button"
-            android:text="@string/label_login"
-            android:textColor="#827717" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/tv_registration2"
+            style="@style/Theme.Alpaca.Text.Body.Medium.Auth"
+            android:layout_marginTop="4dp"
+            android:text="@string/create_to_access"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@id/tv_registration1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_name_registration"
+            style="@style/Theme.Alpaca.InputLayout.Auth"
+            android:layout_marginTop="32dp"
+            android:hint="@string/label_name"
+            app:errorIconDrawable="@null"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@id/tv_registration2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_name_registration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_email_registration"
+            style="@style/Theme.Alpaca.InputLayout.Auth"
+            android:layout_marginTop="16dp"
+            android:hint="@string/label_email"
+            app:errorIconDrawable="@null"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@id/til_name_registration">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_email_registration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password_registration"
+            style="@style/Theme.Alpaca.InputLayout.Auth"
+            android:layout_marginTop="16dp"
+            android:hint="@string/label_password"
+            app:endIconMode="password_toggle"
+            app:errorIconDrawable="@null"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@id/til_email_registration">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password_registration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_process_registration"
+            style="@style/Theme.Alpaca.Button.Auth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/label_registration"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@+id/til_password_registration" />
+
+        <LinearLayout
+            android:id="@+id/liner_layout_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/img_logo2"
+            app:layout_constraintStart_toStartOf="@+id/img_logo2"
+            app:layout_constraintTop_toBottomOf="@+id/btn_process_registration">
+
+            <TextView
+                style="@style/Theme.Alpaca.Text.Body.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/account_ready" />
+
+            <TextView
+                android:id="@+id/btn_to_login_from_registration"
+                style="@style/Theme.Alpaca.Text.Body.Medium.Button"
+                android:text="@string/label_login"
+                android:textColor="#827717" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

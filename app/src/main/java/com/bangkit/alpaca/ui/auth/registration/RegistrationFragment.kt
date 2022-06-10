@@ -132,4 +132,9 @@ class RegistrationFragment : Fragment(), View.OnClickListener {
         super.onDestroy()
         _binding = null
     }
+
+    override fun onPause() {
+        super.onPause()
+        LoadingDialog.hideLoading()
+    }
 }
