@@ -57,6 +57,17 @@ class StoryRepository @Inject constructor(
         }
     }
 
+    /**
+     * Update a story in user's collection
+     *
+     * @param story Story
+     */
+    suspend fun updateStory(story: Story) {
+        FirebaseStoryService.getUserDocumentID().collect { documentId ->
+            FirebaseStoryService.updateStory(documentId, story)
+        }
+    }
+
     fun getAllFlashcardContent(): Flow<List<Flashcard>> = flow {
         emit(DataDummy.provideFlashcard())
     }

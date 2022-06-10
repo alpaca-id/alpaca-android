@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.alpaca.R
+import com.bangkit.alpaca.model.Story
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.File
@@ -19,9 +20,18 @@ class ProcessingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_processing)
 
-        // automatically process and predict the image
-        val imageFile = intent.getSerializableExtra(EXTRA_IMAGE) as File
-        processingViewModel.predictImage(this, imageFile)
+
+        if (intent.hasExtra(EXTRA_IMAGE)) {
+            // automatically process and predict the image
+            val imageFile = intent.getSerializableExtra(EXTRA_IMAGE) as File
+            processingViewModel.predictImage(this, imageFile)
+        } else if (intent.hasExtra(EXTRA_EDIT_STORY)) {
+            val story = intent.getParcelableExtra<Story>(EXTRA_EDIT_STORY)
+
+            if (story != null) {
+                processingViewModel.setStoryToEdit(story)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -37,5 +47,6 @@ class ProcessingActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_IMAGE = "extra_image"
+        const val EXTRA_EDIT_STORY = "extra_edit_story"
     }
 }

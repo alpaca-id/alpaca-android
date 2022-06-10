@@ -28,8 +28,11 @@ import javax.inject.Inject
 class ProcessingViewModel @Inject constructor(private val storyRepository: StoryRepository) :
     ViewModel() {
 
-    private var _stringResultPredict = MutableLiveData<String>()
-    val stringResultPredict: LiveData<String> get() = _stringResultPredict
+    private var _stringResultPredict = MutableLiveData<String?>(null)
+    val stringResultPredict: LiveData<String?> get() = _stringResultPredict
+
+    private var _storyToEdit = MutableLiveData<Story?>(null)
+    val storyToEdit: LiveData<Story?> get() = _storyToEdit
 
     fun predictImage(context: Context, imageFile: File) {
         viewModelScope.launch {
@@ -77,6 +80,10 @@ class ProcessingViewModel @Inject constructor(private val storyRepository: Story
         }
     }
 
+    fun setStoryToEdit(story: Story) {
+        _storyToEdit.value = story
+    }
+
     private fun loadModelFile(context: Context, path: String): MappedByteBuffer {
         val fileDescriptor = context.assets.openFd(path)
 
@@ -97,6 +104,12 @@ class ProcessingViewModel @Inject constructor(private val storyRepository: Story
     fun saveNewStory(story: Story) {
         viewModelScope.launch {
             storyRepository.saveNewStory(story)
+        }
+    }
+
+    fun updateStory(story: Story) {
+        viewModelScope.launch {
+            storyRepository.updateStory(story)
         }
     }
 }

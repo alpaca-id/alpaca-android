@@ -18,6 +18,8 @@ import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityReadingBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.customization.CustomizationActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity.Companion.EXTRA_EDIT_STORY
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -58,7 +60,9 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
         }
 
         val deleteMenu = menu?.findItem(R.id.reading_delete_story)
+        val editStoryMenu = menu?.findItem(R.id.reading_edit_story)
         deleteMenu?.isVisible = story?.fromFirebase ?: false
+        editStoryMenu?.isVisible = story?.fromFirebase ?: false
 
         setupCustomization()
         return true
@@ -231,6 +235,25 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
 
                 true
             }
+
+            R.id.reading_edit_story -> {
+
+                val story: Story? = try {
+                    arg.story
+                } catch (e: Exception) {
+                    intent.getParcelableExtra(EXTRA_STORY)
+                }
+
+                if (story != null) {
+                    Intent(this, ProcessingActivity::class.java).also { intent ->
+                        intent.putExtra(EXTRA_EDIT_STORY, story)
+                        startActivity(intent)
+                    }
+                }
+
+                true
+            }
+
             else -> false
         }
     }

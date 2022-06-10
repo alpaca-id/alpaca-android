@@ -38,6 +38,27 @@ object FirebaseStoryService {
     }
 
     /**
+     * Update a story to user's collection
+     *
+     * @param userId UserID
+     * @param story Story
+     */
+    fun updateStory(userId: String?, story: Story) {
+        try {
+            story.id?.let {
+                Firebase.firestore.collection("users/$userId/stories-scan")
+                    .document(it)
+                    .set(story)
+            }
+        } catch (e: Exception) {
+            Firebase.crashlytics.apply {
+                log("Error when updating a story")
+                recordException(e)
+            }
+        }
+    }
+
+    /**
      * Save new story to the database
      *
      * @param userId UserID
