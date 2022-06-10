@@ -1,4 +1,4 @@
-package com.bangkit.alpaca.data.remote
+package com.bangkit.alpaca.data.remote.firebase
 
 import android.util.Log
 import com.bangkit.alpaca.model.Story

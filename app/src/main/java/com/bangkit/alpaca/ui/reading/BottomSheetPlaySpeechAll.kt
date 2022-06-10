@@ -49,7 +49,7 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     private fun setupAction() {
         sentencesListAdapter.setOnItemClickCallback(object :
             SentencesListAdapter.OnItemClickCallback {
-            override fun onItemClicked(sentence: Sentence, position:Int) {
+            override fun onItemClicked(sentence: Sentence, position: Int) {
                 if (!isReady || mSentence != sentence.text) {
                     if (mediaPlayer?.isPlaying as Boolean) {
                         mediaPlayer?.stop()

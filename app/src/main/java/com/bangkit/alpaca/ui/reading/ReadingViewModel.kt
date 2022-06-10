@@ -3,7 +3,7 @@ package com.bangkit.alpaca.ui.reading
 import androidx.lifecycle.*
 import com.bangkit.alpaca.data.TextStyleRepository
 import com.bangkit.alpaca.data.remote.Result
-import com.bangkit.alpaca.data.remote.TextToSpeechRepository
+import com.bangkit.alpaca.data.TextToSpeechRepository
 import com.bangkit.alpaca.model.Audio
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

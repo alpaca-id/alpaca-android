@@ -2,7 +2,7 @@ package com.bangkit.alpaca.data
 
 import com.bangkit.alpaca.data.local.entity.StoryEntity.Companion.toStory
 import com.bangkit.alpaca.data.local.room.StoryDao
-import com.bangkit.alpaca.data.remote.FirebaseStoryService
+import com.bangkit.alpaca.data.remote.firebase.FirebaseStoryService
 import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.data.remote.retrofit.ApiService
 import com.bangkit.alpaca.model.Flashcard
