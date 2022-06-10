@@ -78,7 +78,8 @@ class ConfirmationFragment : Fragment() {
                 body = content,
                 coverPath = null,
                 authorName = null,
-                createdAt = Calendar.getInstance().timeInMillis
+                createdAt = Calendar.getInstance().timeInMillis,
+                true
             )
 
             processingViewModel.saveNewStory(story)

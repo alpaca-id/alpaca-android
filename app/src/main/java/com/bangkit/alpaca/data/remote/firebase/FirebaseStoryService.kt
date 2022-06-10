@@ -18,8 +18,29 @@ object FirebaseStoryService {
     private const val TAG = "FirebaseStoryService"
 
     /**
+     * Delete a story from user's collection
+     *
+     * @param userId UserID
+     * @param story Story
+     */
+    fun deleteStory(userId: String?, story: Story) {
+        try {
+            story.id?.let {
+                Firebase.firestore.collection("users/$userId/stories-scan").document(it)
+                    .delete()
+            }
+        } catch (e: Exception) {
+            Firebase.crashlytics.apply {
+                log("Error when deleting a story")
+                recordException(e)
+            }
+        }
+    }
+
+    /**
      * Save new story to the database
      *
+     * @param userId UserID
      * @param story Story
      */
     fun saveNewStory(userId: String?, story: Story) {

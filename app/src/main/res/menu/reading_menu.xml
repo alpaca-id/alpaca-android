@@ -4,6 +4,11 @@
     <item
         android:id="@+id/reading_customization_text"
         android:title="@string/text_customisation" />
+
+    <item
+        android:id="@+id/reading_delete_story"
+        android:title="@string/hapus_cerita" />
+
     <item
         android:id="@+id/reading_speech_play_all"
         android:icon="@drawable/ic_play_all_black"

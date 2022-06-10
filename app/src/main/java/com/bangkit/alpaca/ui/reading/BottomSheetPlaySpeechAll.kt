@@ -15,8 +15,10 @@ import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.IOException
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
 

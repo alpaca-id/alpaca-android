@@ -1,7 +1,7 @@
 package com.bangkit.alpaca.data
 
-import com.bangkit.alpaca.data.remote.firebase.FirebaseWordOrderService
 import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.data.remote.firebase.FirebaseWordOrderService
 import com.bangkit.alpaca.model.WordLevel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow

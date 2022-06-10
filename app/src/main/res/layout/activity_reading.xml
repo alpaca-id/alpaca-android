@@ -86,8 +86,6 @@
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/reading_menu"
-                app:navigationIcon="@drawable/ic_back_button"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="@string/dummy_title_story" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
