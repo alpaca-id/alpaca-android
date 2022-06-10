@@ -180,4 +180,5 @@
     <string name="delete_story_message">Cerita ini akan dihapus dan tidak dapat dikembalikan kembali.</string>
     <string name="delete_story_title">Yakin untuk menghapus?</string>
     <string name="edit_cerita">Edit Cerita</string>
+    <string name="counter_flashcard">%d/%d</string>
 </resources>
