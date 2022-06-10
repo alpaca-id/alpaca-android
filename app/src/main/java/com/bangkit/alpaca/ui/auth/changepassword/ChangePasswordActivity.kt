@@ -105,4 +105,9 @@ class ChangePasswordActivity : AppCompatActivity() {
             onBackPressed()
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        LoadingDialog.hideLoading()
+    }
 }

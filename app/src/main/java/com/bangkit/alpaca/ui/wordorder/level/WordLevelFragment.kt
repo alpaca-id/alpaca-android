@@ -92,4 +92,9 @@ class WordLevelFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
+    override fun onPause() {
+        super.onPause()
+        LoadingDialog.hideLoading()
+    }
 }

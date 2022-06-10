@@ -149,4 +149,9 @@ class LibraryFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onPause() {
+        super.onPause()
+        LoadingDialog.hideLoading()
+    }
 }

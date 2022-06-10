@@ -146,4 +146,9 @@ class ProfileActivity : AppCompatActivity() {
         return !binding.tilNameProfile.isErrorEnabled &&
                 !binding.tilEmailProfile.isErrorEnabled
     }
+
+    override fun onPause() {
+        super.onPause()
+        LoadingDialog.hideLoading()
+    }
 }
