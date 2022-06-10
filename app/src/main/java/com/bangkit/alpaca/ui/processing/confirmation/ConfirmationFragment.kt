@@ -72,23 +72,40 @@ class ConfirmationFragment : Fragment() {
             val title = binding.etTitle.text.toString()
             val content = binding.etContent.text.toString()
 
-            val story = Story(
-                id = null,
-                title = title,
-                body = content,
-                coverPath = null,
-                authorName = null,
-                createdAt = Calendar.getInstance().timeInMillis,
-                true
-            )
+            if (validateForm(title, content)) {
+                val story = Story(
+                    id = null,
+                    title = title.trim(),
+                    body = content.trim(),
+                    coverPath = null,
+                    authorName = null,
+                    createdAt = Calendar.getInstance().timeInMillis,
+                    true
+                )
 
-            processingViewModel.saveNewStory(story)
+                processingViewModel.saveNewStory(story)
 
-            Intent(requireContext(), MainActivity::class.java).also { intent ->
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                Intent(requireContext(), MainActivity::class.java).also { intent ->
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
             }
         }
+    }
+
+    private fun validateForm(title: String, content: String): Boolean {
+        var valid = true
+        if (title.trim() == "") {
+            binding.etTitle.error = "Field ini harus diisi"
+            valid = false
+        }
+
+        if (content.trim() == "") {
+            binding.etContent.error = "Field ini harus diisi"
+            valid = false
+        }
+
+        return valid
     }
 
     override fun onDestroyView() {
