@@ -13,8 +13,10 @@ import com.bangkit.alpaca.databinding.ModalBottomSheetPlayWordBinding
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.IOException
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class BottomSheetPlaySpeechWord : BottomSheetDialogFragment() {
 

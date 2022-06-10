@@ -1,7 +1,7 @@
 package com.bangkit.alpaca.data
 
-import com.bangkit.alpaca.data.remote.FirebaseUserService
 import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.data.remote.firebase.FirebaseUserService
 import com.bangkit.alpaca.model.User
 import kotlinx.coroutines.flow.Flow
 

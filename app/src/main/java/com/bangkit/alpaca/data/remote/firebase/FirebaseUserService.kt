@@ -1,5 +1,6 @@
-package com.bangkit.alpaca.data.remote
+package com.bangkit.alpaca.data.remote.firebase
 
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.model.User
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth

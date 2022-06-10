@@ -16,7 +16,8 @@ data class Story(
     val body: String,
     val coverPath: String?,
     val authorName: String?,
-    val createdAt: Long
+    val createdAt: Long,
+    val fromFirebase: Boolean
 ) : Parcelable {
     companion object {
         fun DocumentSnapshot.toStory(): Story? {
@@ -28,7 +29,7 @@ data class Story(
                 val coverPath = getString("coverPath")
                 val createdAt = getLong("createdAt") ?: Calendar.getInstance().timeInMillis
 
-                Story(id, title, body, coverPath, authorName, createdAt)
+                Story(id, title, body, coverPath, authorName, createdAt, true)
             } catch (e: Exception) {
                 Firebase.crashlytics.apply {
                     log("Error converting DocumentSnapshot to Story")
@@ -48,7 +49,8 @@ data class Story(
                 body = body,
                 coverPath = coverPath,
                 authorName = authorName,
-                createdAt = createdAt.toLong()
+                createdAt = createdAt.toLong(),
+                fromFirebase = false
             )
         }
 

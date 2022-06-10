@@ -1,12 +1,15 @@
 package com.bangkit.alpaca.ui.reading
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
+import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -15,9 +18,13 @@ import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.ActivityReadingBinding
 import com.bangkit.alpaca.model.Story
 import com.bangkit.alpaca.ui.customization.CustomizationActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity
+import com.bangkit.alpaca.ui.processing.ProcessingActivity.Companion.EXTRA_EDIT_STORY
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, View.OnTouchListener {
 
@@ -33,7 +40,32 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
         setupToolbar()
         setupStory()
         setupAction()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.reading_menu, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val story: Story? = try {
+            arg.story
+        } catch (e: Exception) {
+            intent.getParcelableExtra(EXTRA_STORY)
+        }
+
+        val deleteMenu = menu?.findItem(R.id.reading_delete_story)
+        val editStoryMenu = menu?.findItem(R.id.reading_edit_story)
+        deleteMenu?.isVisible = story?.fromFirebase ?: false
+        editStoryMenu?.isVisible = story?.fromFirebase ?: false
+
         setupCustomization()
+        return true
     }
 
     private fun setupCustomization() {
@@ -62,7 +94,8 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
                         with(toolbarReading) {
                             setNavigationIconTint(getColor(R.color.white))
                             setTitleTextColor(getColor(R.color.white))
-                            menu.getItem(1).setIcon(R.drawable.ic_play_all_white)
+                            menu.findItem(R.id.reading_speech_play_all)
+                                .setIcon(R.drawable.ic_play_all_white)
                             overflowIcon =
                                 ContextCompat.getDrawable(baseContext, R.drawable.ic_option_white)
                         }
@@ -80,7 +113,8 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
                         with(toolbarReading) {
                             toolbarReading.setNavigationIconTint(getColor(R.color.black))
                             setTitleTextColor(getColor(R.color.black))
-                            menu.getItem(1).setIcon(R.drawable.ic_play_all_black)
+                            menu.findItem(R.id.reading_speech_play_all)
+                                .setIcon(R.drawable.ic_play_all_black)
                             overflowIcon =
                                 ContextCompat.getDrawable(baseContext, R.drawable.ic_option_black)
                         }
@@ -117,9 +151,9 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
     }
 
     private fun setupToolbar() {
-        binding.toolbarReading.setNavigationOnClickListener {
-            onBackPressed()
-        }
+        setSupportActionBar(binding.toolbarReading)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupStory() {
@@ -137,8 +171,6 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
         binding.toolbarReading.title = story?.title
         binding.tvTitle.text = story?.title
         binding.tvBodyReading.text = story?.body
-
-
     }
 
     private fun setupAction() {
@@ -177,6 +209,51 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
                 startActivity(customizationIntent)
                 true
             }
+
+            R.id.reading_delete_story -> {
+                val builder = AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.delete_story_title))
+                    .setMessage(getString(R.string.delete_story_message))
+                    .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                        val story: Story? = try {
+                            arg.story
+                        } catch (e: Exception) {
+                            intent.getParcelableExtra(EXTRA_STORY)
+                        }
+
+                        if (story != null) {
+                            readingViewModel.deleteStory(story)
+                        }
+
+                        finish()
+                    }
+                    .setNegativeButton(getString(R.string.label_cancel)) { _, _ -> }
+                    .show()
+
+                builder.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                builder.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+
+                true
+            }
+
+            R.id.reading_edit_story -> {
+
+                val story: Story? = try {
+                    arg.story
+                } catch (e: Exception) {
+                    intent.getParcelableExtra(EXTRA_STORY)
+                }
+
+                if (story != null) {
+                    Intent(this, ProcessingActivity::class.java).also { intent ->
+                        intent.putExtra(EXTRA_EDIT_STORY, story)
+                        startActivity(intent)
+                    }
+                }
+
+                true
+            }
+
             else -> false
         }
     }

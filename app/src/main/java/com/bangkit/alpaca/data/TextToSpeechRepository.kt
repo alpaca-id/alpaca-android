@@ -1,5 +1,6 @@
-package com.bangkit.alpaca.data.remote
+package com.bangkit.alpaca.data
 
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.data.remote.retrofit.ApiService
 import com.bangkit.alpaca.model.Audio
 import kotlinx.coroutines.flow.Flow
