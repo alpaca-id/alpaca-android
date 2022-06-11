@@ -15,8 +15,10 @@ import com.bangkit.alpaca.ui.adapter.SentencesListAdapter
 import com.bangkit.alpaca.utils.showToastMessage
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.IOException
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
 
@@ -49,7 +51,7 @@ class BottomSheetPlaySpeechAll : BottomSheetDialogFragment() {
     private fun setupAction() {
         sentencesListAdapter.setOnItemClickCallback(object :
             SentencesListAdapter.OnItemClickCallback {
-            override fun onItemClicked(sentence: Sentence, position:Int) {
+            override fun onItemClicked(sentence: Sentence, position: Int) {
                 if (!isReady || mSentence != sentence.text) {
                     if (mediaPlayer?.isPlaying as Boolean) {
                         mediaPlayer?.stop()

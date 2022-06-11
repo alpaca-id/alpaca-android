@@ -2,8 +2,8 @@ package com.bangkit.alpaca.data
 
 import com.bangkit.alpaca.data.local.entity.StoryEntity.Companion.toStory
 import com.bangkit.alpaca.data.local.room.StoryDao
-import com.bangkit.alpaca.data.remote.FirebaseStoryService
 import com.bangkit.alpaca.data.remote.Result
+import com.bangkit.alpaca.data.remote.firebase.FirebaseStoryService
 import com.bangkit.alpaca.data.remote.retrofit.ApiService
 import com.bangkit.alpaca.model.Flashcard
 import com.bangkit.alpaca.model.Story
@@ -36,13 +36,35 @@ class StoryRepository @Inject constructor(
     }
 
     /**
-     * Save a new story to the database
+     * Save a new story to user's collection
      *
      * @param story Story
      */
     suspend fun saveNewStory(story: Story) {
         FirebaseStoryService.getUserDocumentID().collect { documentId ->
             FirebaseStoryService.saveNewStory(documentId, story)
+        }
+    }
+
+    /**
+     * Delete a story from user's collection
+     *
+     * @param story Story
+     */
+    suspend fun deleteStory(story: Story) {
+        FirebaseStoryService.getUserDocumentID().collect { documentId ->
+            FirebaseStoryService.deleteStory(documentId, story)
+        }
+    }
+
+    /**
+     * Update a story in user's collection
+     *
+     * @param story Story
+     */
+    suspend fun updateStory(story: Story) {
+        FirebaseStoryService.getUserDocumentID().collect { documentId ->
+            FirebaseStoryService.updateStory(documentId, story)
         }
     }
 

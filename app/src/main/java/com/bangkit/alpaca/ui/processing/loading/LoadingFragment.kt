@@ -33,7 +33,13 @@ class LoadingFragment : Fragment() {
         handleViewAction()
 
         processingViewModel.stringResultPredict.observe(viewLifecycleOwner) {
-            findNavController().navigate(R.id.action_loadingFragment_to_confirmationFragment)
+            if (it != null)
+                findNavController().navigate(R.id.action_loadingFragment_to_confirmationFragment)
+        }
+
+        processingViewModel.storyToEdit.observe(viewLifecycleOwner) {
+            if (it != null)
+                findNavController().navigate(R.id.action_loadingFragment_to_confirmationFragment)
         }
     }
 

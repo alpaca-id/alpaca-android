@@ -3,6 +3,7 @@ package com.bangkit.alpaca.ui.processing.confirmation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,9 @@ import java.util.*
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class ConfirmationFragment : Fragment() {
+
+
+    private var currentStory: Story? = null
 
     private var _binding: FragmentConfirmationBinding? = null
     private val binding get() = _binding!!
@@ -51,7 +55,17 @@ class ConfirmationFragment : Fragment() {
         handleViewAction()
 
         processingViewModel.stringResultPredict.observe(viewLifecycleOwner) { result ->
-            binding.etContent.setText(result)
+            Log.d("Confirmation", "onViewCreated: $result")
+            if (result != null) binding.etContent.setText(result)
+        }
+
+        processingViewModel.storyToEdit.observe(viewLifecycleOwner) { story ->
+            if (story != null) {
+                binding.etTitle.setText(story.title)
+                binding.etContent.setText(story.body)
+
+                currentStory = story
+            }
         }
     }
 
@@ -72,22 +86,59 @@ class ConfirmationFragment : Fragment() {
             val title = binding.etTitle.text.toString()
             val content = binding.etContent.text.toString()
 
-            val story = Story(
-                id = null,
-                title = title,
-                body = content,
-                coverPath = null,
-                authorName = null,
-                createdAt = Calendar.getInstance().timeInMillis
-            )
+            if (validateForm(title, content)) {
 
-            processingViewModel.saveNewStory(story)
+                if (currentStory != null) {
+                    try {
+                        val newStory = Story(
+                            id = currentStory!!.id,
+                            title = title,
+                            body = content,
+                            coverPath = currentStory!!.coverPath,
+                            authorName = currentStory!!.authorName,
+                            createdAt = currentStory!!.createdAt,
+                            fromFirebase = true
+                        )
 
-            Intent(requireContext(), MainActivity::class.java).also { intent ->
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+                        processingViewModel.updateStory(newStory)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                } else {
+                    val story = Story(
+                        id = null,
+                        title = title.trim(),
+                        body = content.trim(),
+                        coverPath = null,
+                        authorName = null,
+                        createdAt = Calendar.getInstance().timeInMillis,
+                        true
+                    )
+
+                    processingViewModel.saveNewStory(story)
+                }
+
+                Intent(requireContext(), MainActivity::class.java).also { intent ->
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
             }
         }
+    }
+
+    private fun validateForm(title: String, content: String): Boolean {
+        var valid = true
+        if (title.trim() == "") {
+            binding.etTitle.error = "Field ini harus diisi"
+            valid = false
+        }
+
+        if (content.trim() == "") {
+            binding.etContent.error = "Field ini harus diisi"
+            valid = false
+        }
+
+        return valid
     }
 
     override fun onDestroyView() {

@@ -1,6 +1,7 @@
-package com.bangkit.alpaca.data.remote
+package com.bangkit.alpaca.data.remote.firebase
 
 import android.util.Log
+import com.bangkit.alpaca.data.remote.Result
 import com.bangkit.alpaca.model.WordLevel
 import com.bangkit.alpaca.model.WordStage
 import com.google.firebase.auth.ktx.auth

@@ -20,7 +20,9 @@ import com.bangkit.alpaca.ui.processing.ProcessingActivity
 import com.bangkit.alpaca.ui.processing.ProcessingActivity.Companion.EXTRA_IMAGE
 import com.bangkit.alpaca.utils.MediaUtility.createFile
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class CameraActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityCameraBinding
