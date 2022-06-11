@@ -14,7 +14,6 @@ import com.bangkit.alpaca.R
 import com.bangkit.alpaca.databinding.FragmentSettingsBinding
 import com.bangkit.alpaca.ui.auth.AuthenticationActivity
 import com.bangkit.alpaca.ui.customization.CustomizationActivity
-import com.bangkit.alpaca.utils.showToastMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,7 +46,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             btnLogout.setOnClickListener(this@SettingsFragment)
             btnAboutApps.setOnClickListener(this@SettingsFragment)
             btnPrivacyTerms.setOnClickListener(this@SettingsFragment)
-            btnUserTerms.setOnClickListener(this@SettingsFragment)
             btnChangePassword.setOnClickListener(this@SettingsFragment)
             ivProfileIcon.setOnClickListener(this@SettingsFragment)
         }
@@ -71,7 +69,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
             R.id.btn_about_apps -> navigateToAboutApps()
             R.id.btn_privacy_terms -> navigateToPrivacyTerms()
-            R.id.btn_user_terms -> navigateToUserTerms()
         }
     }
 
@@ -91,10 +88,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         Intent(requireContext(), PrivacyStatementActivity::class.java).also { intent ->
             startActivity(intent)
         }
-    }
-
-    private fun navigateToUserTerms() {
-        getString(R.string.feature_not_ready).showToastMessage(requireContext())
     }
 
     private fun showLogoutAlert() {

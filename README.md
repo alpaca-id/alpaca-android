@@ -24,7 +24,11 @@ Alpaca help people with dyslexia to read a text from a paper using OCR to genera
 -
 
 ## Android
--
+- Create end-to-end application design, start from a wireframe until a high-fidelity prototype
+- Implement an Android-based application using Kotlin programming language
+- Implement MVVM Architecture into the application
+- Integrate with the Machine Learning model using TFLite library
+- Integrate with the backend services provided by Google Cloud Service using Retrofit and Firebase
 
 ## Deployment Link
 The deployment save in (link)

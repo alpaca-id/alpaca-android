@@ -6,12 +6,12 @@
         android:title="@string/text_customisation" />
 
     <item
-        android:id="@+id/reading_delete_story"
-        android:title="@string/hapus_cerita" />
-
-    <item
         android:id="@+id/reading_edit_story"
         android:title="@string/edit_cerita" />
+
+    <item
+        android:id="@+id/reading_delete_story"
+        android:title="@string/hapus_cerita" />
 
     <item
         android:id="@+id/reading_speech_play_all"
