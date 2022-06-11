@@ -236,6 +236,23 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
             startIndex = 0
         }
 
+        if (word[startIndex] == ' ') {
+            startIndex++
+        }
+
+        try {
+            var first = word[startIndex]
+            while (first == '.' || first == ',' ||
+                first == '?' || first == '!' ||
+                first == ':' || first == ';' ||
+                first == '"' || first == '\''
+            ) {
+                startIndex++
+                first = word[startIndex]
+            }
+        } catch (e: StringIndexOutOfBoundsException) {
+        }
+
         try {
             while (word[endIndex] != ' ' && word[endIndex] != '\n') {
                 endIndex++
@@ -244,10 +261,19 @@ class ReadingActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Vi
             endIndex = word.length
         }
 
-        val last = word[endIndex - 1]
-        if (last == '.' || last == ',' || last == '?' || last == '!' || last == ':' || last == ';') {
-            endIndex--
+        try {
+            var last = word[endIndex - 1]
+            while (last == '.' || last == ',' ||
+                last == '?' || last == '!' ||
+                last == ':' || last == ';' ||
+                last == '"' || last == '\''
+            ) {
+                endIndex--
+                last = word[endIndex - 1]
+            }
+        } catch (e: StringIndexOutOfBoundsException) {
         }
+
         return word.substring(startIndex, endIndex)
     }
 
