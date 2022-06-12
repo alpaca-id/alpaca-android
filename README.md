@@ -24,7 +24,6 @@ Alpaca help people with dyslexia to read a text from a paper using OCR to genera
 - Create Backend using JavaScript Programming Language and Express.js
 - Creating API for access data
 - Creating API for convert Text-to-Speech
-- Implement Auth with Firebase
 - Deployment on Google Compute Engine
 
 
