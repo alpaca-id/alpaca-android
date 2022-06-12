@@ -21,7 +21,12 @@ Alpaca help people with dyslexia to read a text from a paper using OCR to genera
 - Save and export the existing model to .tflite file format
 
 ## Cloud
--
+- Create Backend using JavaScript Programming Language and Express.js
+- Creating API for access data
+- Creating API for convert Text-to-Speech
+- Implement Auth with Firebase
+- Deployment on Google Compute Engine
+
 
 ## Android
 - Create end-to-end application design, start from a wireframe until a high-fidelity prototype
