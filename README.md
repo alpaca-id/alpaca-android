@@ -35,5 +35,5 @@ Alpaca help people with dyslexia to read a text from a paper using OCR to genera
 - Integrate with the backend services provided by Google Cloud Service using Retrofit and Firebase
 
 ## Deployment Link
-The deployment save in (link)
+The deployment save in (https://bit.ly/ALPACADeploymentLink)
 
