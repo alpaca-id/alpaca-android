@@ -15,7 +15,7 @@ Alpaca help people with dyslexia to read a text from a paper using OCR to genera
 ## Machine Learning
 - Make datasets or find public dataset for Optical Character Recognition 
 - Find library to easier when making model Machine Learning
-- For OCR dataset, we use TRDG dataset from https://github.com/Belval/TextRecognitionDataGenerator
+- For OCR dataset, we use TRDG dataset from (https://bit.ly/ALPACADataset)
 - For Text-to-Speech, we use gTTS library
 - Make two models for Susun Kata game (TTS) and photo scanning (OCR) features
 - Save and export the existing model to .tflite file format
